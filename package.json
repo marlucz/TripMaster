@@ -1,0 +1,47 @@
+{
+  "name": "tripmaster",
+  "version": "1.0.0",
+  "description": "Create trips, do plans, make memories",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "server": "nodemon ./server.js --ignore public/",
+    "dev": "webpack -w --mode development",
+    "build": "SET NODE_ENV=production webpack --mode production",
+    "start:dev": "concurrently \"npm run server\" \"npm run dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marlucz/TripMaster.git"
+  },
+  "author": "Buczi",
+  "license": "ISC",
+  "homepage": "https://github.com/marlucz/TripMaster#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.3",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "autoprefixer": "^9.6.4",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^5.0.0",
+    "css-loader": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
+  },
+  "engines": {
+    "node": "^10"
+  }
+}
