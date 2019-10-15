@@ -1,0 +1,43 @@
+.form {
+  margin: 0 auto;
+
+  &__group {
+    margin-bottom: 1rem;
+  }
+
+  &__input, &__textarea {
+    display: block;
+    font-family: inherit;
+    font-size: 1.2rem;
+    padding: 1.2rem 2rem;
+    background-color: rgba($gray-light, 0.8);
+    border: none;
+    width: 100%;
+
+  }
+
+  // hiding labels visibility for website but not for screen readers
+  &__label {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  &__container {
+    margin: 5rem  auto;
+    width: 70vw;
+    max-width: 50rem;
+    z-index: 10;
+
+  }
+
+  &--hero {
+    margin-top: 10rem;
+  }
+}
+

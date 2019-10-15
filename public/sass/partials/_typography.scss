@@ -1,0 +1,26 @@
+// FONTS
+// LOGO:  font-family: 'Mr Dafoe', cursive;
+// TEXT:  font-family: 'Lato', sans-serif;
+
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: $text-primary-screen;
+  font-family: 'Lato', sans-serif;
+  color: $black;
+}
+
+a {
+  text-decoration: none;
+  color:$black;
+}
+
+.heading-primary {
+  font-size: 3.6rem;
+  font-family: 'Mr Dafoe', cursive;
+  color: $white;
+  margin: 4rem;
+}

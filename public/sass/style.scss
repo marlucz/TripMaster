@@ -1,4 +1,6 @@
-h1 {
-  font-size: 30px;
-  color: red;
-}
+@import "partials/normalize";
+@import "partials/variables";
+@import "partials/typography";
+@import "partials/utils";
+@import "partials/header";
+@import "partials/forms";
