@@ -1,5 +1,10 @@
-.btn {
-  width: 25rem;
+/* BUTTONS*/
+
+.btn,
+.btn:link,
+.btn:visited {
+  width: 100%;
+  max-width: 50rem;
   height: 4rem;
   text-align: center;
   background-color: $theme-secondary;
@@ -7,5 +12,40 @@
   box-shadow: 2px 2px 4px rgba($black, 0.8);
   color: $gray-light;
   text-transform: uppercase;
+  transition: transform 0.2s;
 
+  &:hover {
+    transform: translateY(3px);
+    cursor: pointer;
+  }
+}
+
+/* GRADIENT */
+$triangle-top: polygon(0% 0%, 0% 101%, 101% 0%);
+$triangle-bottom: polygon(100% 0, 0% 100%, 100% 100%);
+
+.gradient-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100%;
+  z-index: -1;
+}
+.gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  &--top {
+    background: linear-gradient($gradient-light, $gradient-medium);
+    clip-path: $triangle-top;
+  }
+
+  &--bottom {
+    background: linear-gradient($gradient-light, $gradient-dark);
+    clip-path: $triangle-bottom;
+  }
 }

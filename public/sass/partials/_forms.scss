@@ -1,19 +1,51 @@
+.sign-container {
+  min-height: 100%;
+  width: 100vw;
+
+  @include mq(xld) {
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+
+  }
+}
+
 .form {
   margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &__group {
+    width: 100%;
     margin-bottom: 1rem;
+    text-align: center;
+
+    @include mq(sm) {
+      margin-bottom: 1.5rem;
+    }
+
+    &:last-of-type {
+      margin-top: auto;
+    }
   }
 
   &__input, &__textarea {
     display: block;
     font-family: inherit;
-    font-size: 1.2rem;
+    font-size: $text-secondary-screen;
     padding: 1.2rem 2rem;
     background-color: rgba($gray-light, 0.8);
     border: none;
     width: 100%;
 
+
+    @include mq(sm) {
+      font-size: $text-secondary-tablet;
+      padding: 1.4rem 2rem;
+    }
+    @include mq(ld) {
+      font-size: $text-secondary-desktop;
+    }
   }
 
   // hiding labels visibility for website but not for screen readers
@@ -29,15 +61,25 @@
   }
 
   &__container {
-    margin: 5rem  auto;
+    margin: 0  auto;
     width: 70vw;
+    height: 70vh;
     max-width: 50rem;
     z-index: 10;
 
+    &--hero {
+      margin-top: 25vh;
+
+      .gradient-container {
+        display: none;
+
+        @include mq(xld) {
+          display: block;
+        }
+      }
+    }
   }
 
-  &--hero {
-    margin-top: 10rem;
-  }
+
 }
 

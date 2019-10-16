@@ -15,8 +15,34 @@ $theme-primary: #05A859;
 $theme-secondary: #F15E4C;
 
 /* FONT VARIABLES */
+$text-secondary-screen: 1.2rem;
 $text-primary-screen: 1.4rem;
+
+$text-secondary-tablet: 1.3rem;
+$text-primary-tablet: 1.6rem;
+
+$text-secondary-desktop: 1.4rem;
 $text-primary-desktop: 1.7rem;
 
-$text-secondary-screen: 1.2rem;
-$text-secondary-desktop: 1.4rem;
+
+/*  BREAKPOINTS */
+
+// bootstrap breakpoints, might change later if necessary
+$breakpoints: (
+  sm: (min-width: 576px),
+  md: (min-width: 768px),
+  ld: (min-width: 992px),
+  xld: (min-width: 1200px)
+);
+
+@mixin mq($breakpoint) {
+
+  $size: map-get($breakpoints, $breakpoint);
+  @if($size) {
+    @media #{$size} {
+      @content
+    }
+  }
+
+}
+

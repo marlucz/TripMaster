@@ -11,16 +11,26 @@ body {
   font-size: $text-primary-screen;
   font-family: 'Lato', sans-serif;
   color: $black;
+  overflow: hidden;
 }
 
-a {
-  text-decoration: none;
+a, .link{
+  text-decoration:none;
   color:$black;
+  margin-bottom:15px;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 .heading-primary {
+  top: 5rem;
   font-size: 3.6rem;
   font-family: 'Mr Dafoe', cursive;
   color: $white;
   margin: 4rem;
+}
+
+.white {
+  color: $white;
 }

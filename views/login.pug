@@ -1,0 +1,23 @@
+extends layout
+
+include mixins/_gradient
+
+block body
+    .sign-container
+        header.header
+            .header__text
+                h1.heading-primary TripMaster
+        .form__container.form__container--hero
+            +gradient()
+            form.form
+                .form__group
+                    label.form__label(for="email") Email
+                    input.form__input(type="email" name="email" placeholder="Email address..." required)
+                .form__group
+                    label.form__label(for="password") Password
+                    input.form__input(type="password" name="password" placeholder="Password" required minlength="6")
+                // TODO href
+                a.link.white(href="#") Forgot your password?
+                .form__group
+                    button.btn(type="submit" value="Sign Up") Sign Up
+                a.link.white(href="/signup" action="GET") Doesn't have an account?
