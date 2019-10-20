@@ -16,6 +16,7 @@ app.get('/', viewRouter);
 app.get('/login', viewRouter);
 app.get('/signup', viewRouter);
 app.get('/404', viewRouter);
+app.get('/forgot', viewRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

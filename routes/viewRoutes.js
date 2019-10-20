@@ -25,5 +25,10 @@ router.get('/404', (req, res) => {
     title: '404'
   });
 });
+router.get('/forgot', (req, res) => {
+  res.status(200).render('forgot', {
+    title: 'Reset password'
+  });
+});
 
 module.exports = router;
