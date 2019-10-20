@@ -1,9 +1,19 @@
-extends layout
-
-block body
-    .container.container--notfound
-        header.header--notfound
-            .header__text
-                h2.heading-error.white 404
-                p.white The page you are looking for might have been removed, had its name changed or is temporarily unavailable.
-        a.link.btn(href="/" action="GET") Back to Homepage
+doctype html
+html(lang='en')
+    head
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport', content='width=device-width, initial-scale=1.0')
+            meta(http-equiv='X-UA-Compatible', content='ie=edge')
+            link(rel='stylesheet' href='/dist/style.css')
+            link(rel="shortcut icon" type="image/png" href="/public/images/icons/favicon.png")
+            link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mr+Dafoe&display=swap")
+            link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap")
+            title #{title}
+    body
+        .container.container--notfound
+            header.header--notfound
+                .header__text
+                    h2.heading-error.white 404
+                    p.white The page you are looking for might have been removed, had its name changed or is temporarily unavailable.
+            a.btn(href="/" action="GET") Back to Homepage

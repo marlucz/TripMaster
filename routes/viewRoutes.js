@@ -2,10 +2,23 @@ const express = require('express');
 
 const router = express.Router();
 
+const user = {
+  name: 'User'
+};
+
 router.get('/', (req, res) => {
-  res.status(200).render('login', {
-    title: 'TripMaster'
-  });
+  if (user) {
+    res.user = user;
+
+    res.status(200).render('layout', {
+      title: 'TripMaster',
+      user
+    });
+  } else {
+    res.status(200).render('login', {
+      title: 'TripMaster'
+    });
+  }
 });
 
 router.get('/login', (req, res) => {

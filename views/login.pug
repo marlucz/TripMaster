@@ -2,13 +2,14 @@ extends layout
 
 include mixins/_gradient
 
-block body
+block signForms
     .container.container--sign-forms
         header.header--sign-forms
             .header__text
                 h1.heading-primary TripMaster
         .form__container.form__container--hero
-            +gradient()
+            .gradient-container.gradient-container--signForms
+                +gradient()
             form.form
                 .form__group
                     label.form__label(for="email") Email
@@ -16,7 +17,7 @@ block body
                 .form__group
                     label.form__label(for="password") Password
                     input.form__input(type="password" name="password" placeholder="Password" required minlength="6")
-                a.link.white(href="/forgot") Forgot your password?
+                a.white(href="/forgot") Forgot your password?
                 .form__group
                     button.btn(type="submit" value="Sign In") Sign In
-                a.link.white(href="/signup" action="GET") Doesn't have an account?
+                a.white(href="/signup" action="GET") Doesn't have an account?

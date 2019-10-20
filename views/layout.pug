@@ -1,3 +1,5 @@
+include mixins/_gradient
+
 doctype html
 html(lang='en')
     head
@@ -5,10 +7,23 @@ html(lang='en')
             meta(charset='UTF-8')
             meta(name='viewport', content='width=device-width, initial-scale=1.0')
             meta(http-equiv='X-UA-Compatible', content='ie=edge')
-            link(rel='stylesheet', href='./dist/style.css')
-            link(rel='shortcut icon', type='image/png', href='./public/images/icons/favicon.png')
+            link(rel='stylesheet' href='/dist/style.css')
+            link(rel="shortcut icon" type="image/png" href="/public/images/icons/favicon.png")
             link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mr+Dafoe&display=swap")
             link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap")
             title #{title}
     body
-        block body
+        if !user 
+            block signForms
+        else 
+            .gradient-container
+                +gradient()
+            nav.nav.nav--top
+                ul
+                    //- TODO render user's icon from his gravatar
+                    each item in helpers.navTop 
+                        li.nav__item
+                            a.nav__link(href=item.slug)
+                                != helpers.icon(item.icon)
+                                span #{item.title}
+
