@@ -3,8 +3,8 @@ extends layout
 include mixins/_gradient
 
 block body
-    .sign-container
-        header.header
+    .container.container--sign-forms
+        header.header--sign-forms
             .header__text
                 h1.heading-primary TripMaster
         .form__container.form__container--hero
@@ -23,4 +23,4 @@ block body
                     label.form__label(for="password-confirm") Confirm Password
                     input.form__input(type="password" name="password-confirm" placeholder="Confirm Password" required)
                 .form__group
-                    button.btn.btn--bottom(type="submit" value="Sign Up") Sign Up
+                    button.btn(type="submit" value="Sign Up") Sign Up

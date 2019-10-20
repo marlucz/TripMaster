@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const pug = require('pug');
 
 const app = express();
 
@@ -16,6 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', viewRouter);
 app.get('/login', viewRouter);
 app.get('/signup', viewRouter);
+app.get('/404', viewRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

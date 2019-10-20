@@ -20,4 +20,10 @@ router.get('/signup', (req, res) => {
   });
 });
 
+router.get('/404', (req, res) => {
+  res.status(200).render('404', {
+    title: '404'
+  });
+});
+
 module.exports = router;

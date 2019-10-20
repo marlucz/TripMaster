@@ -423,11 +423,11 @@ body {
   color: #002535;
   overflow: hidden; }
 
-a, .link {
-  text-decoration: none;
-  color: #002535;
-  margin-bottom: 15px; }
-  a:hover, .link:hover {
+a,
+.link {
+  text-decoration: none; }
+  a:hover,
+  .link:hover {
     text-decoration: underline; }
 
 .heading-primary {
@@ -437,14 +437,40 @@ a, .link {
   color: #FFFFFF;
   margin: 4rem; }
 
+.heading-error {
+  font-size: 5rem;
+  margin-bottom: 1rem; }
+
 .white {
   color: #FFFFFF; }
+
+/* CONTAINERES */
+.container {
+  min-height: 100%;
+  width: 100vw; }
+  @media (min-width: 1200px) {
+    .container--sign-forms {
+      display: grid;
+      grid-template-columns: 50vw 50vw; } }
+  .container--notfound {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background: url("/images/photos/404.jpg") no-repeat center;
+    background-size: cover;
+    padding-bottom: 10vh; }
 
 /* BUTTONS*/
 .btn,
 .btn:link,
 .btn:visited {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20rem;
+  width: 70vw;
   max-width: 50rem;
   height: 4rem;
   text-align: center;
@@ -484,7 +510,7 @@ a, .link {
     -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
             clip-path: polygon(100% 0, 0% 100%, 100% 100%); }
 
-.header {
+.header--sign-forms {
   position: absolute;
   top: 0;
   left: 0;
@@ -495,17 +521,14 @@ a, .link {
   text-align: center;
   z-index: -1; }
   @media (min-width: 1200px) {
-    .header {
+    .header--sign-forms {
       position: static;
       width: 50vw; } }
 
-.sign-container {
-  min-height: 100%;
-  width: 100vw; }
-  @media (min-width: 1200px) {
-    .sign-container {
-      display: grid;
-      grid-template-columns: 50vw 50vw; } }
+.header--notfound {
+  padding-top: 8vh;
+  width: 80vw;
+  max-width: 50rem; }
 
 .form {
   margin: 0 auto;
@@ -546,7 +569,7 @@ a, .link {
     position: absolute;
     width: 1px; }
   .form__container {
-    margin: 0  auto;
+    margin: 0 auto;
     width: 70vw;
     height: 70vh;
     max-width: 50rem;

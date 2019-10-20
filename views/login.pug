@@ -3,8 +3,8 @@ extends layout
 include mixins/_gradient
 
 block body
-    .sign-container
-        header.header
+    .container.container--sign-forms
+        header.header--sign-forms
             .header__text
                 h1.heading-primary TripMaster
         .form__container.form__container--hero
@@ -19,5 +19,5 @@ block body
                 // TODO href
                 a.link.white(href="#") Forgot your password?
                 .form__group
-                    button.btn(type="submit" value="Sign Up") Sign Up
+                    button.btn(type="submit" value="Sign In") Sign In
                 a.link.white(href="/signup" action="GET") Doesn't have an account?

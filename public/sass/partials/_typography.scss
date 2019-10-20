@@ -2,7 +2,6 @@
 // LOGO:  font-family: 'Mr Dafoe', cursive;
 // TEXT:  font-family: 'Lato', sans-serif;
 
-
 html {
   font-size: 10px;
 }
@@ -14,11 +13,10 @@ body {
   overflow: hidden;
 }
 
-a, .link{
-  text-decoration:none;
-  color:$black;
-  margin-bottom:15px;
-  &:hover{
+a,
+.link {
+  text-decoration: none;
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -29,6 +27,11 @@ a, .link{
   font-family: 'Mr Dafoe', cursive;
   color: $white;
   margin: 4rem;
+}
+
+.heading-error {
+  font-size: 5rem;
+  margin-bottom: 1rem;
 }
 
 .white {
