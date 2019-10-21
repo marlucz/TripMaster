@@ -432,6 +432,19 @@ a {
 ul {
   list-style: none; }
 
+span {
+  font-size: 1.2rem;
+  display: block; }
+  @media (min-width: 576px) {
+    span {
+      font-size: 1.3rem; } }
+  @media (min-width: 992px) {
+    span {
+      font-size: 1.4rem; } }
+
+.heading-secondary {
+  margin-bottom: 2rem; }
+
 .heading-primary {
   top: 5rem;
   font-size: 3.6rem;
@@ -446,23 +459,8 @@ ul {
 .white {
   color: #FFFFFF; }
 
-/* CONTAINERES */
-.container {
-  min-height: 100%;
-  width: 100%; }
-  @media (min-width: 1200px) {
-    .container--sign-forms {
-      display: grid;
-      grid-template-columns: 50% 50%; } }
-  .container--notfound {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    background: url("/images/photos/404.jpg") no-repeat center;
-    background-size: cover;
-    padding-bottom: 10vh; }
+.secondary {
+  color: #F15E4C; }
 
 /* BUTTONS*/
 .btn,
@@ -471,8 +469,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 20rem;
-  width: 70vw;
+  width: 75vw;
   max-width: 50rem;
   height: 4rem;
   text-align: center;
@@ -528,6 +525,9 @@ ul {
     .header--sign-forms {
       position: static; } }
 
+.header--forms {
+  margin: 0 1rem 1rem 1rem; }
+
 .header--notfound {
   padding-top: 8vh;
   width: 80%;
@@ -542,11 +542,17 @@ ul {
     width: 100%;
     margin-bottom: 1rem;
     text-align: center; }
+    .form__group--adjacent {
+      display: grid;
+      grid-template-columns: 45% 45%;
+      justify-content: space-between; }
     @media (min-width: 576px) {
       .form__group {
         margin-bottom: 1.5rem; } }
     .form__group:last-of-type {
       margin-top: auto; }
+  .form__textarea {
+    resize: none; }
   .form__input, .form__textarea {
     display: block;
     font-family: inherit;
@@ -573,7 +579,7 @@ ul {
     width: 1px; }
   .form__container {
     margin: 0 auto;
-    width: 70%;
+    width: 75vw;
     height: 70vh;
     max-width: 50rem;
     z-index: 10; }
@@ -586,8 +592,8 @@ ul {
             display: block; } }
 
 .nav {
-  position: fixed;
-  width: 100%; }
+  width: 100%;
+  position: relative; }
   .nav::after {
     content: '';
     position: absolute;
@@ -595,12 +601,10 @@ ul {
     height: 1px;
     width: 95%;
     background-color: #002535; }
-  .nav--top {
-    top: 0;
-    left: 0; }
-    .nav--top::after {
-      bottom: 0; }
+  .nav--top::after {
+    top: 100%; }
   .nav--bottom {
+    position: fixed;
     bottom: 0;
     left: 0; }
     .nav--bottom::after {
@@ -618,6 +622,7 @@ ul {
     flex-basis: 25%; }
     .nav__item svg {
       width: 3rem;
+      height: 3rem;
       fill: #002535; }
     .nav__item:hover {
       color: #05A859; }
@@ -632,23 +637,43 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    flex-basis: 80%;
+    flex-basis: 100%;
     padding: 5px;
     color: inherit; }
     .nav__link:hover {
       text-decoration: none; }
+    .nav__link span {
+      display: none; }
+      @media (min-width: 768px) {
+        .nav__link span {
+          display: block; } }
 
-.nav {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  justify-content: space-between; }
+.content {
+  width: 100;
+  height: 100%; }
 
-svg {
-  width: 40px;
-  height: 40px;
-  fill: #002535; }
+.container {
+  min-height: 100%;
+  width: 100%; }
+  @media (min-width: 1200px) {
+    .container--sign-forms {
+      display: grid;
+      grid-template-columns: 50% 50%; } }
+  .container--forms {
+    width: 95%;
+    max-width: 50rem;
+    height: 100%;
+    margin: 0 auto;
+    padding: 2rem 0; }
+  .container--notfound {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background: url("/images/photos/404.jpg") no-repeat center;
+    background-size: cover;
+    padding-bottom: 10vh; }
 
 
 /*# sourceMappingURL=style.css.map*/

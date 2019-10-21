@@ -1,6 +1,6 @@
 .nav {
-  position: fixed;
   width: 100%;
+  position: relative;
 
   &::after {
     content: '';
@@ -12,15 +12,13 @@
   }
 
   &--top {
-    top: 0;
-    left: 0;
-
     &::after {
-      bottom: 0;
+      top: 100%;
     }
   }
 
   &--bottom {
+    position: fixed;
     bottom: 0;
     left: 0;
 
@@ -45,6 +43,7 @@
 
     svg {
       width: 3rem;
+      height: 3rem;
       fill: $black;
     }
 
@@ -68,12 +67,20 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    flex-basis: 80%;
+    flex-basis: 100%;
     padding: 5px;
     color: inherit;
 
     &:hover {
       text-decoration: none;
+    }
+
+    span {
+      display: none;
+
+      @include mq(md) {
+        display: block;
+      }
     }
   }
 }

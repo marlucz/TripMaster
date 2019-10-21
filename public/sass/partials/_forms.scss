@@ -9,6 +9,12 @@
     margin-bottom: 1rem;
     text-align: center;
 
+    &--adjacent {
+      display: grid;
+      grid-template-columns: 45% 45%;
+      justify-content: space-between;
+    }
+
     @include mq(sm) {
       margin-bottom: 1.5rem;
     }
@@ -16,6 +22,10 @@
     &:last-of-type {
       margin-top: auto;
     }
+  }
+
+  &__textarea {
+    resize: none;
   }
 
   &__input,
@@ -51,7 +61,7 @@
 
   &__container {
     margin: 0 auto;
-    width: 70%;
+    width: 75vw;
     height: 70vh;
     max-width: 50rem;
     z-index: 10;

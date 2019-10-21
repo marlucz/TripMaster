@@ -26,6 +26,22 @@ ul {
   list-style: none;
 }
 
+span {
+  font-size: $text-secondary-screen;
+  display: block;
+
+  @include mq(sm) {
+    font-size: $text-secondary-tablet;
+  }
+  @include mq(ld) {
+    font-size: $text-secondary-desktop;
+  }
+}
+
+.heading-secondary {
+  margin-bottom: 2rem;
+}
+
 .heading-primary {
   top: 5rem;
   font-size: 3.6rem;
@@ -41,4 +57,8 @@ ul {
 
 .white {
   color: $white;
+}
+
+.secondary {
+  color: $theme-secondary;
 }
