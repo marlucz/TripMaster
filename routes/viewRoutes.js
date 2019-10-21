@@ -2,23 +2,19 @@ const express = require('express');
 
 const router = express.Router();
 
-const user = {
-  name: 'User'
-};
-
-router.get('/', (req, res) => {
+const getUser = (req, res, next) => {
+  const { user } = req;
   if (user) {
     res.user = user;
-
-    res.status(200).render('layout', {
-      title: 'TripMaster',
-      user
-    });
-  } else {
-    res.status(200).render('login', {
-      title: 'TripMaster'
-    });
+    next();
   }
+};
+
+router.get('/', getUser, (req, res) => {
+  res.status(200).render('layout', {
+    title: 'TripMaster',
+    user: res.user
+  });
 });
 
 router.get('/login', (req, res) => {
@@ -38,9 +34,17 @@ router.get('/404', (req, res) => {
     title: '404'
   });
 });
+
 router.get('/forgot', (req, res) => {
   res.status(200).render('forgot', {
     title: 'Reset password'
+  });
+});
+
+router.get('/add-trip', getUser, (req, res) => {
+  res.status(200).render('trip', {
+    title: 'Add Trip',
+    user: res.user
   });
 });
 

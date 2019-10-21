@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const moment = require('moment');
 const helpers = require('./helpers');
 
 const app = express();
@@ -14,15 +15,28 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
+  res.locals.moment = moment;
   res.locals.helpers = helpers;
   next();
 });
 
-app.get('/', viewRouter);
 app.get('/login', viewRouter);
 app.get('/signup', viewRouter);
-app.get('/404', viewRouter);
 app.get('/forgot', viewRouter);
+
+// middleware to test user authorized routes
+app.use((req, res, next) => {
+  const user = {
+    name: 'User'
+  };
+  req.user = user;
+
+  next();
+});
+
+app.get('/', viewRouter);
+app.get('/404', viewRouter);
+app.get('/add-trip', viewRouter);
 
 const port = process.env.PORT || 3000;
 
