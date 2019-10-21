@@ -19,10 +19,10 @@ html(lang='en')
             .gradient-container
                 +gradient()
             nav.nav.nav--top
-                ul
+                ul.nav__list
                     //- TODO render user's icon from his gravatar
                     each item in helpers.navTop 
-                        li.nav__item
+                        li.nav__item.nav__item--active
                             a.nav__link(href=item.slug)
                                 != helpers.icon(item.icon)
                                 span #{item.title}
