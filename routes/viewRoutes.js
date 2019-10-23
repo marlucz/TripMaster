@@ -48,4 +48,11 @@ router.get('/add-trip', getUser, (req, res) => {
   });
 });
 
+router.get('/trips', getUser, (req, res) => {
+  res.status(200).render('trips', {
+    title: 'Your Trips',
+    user: res.user
+  });
+});
+
 module.exports = router;

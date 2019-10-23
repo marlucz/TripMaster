@@ -1,4 +1,4 @@
-/* BUTTONS*/
+/* BUTTONS */
 
 .btn,
 .btn:link,
@@ -12,7 +12,7 @@
   text-align: center;
   background-color: $theme-secondary;
   border: none;
-  box-shadow: 2px 2px 4px rgba($black, 0.8);
+  box-shadow: $shadow-hard;
   color: $gray-light;
   text-transform: uppercase;
   transition: transform 0.2s;

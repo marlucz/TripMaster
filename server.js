@@ -37,6 +37,17 @@ app.use((req, res, next) => {
 app.get('/', viewRouter);
 app.get('/404', viewRouter);
 app.get('/add-trip', viewRouter);
+app.get('/trips', viewRouter);
+
+// middleware to test trip dependent routes
+app.use((req, res, next) => {
+  const trip = {
+    name: 'Trip'
+  };
+  req.trip = trip;
+
+  next();
+});
 
 const port = process.env.PORT || 3000;
 

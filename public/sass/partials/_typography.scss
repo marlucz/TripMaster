@@ -38,16 +38,25 @@ span {
   }
 }
 
-.heading-secondary {
-  margin-bottom: 2rem;
-}
-
 .heading-primary {
   top: 5rem;
   font-size: 3.6rem;
   font-family: 'Mr Dafoe', cursive;
   color: $white;
   margin: 4rem;
+}
+
+.heading-secondary {
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+
+  span {
+    text-transform: uppercase;
+  }
+}
+
+.heading-tertiary {
+  font-size: 1.6rem;
 }
 
 .heading-error {
@@ -62,3 +71,8 @@ span {
 .secondary {
   color: $theme-secondary;
 }
+
+.gray-dark {
+  color: $gray-dark;
+}
+

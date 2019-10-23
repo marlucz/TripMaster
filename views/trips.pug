@@ -1,0 +1,17 @@
+extend layout
+
+include mixins/_tripCard
+
+block content
+    .content.content--background
+        .container.container--trips
+            header.header
+                h2.heading-secondary
+                    span.secondary your upcoming
+                    |  Trips
+            .trips--container
+                //- TODO each trip in trips
+                +tripCard()
+                +tripCard()
+                +tripCard()
+                +tripCard()
