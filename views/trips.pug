@@ -1,6 +1,7 @@
 extend layout
 
 include mixins/_tripCard
+include mixins/_pagination
 
 block content
     .content.content--background
@@ -9,9 +10,11 @@ block content
                 h2.heading-secondary
                     span.secondary your upcoming
                     |  Trips
-            .trips--container
+            .trips
                 //- TODO each trip in trips
                 +tripCard()
                 +tripCard()
                 +tripCard()
                 +tripCard()
+                +tripCard()
+            +pagination()
