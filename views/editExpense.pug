@@ -1,0 +1,26 @@
+extends ./layout
+
+block content
+    .content
+        .container.container--forms
+            header.header
+                h2.heading-secondary
+                    span.secondary ADD
+                    |  Trip Expense
+            .form__container
+                form.form
+                    .form__group
+                        label.form__label(for="name") Expense Name
+                        input.form__input(type="text" name="name" placeholder="Expense name..." required)
+                    .form__group
+                        label.form__label(for="value") Expense Value
+                        input.form__input(type="number" name="value" step="any" placeholder="Expense value..." required)
+                    .form__group
+                        label.form__label(for="currency") Expense Currency
+                        input.form__input(type="text" name="value" placeholder="Expense Currency..." required)
+                    .form__group
+                        label.form__label(for="category") Expense Category
+                        input.form__input(type="text" name="value" placeholder="Expense Currency..." required)
+                    .form__group
+                        button.btn(type="submit" value="Add Stop") Add Stop
+

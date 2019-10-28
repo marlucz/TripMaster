@@ -67,8 +67,24 @@ router.get('/trips/:slug', getUser, getTrip, (req, res) => {
 });
 
 router.get('/trips/itinerary/add', getUser, getTrip, (req, res) => {
-  res.status(200).render('editItinerary', {
-    title: 'Add Itinerary',
+  res.status(200).render('editStop', {
+    title: 'Add Trip Stop',
+    user: res.user,
+    trip: res.trip
+  });
+});
+
+router.get('/trips/expenses/add', getUser, getTrip, (req, res) => {
+  res.status(200).render('editExpense', {
+    title: 'Add Expense',
+    user: res.user,
+    trip: res.trip
+  });
+});
+
+router.get('/trips/todo/add', getUser, getTrip, (req, res) => {
+  res.status(200).render('editTodo', {
+    title: 'Add Todo',
     user: res.user,
     trip: res.trip
   });

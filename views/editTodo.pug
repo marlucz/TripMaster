@@ -1,0 +1,20 @@
+extends ./layout
+
+block content
+    .content
+        .container.container--forms
+            header.header
+                h2.heading-secondary
+                    span.secondary ADD
+                    |  Task / Item
+            .form__container
+                form.form
+                    .form__group
+                        label.form__label(for="name") Task/Item Name
+                        input.form__input(type="text" name="name" placeholder="Task / Item name..." required)
+                    .form__group
+                        label.form__label(for="category") Task/Item Category
+                        input.form__input(type="text" name="category" placeholder="Task / Item category..." required)
+                    .form__group
+                        button.btn(type="submit" value="Add Task / Todo Item") Add Task / Todo Item
+
