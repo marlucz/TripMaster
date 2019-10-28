@@ -1,0 +1,37 @@
+extends ./layout
+
+block content
+    .content
+        .container.container--forms
+            header.header
+                h2.heading-secondary
+                    span.secondary ADD
+                    |  Trip Stop
+            .form__container
+                form.form
+                    .form__group
+                        label.form__label(for="stop-name") Stop Name
+                        input.form__input(type="text" name="stop-name" placeholder="Stop name..." required)
+                    .form__group
+                        label.form__label(for="description") Stop Description
+                        textarea.form__textarea(name="description" maxlength="200" rows="3" placeholder="Short description of your stop" required)
+                    .form__group
+                        label.form__label(for="location") Location
+                        input.form__input(id ="location" type="text" name="location" placeholder="Location...")
+                    .form__group--adjacent
+                        .form__group
+                            label.form__label(for="lng") Location Longitude
+                            input.form__input(id ="lng" type="text" name="lng" placeholder="Longitude...")
+                        .form__group
+                            label.form__label(for="lat") Location Latitude
+                            input.form__input(id ="lat" type="text" name="lat" placeholder="Latitude...")
+                    .form__group--adjacent
+                        .form__group
+                            label.form__label(for="date") Pick Date
+                            input.form__input(id ="date" type="date" name="date" placeholder="Pick Date" required)
+                        .form__group
+                            label.form__label(for="time") Pick Time
+                            input.form__input(id ="time" type="time" name="time" step="900"  required)
+                    .form__group
+                        button.btn(type="submit" value="Add Stop") Add Stop
+

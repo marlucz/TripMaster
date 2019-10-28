@@ -49,6 +49,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/trips/:slug', viewRouter);
+app.get('/trips/itinerary/add', viewRouter);
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

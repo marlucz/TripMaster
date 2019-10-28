@@ -10,6 +10,14 @@ const getUser = (req, res, next) => {
   }
 };
 
+const getTrip = (req, res, next) => {
+  const { trip } = req;
+  if (trip) {
+    res.trip = trip;
+    next();
+  }
+};
+
 router.get('/', getUser, (req, res) => {
   res.status(200).render('layout', {
     title: 'TripMaster',
@@ -42,16 +50,27 @@ router.get('/forgot', (req, res) => {
 });
 
 router.get('/add-trip', getUser, (req, res) => {
-  res.status(200).render('trip', {
+  res.status(200).render('editTrip', {
     title: 'Add Trip',
     user: res.user
   });
 });
 
-router.get('/trips', getUser, (req, res) => {
-  res.status(200).render('trips', {
-    title: 'Your Trips',
-    user: res.user
+router.get('/trips/:slug', getUser, getTrip, (req, res) => {
+  const { slug } = req.params;
+
+  res.status(200).render('trip', {
+    title: slug,
+    user: res.user,
+    trip: res.trip
+  });
+});
+
+router.get('/trips/itinerary/add', getUser, getTrip, (req, res) => {
+  res.status(200).render('editItinerary', {
+    title: 'Add Itinerary',
+    user: res.user,
+    trip: res.trip
   });
 });
 

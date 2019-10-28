@@ -603,6 +603,8 @@ span {
     @media (min-width: 992px) {
       .form__input, .form__textarea {
         font-size: 1.4rem; } }
+  .form input[type="date"], .form input[type="time"] {
+    color: #707B84; }
   .form__label {
     border: 0;
     clip: rect(0 0 0 0);

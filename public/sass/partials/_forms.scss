@@ -45,7 +45,13 @@
     @include mq(ld) {
       font-size: $text-secondary-desktop;
     }
+
   }
+
+  input[type="date"],input[type="time"]{
+    color: $gray-dark;
+  }
+
 
   // hiding labels visibility for website but not for screen readers
   &__label {

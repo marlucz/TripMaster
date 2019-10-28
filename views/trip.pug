@@ -1,40 +1,8 @@
-extends layout
+extend layout
+
+include mixins/_tripCard
 
 block content
-    .content
-        .container.container--forms
-            header.header
-                h2.heading-secondary
-                    span.secondary ADD
-                    |  Trip
-            .form__container
-                form.form
-                    .form__group
-                        label.form__label(for="trip-name") Trip Name
-                        input.form__input(type="text" name="trip-name" placeholder="Name of your next trip..." required)
-                    .form__group
-                        label.form__label(for="description") Description
-                        textarea.form__textarea(name="description" maxlength="200" rows="3" placeholder="Enter here short description of your trip" required)
-                    .form__group
-                        label.form__label(for="location") Location
-                        input.form__input(id ="location" type="text" name="location" placeholder="Location...")
-                    .form__group--adjacent
-                        .form__group
-                            label.form__label(for="lng") Location Longitude
-                            input.form__input(id ="lng" type="text" name="lng" placeholder="Longitude...")
-                        .form__group
-                            label.form__label(for="lat") Location Latitude
-                            input.form__input(id ="lat" type="text" name="lat" placeholder="Latitude...")
-                    .form__group--adjacent
-                        .form__group
-                            label.form__label(for="start") Start Date
-                            input.form__input(id ="start" type="date" name="trip-starts" value=(moment().format('YYYY-MM-DD')) required)
-                        .form__group
-                            label.form__label(for="end") End Date
-                            input.form__input(id ="end" type="date" name="trip-ends" required)
-                    .form__group
-                            label.form__label(for="photo") Trip Photo
-                            input.form__input(id ="photo" type="file" accept="image/gif, image/png, image/jpeg" name="photo" placeholder="Upload photo...")
-                    .form__group
-                        button.btn(type="submit" value="Add Trip") Add Trip
-
+    .content.content--background
+        .container.container--trips
+            h1 Todo
