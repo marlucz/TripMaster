@@ -1,0 +1,21 @@
+extend layout
+
+include mixins/_itineraryEvent
+
+block content
+    .content.content--background
+        .container.container--trips
+            .itinerary
+                header.header
+                    h2.heading-secondary
+                        span.secondary Thu, Sep 14 - Fri, Sep 20, 2019
+                        |  Budapest Trip
+                .itinerary__map--container
+                    .itinerary__map
+                .itinerary__timeline--container
+                    ul.itinerary__timeline
+                        +itineraryEvent('18/12/2019', '10:00', 'Budapest Trip', 'Budapestian St. 1234', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.')
+                        +itineraryEvent('18/12/2019', '10:00', 'Budapest Trip', 'Budapestian St. 1234', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.')
+                        +itineraryEvent('18/12/2019', '10:00', 'Budapest Trip', 'Budapestian St. 1234', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.')
+
+

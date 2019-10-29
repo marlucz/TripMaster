@@ -23,12 +23,12 @@ block html
                     nav.nav.nav--top
                         ul.nav__list
                             //- TODO render user's icon from his gravatar
-                            each item in helpers.navTop 
+                            each item in helpers.navTop
                                 li.nav__item
                                     a.nav__link(href=item.slug)
                                         != helpers.icon(item.icon)
                                         span #{item.title}
-                    
+
                     block content
 
                     if trip

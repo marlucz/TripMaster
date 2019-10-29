@@ -49,10 +49,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/trips/:slug', viewRouter);
-app.get('/trips/itinerary/add', viewRouter);
-app.get('/trips/expenses/add', viewRouter);
-app.get('/trips/todo/add', viewRouter);
+app.get('/:slug', viewRouter);
+
+app.get('/:slug/itinerary', viewRouter);
+app.get('/:slug/itinerary/add', viewRouter);
+
+app.get('/:slug/expenses/add', viewRouter);
+
+app.get('/:slug/todo/add', viewRouter);
 
 const port = process.env.PORT || 3000;
 

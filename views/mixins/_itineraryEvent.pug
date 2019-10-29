@@ -1,0 +1,10 @@
+mixin itineraryEvent(date, hour, name, location, description)
+    li.itinerary__event
+        .itinerary__time
+            p #{date}
+            p #{hour}
+        .itinerary__details
+            h3.heading-tertiary #{name}
+            span #{location}
+            .itinerary__description
+                p #{description}

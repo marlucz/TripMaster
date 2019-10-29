@@ -641,6 +641,7 @@ span {
   .nav--top::after {
     top: 100%; }
   .nav--bottom {
+    background-color: #007B76;
     position: fixed;
     bottom: 0;
     left: 0; }
@@ -686,14 +687,15 @@ span {
           display: block; } }
 
 .content {
+  align-self: stretch;
   width: 100%;
   height: 100%; }
   .content--background {
     background-color: #FFFFFF; }
 
 .container {
-  min-height: 100%;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
   @media (min-width: 1200px) {
     .container--sign-forms {
       display: grid;
@@ -708,7 +710,7 @@ span {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 70vh;
+    height: 100%;
     width: 90%;
     max-width: 100rem;
     padding: 2.5rem 1rem 0 1rem; }
