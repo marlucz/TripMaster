@@ -841,8 +841,8 @@ span {
       height: 30vh;
       margin-bottom: 1rem; }
   .itinerary__icon svg {
-    width: 2rem;
-    height: 2rem;
+    width: 5rem;
+    height: 5rem;
     fill: pink; }
   .itinerary__timeline--container {
     width: 100%;
