@@ -1,8 +1,10 @@
-mixin itineraryEvent(date, hour, name, location, description)
+mixin itineraryEvent(date, hour, name, location, description, icon)
     li.itinerary__event
         .itinerary__time
             p #{date}
             p #{hour}
+        .itinerary__icon(data-pin=`${icon}`)
+            != helpers.icon(icon)
         .itinerary__details
             h3.heading-tertiary #{name}
             span #{location}

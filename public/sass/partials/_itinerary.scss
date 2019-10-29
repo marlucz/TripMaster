@@ -1,0 +1,59 @@
+.itinerary {
+  padding: 1rem auto;
+  height: 85vh;
+
+  &__map {
+    background: url("/images/photos/map_placeholder.jpg") no-repeat center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+
+    &--container {
+      width: 100%;
+      height: 30vh;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__icon {
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      fill: pink;
+    }
+
+    //&[data-pin='pin-done'] {
+    //  svg {
+    //    fill: pink;
+    //  }
+    //}
+    //
+    //&[data-pin='pin-now'] {
+    //  svg {
+    //    fill: $theme-primary;
+    //  }
+    //}
+    //
+    //&[data-pin='pin-next'] {
+    //  svg {
+    //    fill: $black;
+    //  }
+    //}
+  }
+
+
+
+  &__timeline {
+
+
+
+
+    &--container {
+      width: 100%;
+      height: 100%;
+      overflow: scroll;
+    }
+  }
+
+}
