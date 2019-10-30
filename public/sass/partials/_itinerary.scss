@@ -2,6 +2,7 @@
 $event-padding: 1rem;
 $text-padding-top: 5px;
 $pin-size: 2.5rem;
+$pin-width: 1px;
 
 .itinerary {
   padding: 1rem auto;
@@ -32,7 +33,8 @@ $pin-size: 2.5rem;
   }
 
   &__event {
-    display: flex;
+    display: grid;
+    grid-template-columns: 25% min-content 1fr;
     padding-bottom: $event-padding;
 
     &:last-of-type {
@@ -48,12 +50,14 @@ $pin-size: 2.5rem;
     justify-content: flex-start;
     align-items: flex-end;
 
+
     p {
+      line-height: 1.6;
       font-size: 1.2rem;
+      word-wrap: normal;
 
       &:first-child {
         font-weight: bold;
-        padding: $text-padding-top 0;
       }
     }
   }
@@ -67,8 +71,8 @@ $pin-size: 2.5rem;
       content: '';
       position: absolute;
       top: $pin-size;
-      left: 50%;
-      width: 1px;
+      left: calc(50% - #{$pin-width});
+      width: $pin-width;
       height:calc(100% - #{$pin-size} + #{$event-padding});
       background-color: $gray-dark;
 
@@ -96,8 +100,45 @@ $pin-size: 2.5rem;
     }
   }
 
+  &__details {
+    position: relative;
 
+    .chevron {
+      position: absolute;
+      top: 0;
+      right: 2rem;
 
+      &:hover {
+        cursor: pointer;
+      }
+      &--active {
+        transform: rotate(180deg);
+      }
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        fill: $gray-dark;
+      }
+    }
+
+    span {
+      color: $gray-dark;
+      line-height: 1.6;
+    }
+  }
+
+  &__description {
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.35s ease 0.15s;
+
+    &--active {
+      opacity: 1;
+      max-height: 100%;
+      transition: all 0.35s ease 0.15s;
+    }
+  }
 
 
 }

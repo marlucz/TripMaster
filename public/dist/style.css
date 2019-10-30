@@ -445,6 +445,7 @@ body {
   overflow: hidden; }
 
 a {
+  display: block;
   text-decoration: none;
   color: #002535; }
   a:hover {
@@ -721,6 +722,7 @@ span {
       .container--trips {
         max-width: 120rem; } }
   .container--notfound {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -849,7 +851,9 @@ span {
     overflow: scroll;
     padding: 1rem 0 2rem 0; }
   .itinerary__event {
-    display: flex;
+    display: grid;
+    grid-template-columns: 25% -webkit-min-content 1fr;
+    grid-template-columns: 25% min-content 1fr;
     padding-bottom: 1rem; }
     .itinerary__event:last-of-type .itinerary__icon:before {
       background-color: red; }
@@ -859,10 +863,11 @@ span {
     justify-content: flex-start;
     align-items: flex-end; }
     .itinerary__time p {
-      font-size: 1.2rem; }
+      line-height: 1.6;
+      font-size: 1.2rem;
+      word-wrap: normal; }
       .itinerary__time p:first-child {
-        font-weight: bold;
-        padding: 5px 0; }
+        font-weight: bold; }
   .itinerary__icon {
     justify-self: center;
     position: relative;
@@ -871,7 +876,7 @@ span {
       content: '';
       position: absolute;
       top: 2.5rem;
-      left: 50%;
+      left: calc(50% - 1px);
       width: 1px;
       height: calc(100% - 2.5rem + 1rem);
       background-color: #707B84; }
@@ -885,6 +890,31 @@ span {
       fill: #05A859; }
     .itinerary__icon[data-pin='pin-next'] svg {
       fill: #002535; }
+  .itinerary__details {
+    position: relative; }
+    .itinerary__details .chevron {
+      position: absolute;
+      top: 0;
+      right: 2rem; }
+      .itinerary__details .chevron:hover {
+        cursor: pointer; }
+      .itinerary__details .chevron--active {
+        transform: rotate(180deg); }
+      .itinerary__details .chevron svg {
+        width: 2rem;
+        height: 2rem;
+        fill: #707B84; }
+    .itinerary__details span {
+      color: #707B84;
+      line-height: 1.6; }
+  .itinerary__description {
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.35s ease 0.15s; }
+    .itinerary__description--active {
+      opacity: 1;
+      max-height: 100%;
+      transition: all 0.35s ease 0.15s; }
 
 
 /*# sourceMappingURL=style.css.map*/

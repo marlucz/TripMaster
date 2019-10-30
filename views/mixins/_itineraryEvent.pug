@@ -7,6 +7,8 @@ mixin itineraryEvent(date, hour, name, location, description, icon)
             != helpers.icon(icon)
         .itinerary__details
             h3.heading-tertiary #{name}
+            .chevron
+                != helpers.icon('chevron')
             span #{location}
             .itinerary__description
                 p #{description}

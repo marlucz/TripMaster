@@ -1,13 +1,14 @@
 mixin tripCard()
     .trip
-        .trip__photo
-            img.trip__photo-img(src=`/images/photos/card1.jpg` alt=`trip name 1`)
-        .trip__details
-            .trip__data
-                h3.heading-tertiary Budapest Trip
-            .trip__data
-                != helpers.icon('upcoming')
-                span Thu, Sep 14 - Fri, Sep 20, 2019
-            .trip__data
-                != helpers.icon('clock')
-                span.gray-dark 5 days, in 50 days
+            .trip__photo
+                img.trip__photo-img(src=`/images/photos/card1.jpg` alt=`trip name 1`)
+            .trip__details
+                .trip__data
+                    a(href=`/:slug/itinerary`)
+                        h3.heading-tertiary Budapest Trip
+                .trip__data
+                    != helpers.icon('upcoming')
+                    span Thu, Sep 14 - Fri, Sep 20, 2019
+                .trip__data
+                    != helpers.icon('clock')
+                    span.gray-dark 5 days, in 50 days

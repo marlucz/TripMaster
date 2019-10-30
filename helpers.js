@@ -12,7 +12,7 @@ exports.navTop = [
 
 exports.navTrip = [
   { slug: '/summary', title: 'Summary', icon: 'summary' },
-  { slug: '/itinerary', title: 'Itinerary', icon: 'itinerary' },
+  { slug: '/:slug/itinerary', title: 'Itinerary', icon: 'itinerary' },
   { slug: '/expenses', title: 'Expenses', icon: 'expenses' },
   { slug: '/todo', title: 'Todo List', icon: 'todo' }
 ];
