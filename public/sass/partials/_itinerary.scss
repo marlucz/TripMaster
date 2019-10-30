@@ -1,6 +1,12 @@
+/* TIMELINE DEPENDENT VARIABLES */
+$event-padding: 1rem;
+$text-padding-top: 5px;
+$pin-size: 2.5rem;
+
 .itinerary {
   padding: 1rem auto;
   height: 85vh;
+
 
   &__map {
     background: url("/images/photos/map_placeholder.jpg") no-repeat center;
@@ -10,50 +16,88 @@
 
     &--container {
       width: 100%;
-      height: 30vh;
+      height: 40%;
       margin-bottom: 1rem;
     }
   }
 
-  &__icon {
-
-    svg {
-      width: 5rem;
-      height: 5rem;
-      fill: pink;
-    }
-
-    //&[data-pin='pin-done'] {
-    //  svg {
-    //    fill: pink;
-    //  }
-    //}
-    //
-    //&[data-pin='pin-now'] {
-    //  svg {
-    //    fill: $theme-primary;
-    //  }
-    //}
-    //
-    //&[data-pin='pin-next'] {
-    //  svg {
-    //    fill: $black;
-    //  }
-    //}
-  }
-
-
-
   &__timeline {
-
-
-
 
     &--container {
       width: 100%;
-      height: 100%;
+      height: 50%;
       overflow: scroll;
+      padding: 1rem 0 2rem 0;
     }
   }
+
+  &__event {
+    display: flex;
+    padding-bottom: $event-padding;
+
+    &:last-of-type {
+        .itinerary__icon:before {
+          background-color: red;
+        }
+    }
+  }
+
+  &__time {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    p {
+      font-size: 1.2rem;
+
+      &:first-child {
+        font-weight: bold;
+        padding: $text-padding-top 0;
+      }
+    }
+  }
+
+  &__icon {
+    justify-self: center;
+    position: relative;
+    padding: 0 5px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: $pin-size;
+      left: 50%;
+      width: 1px;
+      height:calc(100% - #{$pin-size} + #{$event-padding});
+      background-color: $gray-dark;
+
+    }
+    svg {
+      width: $pin-size;
+      height: $pin-size;
+      fill: $gray-dark;
+    }
+
+    &[data-pin='pin-now'] {
+
+      &:before {
+        background-color: $theme-primary;
+      }
+      svg {
+        fill: $theme-primary;
+      }
+    }
+
+    &[data-pin='pin-next'] {
+      svg {
+        fill: $black;
+      }
+    }
+  }
+
+
+
+
 
 }

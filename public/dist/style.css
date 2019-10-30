@@ -430,6 +430,8 @@ template {
 [hidden] {
   display: none; }
 
+/* ONLY GLOBAL VARIABLES HERE */
+/* IF SOME ELEMENTS NEED ITS OWN VARIABLES, THEN THEY ARE IN THE FILE WITH THIS ELEMENT */
 /* COLOR VARIABLES */
 /* FONT VARIABLES */
 /*  BREAKPOINTS */
@@ -828,6 +830,7 @@ span {
         height: 2rem;
         margin-right: 2rem; } }
 
+/* TIMELINE DEPENDENT VARIABLES */
 .itinerary {
   padding: 1rem auto;
   height: 85vh; }
@@ -838,16 +841,50 @@ span {
     height: 100%; }
     .itinerary__map--container {
       width: 100%;
-      height: 30vh;
+      height: 40%;
       margin-bottom: 1rem; }
-  .itinerary__icon svg {
-    width: 5rem;
-    height: 5rem;
-    fill: pink; }
   .itinerary__timeline--container {
     width: 100%;
-    height: 100%;
-    overflow: scroll; }
+    height: 50%;
+    overflow: scroll;
+    padding: 1rem 0 2rem 0; }
+  .itinerary__event {
+    display: flex;
+    padding-bottom: 1rem; }
+    .itinerary__event:last-of-type .itinerary__icon:before {
+      background-color: red; }
+  .itinerary__time {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end; }
+    .itinerary__time p {
+      font-size: 1.2rem; }
+      .itinerary__time p:first-child {
+        font-weight: bold;
+        padding: 5px 0; }
+  .itinerary__icon {
+    justify-self: center;
+    position: relative;
+    padding: 0 5px; }
+    .itinerary__icon:before {
+      content: '';
+      position: absolute;
+      top: 2.5rem;
+      left: 50%;
+      width: 1px;
+      height: calc(100% - 2.5rem + 1rem);
+      background-color: #707B84; }
+    .itinerary__icon svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      fill: #707B84; }
+    .itinerary__icon[data-pin='pin-now']:before {
+      background-color: #05A859; }
+    .itinerary__icon[data-pin='pin-now'] svg {
+      fill: #05A859; }
+    .itinerary__icon[data-pin='pin-next'] svg {
+      fill: #002535; }
 
 
 /*# sourceMappingURL=style.css.map*/
