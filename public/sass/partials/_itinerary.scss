@@ -8,9 +8,8 @@ $pin-width: 1px;
   padding: 1rem auto;
   height: 85vh;
 
-
   &__map {
-    background: url("/images/photos/map_placeholder.jpg") no-repeat center;
+    background: url('/images/photos/map_placeholder.jpg') no-repeat center;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -23,7 +22,6 @@ $pin-width: 1px;
   }
 
   &__timeline {
-
     &--container {
       width: 100%;
       height: 50%;
@@ -38,18 +36,17 @@ $pin-width: 1px;
     padding-bottom: $event-padding;
 
     &:last-of-type {
-        .itinerary__icon:before {
-          background-color: red;
-        }
+      .itinerary__icon:before {
+        background-color: red;
+      }
     }
   }
 
   &__time {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
-
 
     p {
       line-height: 1.6;
@@ -73,9 +70,8 @@ $pin-width: 1px;
       top: $pin-size;
       left: calc(50% - #{$pin-width});
       width: $pin-width;
-      height:calc(100% - #{$pin-size} + #{$event-padding});
+      height: calc(100% - #{$pin-size} + #{$event-padding});
       background-color: $gray-dark;
-
     }
     svg {
       width: $pin-size;
@@ -84,7 +80,6 @@ $pin-width: 1px;
     }
 
     &[data-pin='pin-now'] {
-
       &:before {
         background-color: $theme-primary;
       }
@@ -111,6 +106,7 @@ $pin-width: 1px;
       &:hover {
         cursor: pointer;
       }
+
       &--active {
         transform: rotate(180deg);
       }
@@ -139,6 +135,4 @@ $pin-width: 1px;
       transition: all 0.35s ease 0.15s;
     }
   }
-
-
 }

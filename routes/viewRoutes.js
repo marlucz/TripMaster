@@ -37,15 +37,22 @@ router.get('/signup', (req, res) => {
   });
 });
 
+router.get('/forgot', (req, res) => {
+  res.status(200).render('forgot', {
+    title: 'Reset password'
+  });
+});
+
 router.get('/404', (req, res) => {
   res.status(200).render('404', {
     title: '404'
   });
 });
 
-router.get('/forgot', (req, res) => {
-  res.status(200).render('forgot', {
-    title: 'Reset password'
+router.get('/me', getUser, (req, res) => {
+  res.status(200).render('me', {
+    title: 'My Account',
+    user: res.user
   });
 });
 

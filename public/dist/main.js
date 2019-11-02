@@ -97,7 +97,38 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/style.scss */ "./public/sass/style.scss");
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_timelineDescriptionAccordion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/timelineDescriptionAccordion */ "./public/js/modules/timelineDescriptionAccordion.js");
 
+ //  ****************  DOM ELEMENTS **************
+
+const chevrons = document.querySelectorAll('.chevron'); // *****************  DOM MANIPULATION *************
+// itinerary timeline description show and hide
+
+chevrons.forEach(chevron => {
+  chevron.addEventListener('click', _modules_timelineDescriptionAccordion__WEBPACK_IMPORTED_MODULE_1__["default"]);
+});
+
+/***/ }),
+
+/***/ "./public/js/modules/timelineDescriptionAccordion.js":
+/*!***********************************************************!*\
+  !*** ./public/js/modules/timelineDescriptionAccordion.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function timelineDescriptionAccordion() {
+  if (!this.classList.contains('chevron')) return; // get description node to toggle its active class
+
+  const description = this.nextSibling.nextSibling; // toggle active classes for chevron itself and description node
+
+  this.classList.toggle('chevron--active');
+  description.classList.toggle('itinerary__description--active');
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (timelineDescriptionAccordion);
 
 /***/ }),
 

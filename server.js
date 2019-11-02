@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 app.get('/login', viewRouter);
 app.get('/signup', viewRouter);
 app.get('/forgot', viewRouter);
+app.get('/404', viewRouter);
 
 // middleware to test user authorized routes
 app.use((req, res, next) => {
@@ -35,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', viewRouter);
-app.get('/404', viewRouter);
+app.get('/me', viewRouter);
 app.get('/add-trip', viewRouter);
 app.get('/trips', viewRouter);
 
@@ -50,12 +51,9 @@ app.use((req, res, next) => {
 });
 
 app.get('/:slug', viewRouter);
-
 app.get('/:slug/itinerary', viewRouter);
 app.get('/:slug/itinerary/add', viewRouter);
-
 app.get('/:slug/expenses/add', viewRouter);
-
 app.get('/:slug/todo/add', viewRouter);
 
 const port = process.env.PORT || 3000;
