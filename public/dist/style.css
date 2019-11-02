@@ -855,8 +855,10 @@ span {
     grid-template-columns: 25% -webkit-min-content 1fr;
     grid-template-columns: 25% min-content 1fr;
     padding-bottom: 1rem; }
-    .itinerary__event:last-of-type .itinerary__icon:before {
+    .itinerary__event:nth-last-of-type(1) .itinerary__icon:before {
       background-color: red; }
+    .itinerary__event:last-of-type .itinerary__icon:before {
+      display: none; }
   .itinerary__time {
     display: flex;
     flex-direction: column;
@@ -891,7 +893,8 @@ span {
     .itinerary__icon[data-pin='pin-next'] svg {
       fill: #002535; }
   .itinerary__details {
-    position: relative; }
+    position: relative;
+    padding-top: 2px; }
     .itinerary__details .chevron {
       position: absolute;
       top: 0;

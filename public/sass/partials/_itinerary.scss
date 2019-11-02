@@ -35,9 +35,15 @@ $pin-width: 1px;
     grid-template-columns: 25% min-content 1fr;
     padding-bottom: $event-padding;
 
-    &:last-of-type {
+    &:nth-last-of-type(1) {
       .itinerary__icon:before {
         background-color: red;
+      }
+    }
+
+    &:last-of-type {
+      .itinerary__icon:before {
+        display: none;
       }
     }
   }
@@ -97,6 +103,7 @@ $pin-width: 1px;
 
   &__details {
     position: relative;
+    padding-top: 2px;
 
     .chevron {
       position: absolute;

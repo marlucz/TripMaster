@@ -21,6 +21,15 @@ block content
                         +itineraryEvent('18/12/2019', '10:00', 'Budapest Trip', 'Budapestian St. 1234', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.', 'pin-next')
                         +itineraryEvent('18/12/2019', '10:00', 'Budapest Trip', 'Budapestian St. 1234', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.', 'pin-next')
                         +itineraryEvent('18/12/2019', '10:00', 'Budapest Trip', 'Budapestian St. 1234', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.', 'pin-next')
+                        li.itinerary__event
+                            .itinerary__time
+                                p Upcoming
+                                p Date
+                            .itinerary__icon
+                                a(href="/:slug/itinerary/add")
+                                    != helpers.icon('add')                                
+                            .itinerary__details
+                                h3.heading-tertiary Add another stop
 
 
 
