@@ -857,17 +857,21 @@ span {
     padding-bottom: 1rem; }
     .itinerary__event:nth-last-of-type(1) .itinerary__icon:before {
       background-color: red; }
-    .itinerary__event:last-of-type .itinerary__icon:before {
-      display: none; }
+    .itinerary__event:last-of-type {
+      color: #F15E4C; }
+      .itinerary__event:last-of-type svg {
+        fill: #F15E4C; }
+      .itinerary__event:last-of-type .itinerary__icon:before {
+        display: none; }
   .itinerary__time {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end; }
     .itinerary__time p {
-      line-height: 1.6;
       font-size: 1.2rem;
-      word-wrap: normal; }
+      word-wrap: normal;
+      margin: 3px 0; }
       .itinerary__time p:first-child {
         font-weight: bold; }
   .itinerary__icon {
@@ -893,8 +897,7 @@ span {
     .itinerary__icon[data-pin='pin-next'] svg {
       fill: #002535; }
   .itinerary__details {
-    position: relative;
-    padding-top: 2px; }
+    position: relative; }
     .itinerary__details .chevron {
       position: absolute;
       top: 0;
