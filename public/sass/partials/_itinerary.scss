@@ -3,6 +3,7 @@ $event-padding: 1rem;
 $text-padding-top: 5px;
 $pin-size: 2.5rem;
 $pin-width: 1px;
+$svg-size: 2rem;
 
 .itinerary {
   padding: 1rem auto;
@@ -51,6 +52,8 @@ $pin-width: 1px;
         display: none;
       }
     }
+
+
   }
 
   &__time {
@@ -112,7 +115,7 @@ $pin-width: 1px;
     .chevron {
       position: absolute;
       top: 0;
-      right: 2rem;
+      right: $svg-size;
 
       &:hover {
         cursor: pointer;
@@ -123,8 +126,8 @@ $pin-width: 1px;
       }
 
       svg {
-        width: 2rem;
-        height: 2rem;
+        width: $svg-size;
+        height: $svg-size;
         fill: $gray-dark;
       }
     }
@@ -144,6 +147,13 @@ $pin-width: 1px;
       opacity: 1;
       max-height: 100%;
       transition: all 0.35s ease 0.15s;
+    }
+
+    svg {
+      width: $svg-size;
+      height: $svg-size;
+      margin: calc(#{$svg-size} / 2 );
+      margin-left: 0;
     }
   }
 }

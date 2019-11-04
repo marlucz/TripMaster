@@ -21,6 +21,21 @@ a {
   &:hover {
     text-decoration: underline;
   }
+
+  &.inline {
+    display: inline-block;
+
+    &--delete {
+      svg {
+        fill: $theme-secondary;
+      }
+    }
+    &--edit {
+      svg {
+        fill: $theme-primary;
+      }
+    }
+  }
 }
 
 ul {
@@ -81,19 +96,26 @@ span {
 
 // explicitly styled colors for items that has different colors in different media queries / states
 
-.white {
-  color: $white;
-}
+.color {
+  &--white {
+    color: $white;
+  }
 
-.black {
-  color: $black;
-}
+  &--black {
+    color: $black;
+  }
 
-.secondary {
-  color: $theme-secondary;
-}
+  &--primary {
+    color: $theme-primary;
+  }
 
-.gray-dark {
-  color: $gray-dark;
+  &--secondary {
+    color: $theme-secondary;
+  }
+
+  &--gray-dark {
+    color: $gray-dark;
+  }
+
 }
 

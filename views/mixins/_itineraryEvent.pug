@@ -6,9 +6,14 @@ mixin itineraryEvent(date, hour, name, location, description, icon)
         .itinerary__icon(data-pin=`${icon}`)
             != helpers.icon(icon)
         .itinerary__details
-            h3.heading-tertiary.black #{name}
+            h3.heading-tertiary.color--black #{name}
             .chevron
                 != helpers.icon('chevron')
             span #{location}
             .itinerary__description
                 p #{description}
+                // TODO - change routes for itinerary delete and edit
+                a(href=`/:slug/itinerary/add` class="inline inline--delete")
+                    !=helpers.icon('delete')
+                a(href=`/:slug/itinerary/add` class="inline inline--edit")
+                    != helpers.icon('edit')

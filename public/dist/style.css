@@ -450,6 +450,12 @@ a {
   color: #002535; }
   a:hover {
     text-decoration: underline; }
+  a.inline {
+    display: inline-block; }
+    a.inline--delete svg {
+      fill: #F15E4C; }
+    a.inline--edit svg {
+      fill: #05A859; }
 
 ul {
   list-style: none; }
@@ -494,16 +500,19 @@ span {
   font-size: 5rem;
   margin-bottom: 1rem; }
 
-.white {
+.color--white {
   color: #FFFFFF; }
 
-.black {
+.color--black {
   color: #002535; }
 
-.secondary {
+.color--primary {
+  color: #05A859; }
+
+.color--secondary {
   color: #F15E4C; }
 
-.gray-dark {
+.color--gray-dark {
   color: #707B84; }
 
 /* BUTTONS */
@@ -924,6 +933,11 @@ span {
       opacity: 1;
       max-height: 100%;
       transition: all 0.35s ease 0.15s; }
+    .itinerary__description svg {
+      width: 2rem;
+      height: 2rem;
+      margin: calc(2rem / 2);
+      margin-left: 0; }
 
 
 /*# sourceMappingURL=style.css.map*/
