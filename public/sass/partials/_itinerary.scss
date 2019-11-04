@@ -1,7 +1,9 @@
 /* TIMELINE DEPENDENT VARIABLES */
-$event-padding: 1rem;
+$event-padding-small: 1rem;
+$event-padding-medium: 1.5rem;
 $text-padding-top: 5px;
-$timeline-line-width: 1px;
+$thin-line: 1px;
+$medium-line: 2px;
 
 @mixin pin-size($prop) {
   #{$prop} : 2.5rem;
@@ -24,6 +26,13 @@ $timeline-line-width: 1px;
   padding: 1rem auto;
   height: 85vh;
 
+  @media screen and (min-width: 1024px) and (orientation: landscape) {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "timeline map";
+  }
+
   &__map {
     background: url('/images/photos/map_placeholder.jpg') no-repeat center;
     background-size: cover;
@@ -34,6 +43,17 @@ $timeline-line-width: 1px;
       width: 100%;
       height: 40%;
       margin-bottom: 1rem;
+
+      @include mq(ld) {
+        height: 50%;
+        margin-bottom: 2rem;
+      }
+
+      @media screen and (min-width: 1024px) and (orientation: landscape) {
+        grid-area: map;
+        width: 50vw;
+        height: 100%;
+      }
     }
   }
 
@@ -43,13 +63,25 @@ $timeline-line-width: 1px;
       height: 55%;
       overflow: scroll;
       padding: 1rem 0 1.5rem 0;
+
+      @media screen and (min-width: 1024px) and (orientation: landscape) {
+        grid-area: timeline;
+        width: 30vw;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
     }
   }
 
   &__event {
     display: grid;
     grid-template-columns: 25% min-content 1fr;
-    padding-bottom: $event-padding;
+    padding-bottom: $event-padding-small;
+
+    @include mq(md) {
+    padding-bottom: $event-padding-medium;
+    }
 
     &:nth-last-of-type(1) {
       .itinerary__icon:before {
@@ -80,6 +112,10 @@ $timeline-line-width: 1px;
       word-wrap: normal;
       margin: 3px 0;
 
+      @include mq(md) {
+        font-size: 1.6rem;
+      }
+
       &:first-child {
         font-weight: bold;
       }
@@ -95,10 +131,16 @@ $timeline-line-width: 1px;
       content: '';
       position: absolute;
       @include pin-size('top');
-      left: calc(50% - #{$timeline-line-width});
-      width: $timeline-line-width;
-      height: calc(100% - 2.5rem + #{$event-padding});
+      left: calc(50% - #{$thin-line});
+      width: $thin-line;
+      height: calc(100% - 2.5rem + #{$event-padding-small});
       background-color: $gray-dark;
+
+      @include mq(md) {
+        left: calc(50% - #{$medium-line}/2);
+        width: $medium-line;
+        height: calc(100% - 4rem + #{$event-padding-medium});
+      }
     }
     svg {
       @include pin-size('width');
@@ -148,6 +190,10 @@ $timeline-line-width: 1px;
     span {
       color: $gray-dark;
       line-height: 1.6;
+
+      @include mq(md) {
+        font-size: 1.6rem;
+      }
     }
   }
 

@@ -12,16 +12,18 @@
   }
 
   &--top {
-    &::after {
-      top: 100%;
-    }
+    grid-area: nav-top;
+    //&::after {
+    //  top: 100%;
+    //}
   }
 
   &--bottom {
+    grid-area: nav-bottom;
     background-color: $gradient-dark;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    //position: fixed;
+    //bottom: 0;
+    //left: 0;
 
     &::after {
       top: 0;
