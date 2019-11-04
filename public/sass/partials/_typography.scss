@@ -78,8 +78,15 @@ span {
   margin-bottom: 1rem;
 }
 
+
+// explicitly styled colors for items that has different colors in different media queries / states
+
 .white {
   color: $white;
+}
+
+.black {
+  color: $black;
 }
 
 .secondary {

@@ -497,6 +497,9 @@ span {
 .white {
   color: #FFFFFF; }
 
+.black {
+  color: #002535; }
+
 .secondary {
   color: #F15E4C; }
 
@@ -847,7 +850,7 @@ span {
       margin-bottom: 1rem; }
   .itinerary__timeline--container {
     width: 100%;
-    height: 50%;
+    height: 60%;
     overflow: scroll;
     padding: 1rem 0 2rem 0; }
   .itinerary__event {
