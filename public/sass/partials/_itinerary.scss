@@ -1,9 +1,24 @@
 /* TIMELINE DEPENDENT VARIABLES */
 $event-padding: 1rem;
 $text-padding-top: 5px;
-$pin-size: 2.5rem;
-$pin-width: 1px;
-$svg-size: 2rem;
+$timeline-line-width: 1px;
+
+@mixin pin-size($prop) {
+  #{$prop} : 2.5rem;
+
+  @include mq(md) {
+    #{$prop}: 4rem;
+  }
+}
+
+@mixin svg-size($prop) {
+  #{$prop} : 2rem;
+
+  @include mq(md) {
+    #{$prop}: 3rem;
+  }
+}
+
 
 .itinerary {
   padding: 1rem auto;
@@ -25,9 +40,9 @@ $svg-size: 2rem;
   &__timeline {
     &--container {
       width: 100%;
-      height: 60%;
+      height: 55%;
       overflow: scroll;
-      padding: 1rem 0 2rem 0;
+      padding: 1rem 0 1.5rem 0;
     }
   }
 
@@ -52,8 +67,6 @@ $svg-size: 2rem;
         display: none;
       }
     }
-
-
   }
 
   &__time {
@@ -81,15 +94,15 @@ $svg-size: 2rem;
     &:before {
       content: '';
       position: absolute;
-      top: $pin-size;
-      left: calc(50% - #{$pin-width});
-      width: $pin-width;
-      height: calc(100% - #{$pin-size} + #{$event-padding});
+      @include pin-size('top');
+      left: calc(50% - #{$timeline-line-width});
+      width: $timeline-line-width;
+      height: calc(100% - 2.5rem + #{$event-padding});
       background-color: $gray-dark;
     }
     svg {
-      width: $pin-size;
-      height: $pin-size;
+      @include pin-size('width');
+      @include pin-size('height');
       fill: $gray-dark;
     }
 
@@ -115,7 +128,7 @@ $svg-size: 2rem;
     .chevron {
       position: absolute;
       top: 0;
-      right: $svg-size;
+      @include svg-size('right');
 
       &:hover {
         cursor: pointer;
@@ -126,8 +139,8 @@ $svg-size: 2rem;
       }
 
       svg {
-        width: $svg-size;
-        height: $svg-size;
+        @include svg-size('width');
+        @include svg-size('height');
         fill: $gray-dark;
       }
     }
@@ -139,20 +152,19 @@ $svg-size: 2rem;
   }
 
   &__description {
-    opacity: 0;
     max-height: 0;
-    transition: all 0.35s ease 0.15s;
+    transition: all 0.35s ease;
+    overflow: hidden;
 
     &--active {
-      opacity: 1;
       max-height: 100%;
-      transition: all 0.35s ease 0.15s;
+      transition: all 0.35s ease;
     }
 
     svg {
-      width: $svg-size;
-      height: $svg-size;
-      margin: calc(#{$svg-size} / 2 );
+      @include svg-size('width');
+      @include svg-size('height');
+      margin: 1rem;
       margin-left: 0;
     }
   }

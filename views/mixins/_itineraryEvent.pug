@@ -14,6 +14,6 @@ mixin itineraryEvent(date, hour, name, location, description, icon)
                 p #{description}
                 // TODO - change routes for itinerary delete and edit
                 a(href=`/:slug/itinerary/add` class="inline inline--delete")
-                    !=helpers.icon('delete')
+                    != helpers.icon('delete')
                 a(href=`/:slug/itinerary/add` class="inline inline--edit")
                     != helpers.icon('edit')

@@ -859,9 +859,9 @@ span {
       margin-bottom: 1rem; }
   .itinerary__timeline--container {
     width: 100%;
-    height: 60%;
+    height: 55%;
     overflow: scroll;
-    padding: 1rem 0 2rem 0; }
+    padding: 1rem 0 1.5rem 0; }
   .itinerary__event {
     display: grid;
     grid-template-columns: 25% -webkit-min-content 1fr;
@@ -898,10 +898,19 @@ span {
       width: 1px;
       height: calc(100% - 2.5rem + 1rem);
       background-color: #707B84; }
+      @media (min-width: 768px) {
+        .itinerary__icon:before {
+          top: 4rem; } }
     .itinerary__icon svg {
       width: 2.5rem;
       height: 2.5rem;
       fill: #707B84; }
+      @media (min-width: 768px) {
+        .itinerary__icon svg {
+          width: 4rem; } }
+      @media (min-width: 768px) {
+        .itinerary__icon svg {
+          height: 4rem; } }
     .itinerary__icon[data-pin='pin-now']:before {
       background-color: #05A859; }
     .itinerary__icon[data-pin='pin-now'] svg {
@@ -914,6 +923,9 @@ span {
       position: absolute;
       top: 0;
       right: 2rem; }
+      @media (min-width: 768px) {
+        .itinerary__details .chevron {
+          right: 3rem; } }
       .itinerary__details .chevron:hover {
         cursor: pointer; }
       .itinerary__details .chevron--active {
@@ -922,22 +934,33 @@ span {
         width: 2rem;
         height: 2rem;
         fill: #707B84; }
+        @media (min-width: 768px) {
+          .itinerary__details .chevron svg {
+            width: 3rem; } }
+        @media (min-width: 768px) {
+          .itinerary__details .chevron svg {
+            height: 3rem; } }
     .itinerary__details span {
       color: #707B84;
       line-height: 1.6; }
   .itinerary__description {
-    opacity: 0;
     max-height: 0;
-    transition: all 0.35s ease 0.15s; }
+    transition: all 0.35s ease;
+    overflow: hidden; }
     .itinerary__description--active {
-      opacity: 1;
       max-height: 100%;
-      transition: all 0.35s ease 0.15s; }
+      transition: all 0.35s ease; }
     .itinerary__description svg {
       width: 2rem;
       height: 2rem;
-      margin: calc(2rem / 2);
+      margin: 1rem;
       margin-left: 0; }
+      @media (min-width: 768px) {
+        .itinerary__description svg {
+          width: 3rem; } }
+      @media (min-width: 768px) {
+        .itinerary__description svg {
+          height: 3rem; } }
 
 
 /*# sourceMappingURL=style.css.map*/
