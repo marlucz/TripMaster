@@ -6,7 +6,11 @@
   background: $white;
   box-shadow: $shadow-light;
   margin-top: auto;
-  margin-bottom: 8rem;
+  margin-bottom: 2.5rem;
+
+  @include mq(md) {
+    margin-bottom: 3.5rem;
+  }
 
   &__next {
     flex: 0 0 auto;
