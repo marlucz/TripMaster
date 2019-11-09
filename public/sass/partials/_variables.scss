@@ -53,29 +53,4 @@ $breakpoints: (
 }
 
 
-/*  SVG MIXINS  */
-
-@mixin pin-size($prop) {
-  #{$prop} : 2.5rem;
-
-  @include mq(md) {
-    #{$prop}: 4rem;
-  }
-
-  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
-    #{$prop} : 2.5rem;
-  }
-}
-
-@mixin svg-size($prop) {
-  #{$prop} : 2rem;
-
-  @include mq(md) {
-    #{$prop}: 3rem;
-  }
-
-  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
-    #{$prop} : 2rem;
-  }
-}
 

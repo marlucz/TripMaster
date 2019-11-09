@@ -5,6 +5,33 @@ $text-padding-top: 5px;
 $thin-line: 1px;
 $medium-line: 2px;
 
+/*  SVG MIXINS  */
+
+@mixin pin-size($prop) {
+  #{$prop} : 2.5rem;
+
+  @include mq(md) {
+    #{$prop}: 4rem;
+  }
+
+  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    #{$prop} : 2.5rem;
+  }
+}
+
+@mixin svg-size($prop) {
+  #{$prop} : 2rem;
+
+  @include mq(md) {
+    #{$prop}: 3rem;
+  }
+
+  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    #{$prop} : 2rem;
+  }
+}
+
+
 .itinerary {
   @include stretch;
   display: grid;
@@ -65,7 +92,6 @@ $medium-line: 2px;
   }
 
   &__event {
-    max-height: 100%;
     display: grid;
     grid-template-columns: 25% min-content 1fr;
     padding-bottom: $event-padding-small;
