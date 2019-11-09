@@ -635,6 +635,8 @@ span {
     height: 70vh;
     max-width: 50rem;
     z-index: 10; }
+    .form__container--divided {
+      height: 60%; }
     .form__container--hero {
       margin-top: 25vh; }
       .form__container--hero .gradient-container {
@@ -718,6 +720,11 @@ span {
   height: 100%; }
   .content--background {
     background-color: #FFFFFF; }
+  .content--account {
+    display: grid;
+    height: 100%;
+    grid-template-rows: repeat(2, minmax(-webkit-min-content, 1fr));
+    grid-template-rows: repeat(2, minmax(min-content, 1fr)); }
 
 .container {
   width: 100%;

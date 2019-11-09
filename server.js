@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', viewRouter);
-app.get('/me', viewRouter);
+app.get('/account', viewRouter);
 app.get('/add-trip', viewRouter);
 app.get('/trips', viewRouter);
 

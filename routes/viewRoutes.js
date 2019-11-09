@@ -49,8 +49,8 @@ router.get('/404', (req, res) => {
   });
 });
 
-router.get('/me', getUser, (req, res) => {
-  res.status(200).render('me', {
+router.get('/account', getUser, (req, res) => {
+  res.status(200).render('account', {
     title: 'My Account',
     user: res.user
   });

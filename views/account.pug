@@ -1,0 +1,39 @@
+extends ./layout
+
+block content
+    .content.content--account
+        .container.container--forms
+            header.header
+                h2.heading-secondary
+                    span.color--secondary your
+                    |  account settings
+            .form__container.form__container--divided
+                form.form
+                    .form__group
+                        label.form__label(for="name") Name
+                        input.form__input(type="text" name="name" value="User's name" required)
+                    .form__group
+                        label.form__label(for="email") Email Address
+                        input.form__input(type="email" name="email" value="User's email" required)
+                    .form__group
+                        button.btn(type="submit" value="Update Account") Update Account
+        .container.container--forms
+            header.header
+                h2.heading-secondary
+                    span.color--secondary change
+                    |  password
+            .form__container.form__container--divided
+                form.form
+                    .form__group
+                        label.form__label(for="password-current") Current Password
+                        input.form__input(type="password" name="password-current" placeholder="*********" required)
+                    .form__group
+                        label.form__label(for="password-new") New Password
+                        input.form__input(type="password" name="password-new" placeholder="*********" required)
+                    .form__group
+                        label.form__label(for="password-confirm") Confirm Password
+                        input.form__input(type="password" name="password-confirm" placeholder="*********" required)
+                    .form__group
+                        button.btn(type="submit" value="Change Password") Change Password
+
+
