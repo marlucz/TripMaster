@@ -42,11 +42,11 @@ localhost:3000/
 ## Done
 
 - Server setup with router
-- Pages: login/register, 404, account, trips, itinerary, 
+- Pages: login/register, 404, account, trips, itinerary, expenses
 
 ## Working on 
 
-- Pages: expenses, todo list, single trip view
+- Pages: todo list, single trip view
 
 ## To be done
 
