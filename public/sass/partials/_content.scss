@@ -1,7 +1,7 @@
 .layout {
-  height: 100vh;
+  height: 100%;
   display: grid;
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-rows: min-content var(--content) min-content;
   grid-template-areas:
   "nav-top"
   "content"
@@ -11,7 +11,8 @@
 .content {
   grid-area: content;
   align-self: stretch;
-  @include stretch;
+  width: 100%;
+  height: var(--content);
 
   &--background {
     background-color: $white;

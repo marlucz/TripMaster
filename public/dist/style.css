@@ -434,6 +434,7 @@ template {
 /* COLOR VARIABLES */
 /* FONT VARIABLES */
 /*  BREAKPOINTS */
+/*  SVG MIXINS  */
 html {
   font-size: 10px; }
 
@@ -525,6 +526,7 @@ span {
   max-width: 50rem;
   height: 4rem;
   text-align: center;
+  margin: 0 auto;
   background-color: #F15E4C;
   border: none;
   box-shadow: 2px 2px 4px rgba(0, 37, 53, 0.8);
@@ -618,7 +620,7 @@ span {
     @media (min-width: 992px) {
       .form__input, .form__textarea {
         font-size: 1.4rem; } }
-  .form input[type="date"], .form input[type="time"] {
+  .form input[type="date"], .form input[type="time"], .form input[value] {
     color: #707B84; }
   .form__label {
     border: 0;
@@ -707,17 +709,17 @@ span {
           display: block; } }
 
 .layout {
-  height: 100vh;
+  height: 100%;
   display: grid;
-  grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-rows: -webkit-min-content var(--content) -webkit-min-content;
+  grid-template-rows: min-content var(--content) min-content;
   grid-template-areas: "nav-top" "content" "nav-bottom"; }
 
 .content {
   grid-area: content;
   align-self: stretch;
   width: 100%;
-  height: 100%; }
+  height: var(--content); }
   .content--background {
     background-color: #FFFFFF; }
   .content--account {
@@ -1078,6 +1080,32 @@ span {
       @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
         .itinerary__description svg {
           height: 2rem; } }
+
+.expenses {
+  display: grid;
+  grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
+  grid-template-rows: min-content 1fr min-content;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 2rem; }
+  .expenses svg {
+    width: 2rem;
+    height: 2rem; }
+    @media (min-width: 768px) {
+      .expenses svg {
+        width: 3rem; } }
+    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      .expenses svg {
+        width: 2rem; } }
+    @media (min-width: 768px) {
+      .expenses svg {
+        height: 3rem; } }
+    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      .expenses svg {
+        height: 2rem; } }
+  .expenses__list {
+    overflow-y: scroll;
+    margin-bottom: 2rem; }
 
 
 /*# sourceMappingURL=style.css.map*/

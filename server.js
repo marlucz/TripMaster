@@ -28,7 +28,8 @@ app.get('/404', viewRouter);
 // middleware to test user authorized routes
 app.use((req, res, next) => {
   const user = {
-    name: 'User'
+    name: 'Default User',
+    email: 'user@example.com'
   };
   req.user = user;
 
@@ -54,6 +55,7 @@ app.get('/:slug', viewRouter);
 app.get('/:slug/itinerary', viewRouter);
 app.get('/:slug/itinerary/add', viewRouter);
 app.get('/:slug/expenses/add', viewRouter);
+app.get('/:slug/expenses', viewRouter);
 app.get('/:slug/todo/add', viewRouter);
 
 const port = process.env.PORT || 3000;

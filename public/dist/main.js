@@ -98,15 +98,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/style.scss */ "./public/sass/style.scss");
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_style_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_timelineDescriptionAccordion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/timelineDescriptionAccordion */ "./public/js/modules/timelineDescriptionAccordion.js");
+/* harmony import */ var _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/contentHeight */ "./public/js/modules/contentHeight.js");
+ //  ****************  MODULE IMPORTS **************
+
 
  //  ****************  DOM ELEMENTS **************
 
 const chevrons = document.querySelectorAll('.chevron'); // *****************  DOM MANIPULATION *************
-// itinerary timeline description show and hide
+// content height dynamic height based on nav heights
+
+let contentListeners = ['DOMContentLoaded', 'resize'];
+contentListeners.forEach(listener => window.addEventListener(listener, _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__["default"])); // itinerary timeline description show and hide
 
 chevrons.forEach(chevron => {
   chevron.addEventListener('click', _modules_timelineDescriptionAccordion__WEBPACK_IMPORTED_MODULE_1__["default"]);
 });
+
+/***/ }),
+
+/***/ "./public/js/modules/contentHeight.js":
+/*!********************************************!*\
+  !*** ./public/js/modules/contentHeight.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function contentHeight() {
+  const navTop = document.querySelector('.nav--top');
+  const navBottom = document.querySelector('.nav--bottom');
+  const navTopHeight = navTop.getBoundingClientRect().height;
+  const navBottomHeight = navBottom ? navBottom.getBoundingClientRect().height : 0;
+  let {
+    innerHeight
+  } = window;
+  document.documentElement.style.setProperty('--content', "".concat(innerHeight - navTopHeight - navBottomHeight, "px"));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (contentHeight);
 
 /***/ }),
 

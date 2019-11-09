@@ -104,6 +104,14 @@ router.get('/:slug/expenses/add', getUser, getTrip, (req, res) => {
   });
 });
 
+router.get('/:slug/expenses', getUser, getTrip, (req, res) => {
+  res.status(200).render('expenses', {
+    title: 'Trip Expenses',
+    user: res.user,
+    trip: res.trip
+  });
+});
+
 router.get('/:slug/todo/add', getUser, getTrip, (req, res) => {
   res.status(200).render('editTodo', {
     title: 'Add Todo',

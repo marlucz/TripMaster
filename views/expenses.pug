@@ -1,0 +1,26 @@
+extend layout
+
+include mixins/_expense
+
+block content
+    .content.content--background
+        .container.container--trips
+            .expenses
+                header.header
+                    h2.heading-secondary
+                        span.color--secondary #{trip.name}
+                        |  total expenses: 30$
+                ul.expenses__list
+                    +expense("18/12/2019", "10:00", ["food", "local life"], "Breakfast with coffee", "10", "$")
+                    +expense("18/12/2019", "10:00", ["food", "local life"], "Breakfast with coffee", "10", "$")
+                    +expense("18/12/2019", "10:00", ["food", "local life"], "Breakfast with coffee", "10", "$")
+                    +expense("18/12/2019", "10:00", ["food", "local life"], "Breakfast with coffee", "10", "$")
+                    +expense("18/12/2019", "10:00", ["food", "local life"], "Breakfast with coffee", "10", "$")
+                    +expense("18/12/2019", "10:00", ["food", "local life"], "Breakfast with coffee", "10", "$")
+                    +expense("18/12/2019", "10:00", ["food", "local life"], "Breakfast with coffee", "10", "$")
+                a.btn(href="/:slug/expenses/add" action="GET") ADD EXPENSE
+
+
+
+
+

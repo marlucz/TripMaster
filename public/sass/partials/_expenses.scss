@@ -1,0 +1,17 @@
+.expenses {
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 2rem;
+
+  svg {
+    @include svg-size('width');
+    @include svg-size('height');
+  }
+
+  &__list {
+    overflow-y: scroll;
+    margin-bottom: 2rem;
+  }
+}

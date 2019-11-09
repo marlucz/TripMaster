@@ -1,0 +1,18 @@
+mixin expense(date, hour, tags, name, value, currency)
+    li.expense
+        .expense__time
+            p #{date}
+            p #{hour}
+        .expense__icon
+            != helpers.icon("coin")
+        .expense__details
+            ul.expense__tags
+                each tag in tags
+                    li.tag= tag
+            h3.heading-tertiary.color--black #{name}
+            .expense__edit
+                // TODO - change routes for expense delete and edit
+                a(href=`/:slug/expenses/add` class="inline inline--delete")
+                    != helpers.icon('delete')
+                a(href=`/:slug/expenses/add` class="inline inline--edit")
+                    != helpers.icon('edit')
