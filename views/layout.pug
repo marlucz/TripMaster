@@ -36,7 +36,7 @@ block html
                             nav.nav.nav--bottom
                                 ul.nav__list
                                     each item in helpers.navTrip
-                                        li.nav__item
+                                        li.nav__item.nav__item--bottom
                                             a.nav__link(href=item.slug)
                                                 != helpers.icon(item.icon)
                                                 span #{item.title}

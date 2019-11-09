@@ -11,6 +11,11 @@ $medium-line: 2px;
   @include mq(md) {
     #{$prop}: 4rem;
   }
+
+  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    #{$prop} : 2.5rem;
+  }
+
 }
 
 @mixin svg-size($prop) {
@@ -19,13 +24,35 @@ $medium-line: 2px;
   @include mq(md) {
     #{$prop}: 3rem;
   }
+
+  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    #{$prop} : 2rem;
+  }
 }
 
 
 .itinerary {
-  height: 100%;
+  @include stretch;
   display: grid;
   grid-template-rows: min-content 40% 50%;
+
+  @include mq(md) {
+    grid-template-rows: min-content 50% 42%;
+  }
+
+  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    height: 95%;
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 40% 60%;
+    grid-template-areas:
+      "header header"
+      "timeline map"
+  ;
+  }
+
+  @media (min-width: 1600px) {
+    grid-template-columns: 35% 65%;
+  }
 
   &__map {
     background: url('/images/photos/map_placeholder.jpg') no-repeat center;
@@ -37,14 +64,12 @@ $medium-line: 2px;
       margin-bottom: 1rem;
 
       @include mq(ld) {
-        height: 50%;
         margin-bottom: 2rem;
       }
 
-      @media screen and (min-width: 1024px) and (orientation: landscape) {
+      @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+        @include stretch;
         grid-area: map;
-        width: 50vw;
-        height: 100%;
       }
     }
   }
@@ -55,6 +80,13 @@ $medium-line: 2px;
       width: 100%;
       overflow-y: scroll;
       margin-top: 1.5rem;
+
+      @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+        @include stretch;
+        grid-area: timeline;
+        height: 100%;
+        max-height: 70vh;
+       }
       }
   }
 
@@ -65,7 +97,13 @@ $medium-line: 2px;
     padding-bottom: $event-padding-small;
 
     @include mq(md) {
-    padding-bottom: $event-padding-medium;
+      padding-bottom: $event-padding-medium;
+      grid-template-columns: 18% min-content 1fr;
+    }
+
+    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      padding-bottom: $event-padding-small;
+      grid-template-columns: 22% min-content 1fr;
     }
 
     &:nth-last-of-type(1) {
@@ -93,6 +131,10 @@ $medium-line: 2px;
     justify-content: flex-start;
     align-items: flex-end;
 
+    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      align-items: flex-start;
+    }
+
     p {
       font-size: 1.2rem;
       word-wrap: normal;
@@ -113,6 +155,14 @@ $medium-line: 2px;
     position: relative;
     padding: 0 5px;
 
+    @include mq(md) {
+      margin: 0 2rem;
+    }
+
+    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      margin: 0 5px;
+    }
+
     &:before {
       content: '';
       position: absolute;
@@ -127,6 +177,13 @@ $medium-line: 2px;
         width: $medium-line;
         height: calc(100% - 4rem + #{$event-padding-medium});
       }
+
+      @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+        left: 50%;
+        width: $thin-line;
+        height: calc(100% - 2.5rem + #{$event-padding-small});
+      }
+
     }
     svg {
       @include pin-size('width');

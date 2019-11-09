@@ -26,6 +26,7 @@
     &::after {
       top: 0;
     }
+
   }
 
   &__list {
@@ -59,6 +60,13 @@
       color: $theme-secondary;
       svg {
         fill: $theme-secondary;
+      }
+    }
+
+    &--bottom {
+      color: $white;
+      svg {
+        fill: $white;
       }
     }
   }
