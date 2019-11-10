@@ -5,27 +5,41 @@ include mixins/_todoItem
 block content
     .content.content--background
         .container.container--trips
-            .todo--container
+            .todo
                 header.header
                     h2.heading-secondary
                         span.color--secondary #{trip.name}
-                        |  Tasks / Items : 2/10
-                section.todo__category
-                    .todo__category--header
-                        span 1/2
-                        h3.todo__header Pre-Trip
-                        .chevron
-                            != helpers.icon('chevron')
-                    ul.todo__list
-                        +todoItem('true', 'get IDs')
-                        +todoItem('false', 'exchange cash')
-                section.todo__category
-                    .todo__categroy--header
-                        span 1/2
-                        h3.todo__header Clothes
-                        .chevron
-                            != helpers.icon('chevron')
-                    ul.todo__list
-                        +todoItem('true', 'Warm coat')
-                        +todoItem('false', 'Socks')
+                        |  Stuff Done : 2/10
+                .todo__container
+                    section.todo__category
+                        .todo__header
+                            span 1/2
+                            h3 Pre-Trip
+                            .chevron.chevron--todo
+                                != helpers.icon('chevron')
+                        ul.todo__list
+                            +todoItem(true, 'get IDs')
+                            +todoItem(false, 'exchange cash')
+                    section.todo__category
+                        .todo__header
+                            span 2/5
+                            h3 Clothes
+                            .chevron.chevron--todo
+                                != helpers.icon('chevron')
+                        ul.todo__list
+                            +todoItem(true, 'Warm coat')
+                            +todoItem(false, 'Socks')
+                            +todoItem(true, 'Boots')
+                            +todoItem(false, 'T-shirt')
+                            +todoItem(false, 'Gloves')
+                    section.todo__category
+                        .todo__header
+                            span 1/3
+                            h3 Bookings
+                            .chevron.chevron--todo
+                                != helpers.icon('chevron')
+                        ul.todo__list
+                            +todoItem(true, 'Grand Budapest Hotel')
+                            +todoItem(false, 'Intercontinental')
+                            +todoItem(false, 'Hostel 24/7')
                 a.btn(href="/:slug/todo/add" action="GET") Add Item/Task

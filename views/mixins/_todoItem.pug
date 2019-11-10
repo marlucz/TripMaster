@@ -1,9 +1,9 @@
 mixin todoItem(done, description)
-    li.todo__item
-        - const dataPin = done ? 'done' : 'todo'
-        .todo__item--icon(dataPin=`${dataPin}`)
-            != helpers.icon('done')
-        h4.todo__item--description= description
+    - const itemDone = done ? 'done' : 'todo'
+    li(class="todo__item" data-item=`${itemDone}`)
+        a(href=`/:slug/todo/add` class="todo__item--icon")
+            != helpers.icon(`${itemDone}`)
+        p.todo__item--description=description
         .todo__item--edit
             // TODO - change routes for todo delete and edit
             a(href=`/:slug/todo/add` class="inline inline--delete")
