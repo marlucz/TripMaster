@@ -120,4 +120,12 @@ router.get('/:slug/todo/add', getUser, getTrip, (req, res) => {
   });
 });
 
+router.get('/:slug/todo', getUser, getTrip, (req, res) => {
+  res.status(200).render('todo', {
+    title: 'Todo List',
+    user: res.user,
+    trip: res.trip
+  });
+});
+
 module.exports = router;

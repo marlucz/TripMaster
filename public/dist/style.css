@@ -1177,5 +1177,9 @@ span {
           height: 2.5rem;
           margin: 5px; } }
 
+.todo--container svg {
+  width: 2rem;
+  height: 2rem; }
+
 
 /*# sourceMappingURL=style.css.map*/

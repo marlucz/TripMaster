@@ -1,0 +1,12 @@
+mixin todoItem(done, description)
+    li.todo__item
+        - const dataPin = done ? 'done' : 'todo'
+        .todo__item--icon(dataPin=`${dataPin}`)
+            != helpers.icon('done')
+        h4.todo__item--description= description
+        .todo__item--edit
+            // TODO - change routes for todo delete and edit
+            a(href=`/:slug/todo/add` class="inline inline--delete")
+                != helpers.icon('delete')
+            a(href=`/:slug/todo/add` class="inline inline--edit")
+                != helpers.icon('edit')

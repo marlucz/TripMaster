@@ -57,6 +57,7 @@ app.get('/:slug/itinerary/add', viewRouter);
 app.get('/:slug/expenses/add', viewRouter);
 app.get('/:slug/expenses', viewRouter);
 app.get('/:slug/todo/add', viewRouter);
+app.get('/:slug/todo', viewRouter);
 
 const port = process.env.PORT || 3000;
 

@@ -1,0 +1,31 @@
+extend layout
+
+include mixins/_todoItem
+
+block content
+    .content.content--background
+        .container.container--trips
+            .todo--container
+                header.header
+                    h2.heading-secondary
+                        span.color--secondary #{trip.name}
+                        |  Tasks / Items : 2/10
+                section.todo__category
+                    .todo__category--header
+                        span 1/2
+                        h3.todo__header Pre-Trip
+                        .chevron
+                            != helpers.icon('chevron')
+                    ul.todo__list
+                        +todoItem('true', 'get IDs')
+                        +todoItem('false', 'exchange cash')
+                section.todo__category
+                    .todo__categroy--header
+                        span 1/2
+                        h3.todo__header Clothes
+                        .chevron
+                            != helpers.icon('chevron')
+                    ul.todo__list
+                        +todoItem('true', 'Warm coat')
+                        +todoItem('false', 'Socks')
+                a.btn(href="/:slug/todo/add" action="GET") Add Item/Task
