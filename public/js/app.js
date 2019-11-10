@@ -1,7 +1,7 @@
 import '../sass/style.scss';
 
 //  ****************  MODULE IMPORTS **************
-import timelineDescriptionAccordion from './modules/timelineDescriptionAccordion';
+import chevronAccordion from './modules/chevronAccordion';
 import contentHeight from './modules/contentHeight';
 
 //  ****************  DOM ELEMENTS **************
@@ -18,5 +18,5 @@ contentListeners.forEach(listener =>
 
 // itinerary timeline description show and hide
 chevrons.forEach(chevron => {
-  chevron.addEventListener('click', timelineDescriptionAccordion);
+  chevron.addEventListener('click', chevronAccordion);
 });
