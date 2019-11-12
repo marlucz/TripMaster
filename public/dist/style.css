@@ -484,7 +484,7 @@ span {
       margin-bottom: 1.8rem; } }
   @media (min-width: 992px) {
     .heading-secondary {
-      margin-bottom: 2.5rem; } }
+      margin-bottom: 2rem; } }
   .heading-secondary span {
     text-transform: uppercase; }
 
@@ -492,8 +492,7 @@ span {
   font-size: 1.6rem; }
   @media (min-width: 768px) {
     .heading-tertiary {
-      font-size: 2.2rem;
-      color: #FFFFFF; } }
+      font-size: 2.2rem; } }
 
 .heading-error {
   font-size: 5rem;
@@ -712,7 +711,7 @@ span {
   display: grid;
   grid-template-rows: -webkit-min-content var(--content) -webkit-min-content;
   grid-template-rows: min-content var(--content) min-content;
-  grid-template-areas: "nav-top" "content" "nav-bottom"; }
+  grid-template-areas: 'nav-top' 'content' 'nav-bottom'; }
 
 .content {
   grid-area: content;
@@ -741,15 +740,13 @@ span {
     width: 75%;
     max-width: 50rem; }
   .container--trips {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 90%;
     max-width: 100rem;
     padding: 1.5rem 1rem 0 1rem; }
-    @media (min-width: 768px) {
-      .container--trips {
-        padding: 2.5rem 1rem 0 1rem; } }
     @media (min-width: 1200px) {
       .container--trips {
         max-width: 120rem; } }
@@ -771,11 +768,13 @@ span {
   justify-content: center;
   background: #FFFFFF;
   box-shadow: 0 0 5px rgba(0, 37, 53, 0.3);
-  margin-top: auto;
-  margin-bottom: 2.5rem; }
-  @media (min-width: 768px) {
+  margin-top: auto; }
+  @media (min-width: 992px) {
     .pagination {
-      margin-bottom: 3.5rem; } }
+      margin-bottom: 1.5rem; } }
+  @media (min-width: 1200px) {
+    .pagination {
+      margin-bottom: 2rem; } }
   .pagination__next {
     flex: 0 0 auto;
     padding: 1rem; }
@@ -794,30 +793,42 @@ span {
     text-align: center; }
 
 .trips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
+  display: grid;
+  grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
+  grid-template-rows: min-content 1fr min-content;
+  padding-bottom: 2rem;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll; }
+  .trips__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    grid-gap: 5px;
+    margin-bottom: 1rem; }
+    @media (min-width: 768px) {
+      .trips__list {
+        grid-gap: 1rem; } }
+    @media (min-width: 992px) {
+      .trips__list {
+        grid-gap: 2rem;
+        margin-bottom: 2rem; } }
+    @media screen and (min-width: 1024px) and (orientation: portrait), (min-width: 1200px) {
+      .trips__list {
+        grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr)); } }
 
 .trip {
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  height: 100%; }
   @media (min-width: 768px) {
     .trip {
       flex-direction: column;
-      width: 48%;
       margin-bottom: 2rem; } }
-  @media (min-width: 1200px) {
-    .trip {
-      margin-bottom: 3rem; } }
-  @media (min-width: 1024px) and (orientation: landscape) {
-    .trip {
-      width: 30%; } }
   .trip__photo {
-    width: 12vh;
-    height: 12vh; }
+    width: 25%;
+    height: 90%; }
     @media (min-width: 768px) {
       .trip__photo {
         width: 100%;
@@ -827,7 +838,7 @@ span {
         height: 18vh; } }
     @media (min-width: 1200px) {
       .trip__photo {
-        height: 20vh; } }
+        height: 25vh; } }
   .trip__photo-img {
     -o-object-fit: cover;
        object-fit: cover;
@@ -846,16 +857,13 @@ span {
       .trip__details {
         width: 100%;
         height: auto;
-        padding: 2rem;
-        padding-bottom: 0; } }
+        padding: 0 1.5rem; } }
   .trip__data {
     display: flex;
     align-items: center; }
     @media (min-width: 768px) {
       .trip__data {
-        padding-bottom: 2rem; }
-        .trip__data:first-child {
-          margin-top: -5rem; } }
+        padding-bottom: 1rem; } }
   .trip svg {
     width: 1.5rem;
     height: 1.5rem;
@@ -885,7 +893,7 @@ span {
       grid-template-rows: -webkit-min-content 1fr;
       grid-template-rows: min-content 1fr;
       grid-template-columns: 40% 60%;
-      grid-template-areas: "header header" "timeline map"; } }
+      grid-template-areas: 'header header' 'timeline map'; } }
   @media (min-width: 1600px) {
     .itinerary {
       grid-template-columns: 35% 65%; } }
@@ -985,7 +993,7 @@ span {
           top: 2.5rem; } }
       @media (min-width: 768px) {
         .itinerary__icon:before {
-          left: calc(50% - 2px/2);
+          left: calc(50% - 2px/ 2);
           width: 2px;
           height: calc(100% - 4rem + 1.5rem); } }
       @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
@@ -1181,8 +1189,8 @@ span {
   display: grid;
   grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
   grid-template-rows: min-content 1fr min-content;
-  height: 100%;
   width: 100%;
+  height: 100%;
   padding-bottom: 2rem; }
   .todo__container {
     overflow-y: scroll;
@@ -1199,7 +1207,8 @@ span {
     align-items: center;
     color: #FFFFFF;
     padding: 2px 1rem; }
-    .todo__header span, .todo__header h3 {
+    .todo__header span,
+    .todo__header h3 {
       font-size: 1.4rem;
       font-weight: normal; }
     .todo__header .chevron {
@@ -1248,7 +1257,7 @@ span {
       align-items: center; }
       .todo__item--edit a {
         padding-left: 5px; }
-    .todo__item[data-item="done"] p:after {
+    .todo__item[data-item='done'] p:after {
       content: '';
       position: absolute;
       top: 50%;
@@ -1256,7 +1265,7 @@ span {
       width: 100%;
       height: 1px;
       background-color: #05A859; }
-    .todo__item[data-item="done"] .todo__item--icon svg {
+    .todo__item[data-item='done'] .todo__item--icon svg {
       fill: #05A859; }
 
 

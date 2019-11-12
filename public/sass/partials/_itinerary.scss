@@ -8,29 +8,30 @@ $medium-line: 2px;
 /*  SVG MIXINS  */
 
 @mixin pin-size($prop) {
-  #{$prop} : 2.5rem;
+  #{$prop}: 2.5rem;
 
   @include mq(md) {
     #{$prop}: 4rem;
   }
 
-  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
-    #{$prop} : 2.5rem;
+  @media screen and (min-width: 1024px) and (orientation: landscape),
+    (min-width: 1200px) {
+    #{$prop}: 2.5rem;
   }
 }
 
 @mixin svg-size($prop) {
-  #{$prop} : 2rem;
+  #{$prop}: 2rem;
 
   @include mq(md) {
     #{$prop}: 3rem;
   }
 
-  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
-    #{$prop} : 2rem;
+  @media screen and (min-width: 1024px) and (orientation: landscape),
+    (min-width: 1200px) {
+    #{$prop}: 2rem;
   }
 }
-
 
 .itinerary {
   @include stretch;
@@ -41,14 +42,14 @@ $medium-line: 2px;
     grid-template-rows: min-content 50% 42%;
   }
 
-  @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+  @media screen and (min-width: 1024px) and (orientation: landscape),
+    (min-width: 1200px) {
     height: 95%;
     grid-template-rows: min-content 1fr;
     grid-template-columns: 40% 60%;
     grid-template-areas:
-      "header header"
-      "timeline map"
-  ;
+      'header header'
+      'timeline map';
   }
 
   @media (min-width: 1600px) {
@@ -68,7 +69,8 @@ $medium-line: 2px;
         margin-bottom: 2rem;
       }
 
-      @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      @media screen and (min-width: 1024px) and (orientation: landscape),
+        (min-width: 1200px) {
         @include stretch;
         grid-area: map;
       }
@@ -82,13 +84,14 @@ $medium-line: 2px;
       overflow-y: scroll;
       margin-top: 1.5rem;
 
-      @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      @media screen and (min-width: 1024px) and (orientation: landscape),
+        (min-width: 1200px) {
         @include stretch;
         grid-area: timeline;
         height: 100%;
         max-height: 70vh;
-       }
       }
+    }
   }
 
   &__event {
@@ -101,7 +104,8 @@ $medium-line: 2px;
       grid-template-columns: 18% min-content 1fr;
     }
 
-    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    @media screen and (min-width: 1024px) and (orientation: landscape),
+      (min-width: 1200px) {
       padding-bottom: $event-padding-small;
       grid-template-columns: 22% min-content 1fr;
     }
@@ -131,7 +135,8 @@ $medium-line: 2px;
     justify-content: flex-start;
     align-items: flex-end;
 
-    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    @media screen and (min-width: 1024px) and (orientation: landscape),
+      (min-width: 1200px) {
       align-items: flex-start;
     }
 
@@ -159,7 +164,8 @@ $medium-line: 2px;
       margin: 0 2rem;
     }
 
-    @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+    @media screen and (min-width: 1024px) and (orientation: landscape),
+      (min-width: 1200px) {
       margin: 0 5px;
     }
 
@@ -173,17 +179,17 @@ $medium-line: 2px;
       background-color: $gray-dark;
 
       @include mq(md) {
-        left: calc(50% - #{$medium-line}/2);
+        left: calc(50% - #{$medium-line}/ 2);
         width: $medium-line;
         height: calc(100% - 4rem + #{$event-padding-medium});
       }
 
-      @media screen and (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+      @media screen and (min-width: 1024px) and (orientation: landscape),
+        (min-width: 1200px) {
         left: 50%;
         width: $thin-line;
         height: calc(100% - 2.5rem + #{$event-padding-small});
       }
-
     }
     svg {
       @include pin-size('width');

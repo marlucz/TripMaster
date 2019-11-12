@@ -1,10 +1,8 @@
 .todo {
   display: grid;
   grid-template-rows: min-content 1fr min-content;
-  height: 100%;
-  width: 100%;
+  @include stretch;
   padding-bottom: 2rem;
-
 
   &__container {
     overflow-y: scroll;
@@ -28,7 +26,8 @@
     color: $white;
     padding: 2px $gap-medium;
 
-    span, h3 {
+    span,
+    h3 {
       font-size: 1.4rem;
       font-weight: normal;
     }
@@ -105,7 +104,7 @@
       }
     }
 
-    &[data-item="done"] {
+    &[data-item='done'] {
       p:after {
         content: '';
         position: absolute;

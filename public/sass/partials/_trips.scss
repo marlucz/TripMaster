@@ -1,33 +1,47 @@
 .trips {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  padding-bottom: 2rem;
+  @include stretch;
+  overflow-y: scroll;
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    grid-gap: $gap-small;
+    margin-bottom: $gap-medium;
+
+    @include mq(md) {
+      grid-gap: $gap-medium;
+    }
+
+    @include mq(ld) {
+      grid-gap: $gap-big;
+      margin-bottom: $gap-big;
+    }
+
+    @media screen and (min-width: 1024px) and (orientation: portrait),
+      (min-width: 1200px) {
+      grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    }
+  }
 }
 
 .trip {
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
   margin-bottom: 1rem;
+  height: 100%;
 
   @include mq(md) {
     flex-direction: column;
-    width: 48%;
     margin-bottom: 2rem;
   }
 
-  @include mq(xld) {
-    margin-bottom: 3rem;
-  }
-
-  @media (min-width: 1024px ) and (orientation: landscape) {
-    width: 30%;
-  }
-
   &__photo {
-    width: 12vh;
-    height: 12vh;
+    width: 25%;
+    height: 90%;
 
     @include mq(md) {
       width: 100%;
@@ -39,7 +53,7 @@
     }
 
     @include mq(xld) {
-      height: 20vh;
+      height: 25vh;
     }
   }
 
@@ -62,8 +76,7 @@
     @include mq(md) {
       width: 100%;
       height: auto;
-      padding: 2rem;
-      padding-bottom: 0;
+      padding: 0 1.5rem;
     }
   }
 
@@ -72,11 +85,7 @@
     align-items: center;
 
     @include mq(md) {
-      padding-bottom: 2rem;
-
-      &:first-child {
-        margin-top: -5rem;
-      }
+      padding-bottom: $gap-medium;
     }
   }
 

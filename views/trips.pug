@@ -6,15 +6,16 @@ include mixins/_pagination
 block content
     .content.content--background
         .container.container--trips
-            header.header
-                h2.heading-secondary
-                    span.color--secondary your upcoming
-                    |  Trips
             .trips
-                //- TODO each trip in trips
-                +tripCard()
-                +tripCard()
-                +tripCard()
-                +tripCard()
-                +tripCard()
-            +pagination()
+                header.header
+                    h2.heading-secondary
+                        span.color--secondary your upcoming
+                        |  Trips
+                    //- TODO each trip in 
+                .trips__list
+                    +tripCard()
+                    +tripCard()
+                    +tripCard()
+                    +tripCard()
+                    +tripCard()
+                +pagination()

@@ -6,10 +6,13 @@
   background: $white;
   box-shadow: $shadow-light;
   margin-top: auto;
-  margin-bottom: 2.5rem;
 
-  @include mq(md) {
-    margin-bottom: 3.5rem;
+  @include mq(ld) {
+    margin-bottom: 1.5rem;
+  }
+
+  @include mq(xld) {
+    margin-bottom: 2rem;
   }
 
   &__next {
@@ -17,7 +20,7 @@
     padding: 1rem;
     a:after {
       margin-left: 1rem;
-      content: '→'
+      content: '→';
     }
   }
   &__prev {
@@ -25,7 +28,7 @@
     padding: 1rem;
     a:before {
       margin-right: 1rem;
-      content: '←'
+      content: '←';
     }
   }
   &__text {

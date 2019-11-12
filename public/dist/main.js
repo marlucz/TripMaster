@@ -97,7 +97,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/style.scss */ "./public/sass/style.scss");
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/chevronAccordion */ "./public/js/modules/chevronAccordion.js");
+/* harmony import */ var _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/chevronAccordion */ "./public/js/modules/chevronAccordion.js");
 /* harmony import */ var _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/contentHeight */ "./public/js/modules/contentHeight.js");
  //  ****************  MODULE IMPORTS **************
 
@@ -111,7 +111,7 @@ let contentListeners = ['DOMContentLoaded', 'resize'];
 contentListeners.forEach(listener => window.addEventListener(listener, _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__["default"])); // itinerary timeline description show and hide
 
 chevrons.forEach(chevron => {
-  chevron.addEventListener('click', _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  chevron.addEventListener('click', _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_1__["default"]);
 });
 
 /***/ }),
