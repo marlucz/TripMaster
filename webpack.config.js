@@ -4,12 +4,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    main: './public/js/app.js'
+    main: './public/js/app.ts'
   },
+  target: 'node',
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'public/dist'),
     filename: '[name].js'
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [
@@ -32,15 +36,16 @@ module.exports = {
         ]
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          presets: [
-            ['@babel/preset-env', { useBuiltIns: 'usage', corejs: '2.0.0' }]
-          ],
-          plugins: ['@babel/plugin-proposal-class-properties']
-        }
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: false
+            }
+          }
+        ],
+        exclude: /node_modules/
       }
     ]
   },

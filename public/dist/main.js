@@ -81,14 +81,14 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./public/js/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./public/js/app.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./public/js/app.js":
+/***/ "./public/js/app.ts":
 /*!**************************!*\
-  !*** ./public/js/app.js ***!
+  !*** ./public/js/app.ts ***!
   \**************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -97,78 +97,83 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/style.scss */ "./public/sass/style.scss");
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/chevronAccordion */ "./public/js/modules/chevronAccordion.js");
-/* harmony import */ var _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/contentHeight */ "./public/js/modules/contentHeight.js");
- //  ****************  MODULE IMPORTS **************
+/* harmony import */ var _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/chevronAccordion */ "./public/js/modules/chevronAccordion.ts");
+/* harmony import */ var _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/contentHeight */ "./public/js/modules/contentHeight.ts");
+
+//  ****************  MODULE IMPORTS **************
 
 
- //  ****************  DOM ELEMENTS **************
-
-const chevrons = document.querySelectorAll('.chevron'); // *****************  DOM MANIPULATION *************
+//  ****************  DOM ELEMENTS **************
+var chevrons = document.querySelectorAll('.chevron');
+// *****************  DOM MANIPULATION *************
 // content height dynamic height based on nav heights
-
-let contentListeners = ['DOMContentLoaded', 'resize'];
-contentListeners.forEach(listener => window.addEventListener(listener, _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__["default"])); // itinerary timeline description show and hide
-
-chevrons.forEach(chevron => {
-  chevron.addEventListener('click', _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var contentListeners = ['DOMContentLoaded', 'resize'];
+contentListeners.forEach(function (listener) {
+    return window.addEventListener(listener, _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__["default"]);
 });
+// itinerary timeline description show and hide
+chevrons.forEach(function (chevron) {
+    chevron.addEventListener('click', _modules_chevronAccordion__WEBPACK_IMPORTED_MODULE_1__["default"]);
+});
+
 
 /***/ }),
 
-/***/ "./public/js/modules/chevronAccordion.js":
+/***/ "./public/js/modules/chevronAccordion.ts":
 /*!***********************************************!*\
-  !*** ./public/js/modules/chevronAccordion.js ***!
+  !*** ./public/js/modules/chevronAccordion.ts ***!
   \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return chevronAccordion; });
 function chevronAccordion() {
-  if (!this.classList.contains('chevron')) return;
-
-  if (this.classList.contains('chevron--event')) {
-    // get description node to toggle its active class
-    const description = this.nextSibling.nextSibling;
-    if (!description) return;
-    description.classList.toggle('itinerary__description--active');
-  } else if (this.classList.contains('chevron--todo')) {
-    // get todolist node to toggle its active class
-    const todoList = this.parentElement.parentElement.lastChild;
-    if (!todoList) return;
-    todoList.classList.toggle('todo__list--active');
-  } // toggle active classes for chevron itself
-
-
-  this.classList.toggle('chevron--active');
+    if (!this.classList.contains('chevron'))
+        return;
+    if (this.classList.contains('chevron--event')) {
+        // get description node to toggle its active class
+        var description = this.nextSibling.nextSibling;
+        if (!description)
+            return;
+        description.classList.toggle('itinerary__description--active');
+    }
+    else if (this.classList.contains('chevron--todo')) {
+        // get todolist node to toggle its active class
+        var todoList = this.parentElement.parentElement.lastChild;
+        if (!todoList)
+            return;
+        todoList.classList.toggle('todo__list--active');
+    }
+    // toggle active classes for chevron itself
+    this.classList.toggle('chevron--active');
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (chevronAccordion);
 
 /***/ }),
 
-/***/ "./public/js/modules/contentHeight.js":
+/***/ "./public/js/modules/contentHeight.ts":
 /*!********************************************!*\
-  !*** ./public/js/modules/contentHeight.js ***!
+  !*** ./public/js/modules/contentHeight.ts ***!
   \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return contentHeight; });
 function contentHeight() {
-  const navTop = document.querySelector('.nav--top');
-  const navBottom = document.querySelector('.nav--bottom');
-  const navTopHeight = navTop.getBoundingClientRect().height;
-  const navBottomHeight = navBottom ? navBottom.getBoundingClientRect().height : 0;
-  let {
-    innerHeight
-  } = window;
-  document.documentElement.style.setProperty('--content', "".concat(innerHeight - navTopHeight - navBottomHeight, "px"));
+    var navTop = document.querySelector('.nav--top');
+    var navBottom = document.querySelector('.nav--bottom');
+    var navTopHeight = navTop.getBoundingClientRect().height;
+    var navBottomHeight = navBottom
+        ? navBottom.getBoundingClientRect().height
+        : 0;
+    var innerHeight = window.innerHeight;
+    document.documentElement.style.setProperty('--content', innerHeight - navTopHeight - navBottomHeight + "px");
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (contentHeight);
 
 /***/ }),
 

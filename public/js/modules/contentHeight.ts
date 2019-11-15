@@ -1,4 +1,4 @@
-function contentHeight() {
+export default function contentHeight() {
   const navTop = document.querySelector('.nav--top');
   const navBottom = document.querySelector('.nav--bottom');
 
@@ -14,5 +14,3 @@ function contentHeight() {
     `${innerHeight - navTopHeight - navBottomHeight}px`
   );
 }
-
-export default contentHeight;

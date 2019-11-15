@@ -1,4 +1,4 @@
-function chevronAccordion() {
+export default function chevronAccordion() {
   if (!this.classList.contains('chevron')) return;
 
   if (this.classList.contains('chevron--event')) {
@@ -18,5 +18,3 @@ function chevronAccordion() {
   // toggle active classes for chevron itself
   this.classList.toggle('chevron--active');
 }
-
-export default chevronAccordion;
