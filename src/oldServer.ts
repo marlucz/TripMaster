@@ -1,11 +1,12 @@
-const path = require('path');
-const express = require('express');
-const moment = require('moment');
-const helpers = require('./helpers');
+import { Application, Request, Response, NextFunction } from 'express';
+import express = require('express');
+import path = require('path');
+import moment = require('moment');
+import * as helpers from './helpers';
 
-const app = express();
+const app: Application = express();
 
-const viewRouter = require('./routes/viewRoutes');
+const viewRouter = require('../routes/viewRoutes');
 
 // set render template engine to pug
 app.set('view engine', 'pug');
@@ -59,7 +60,7 @@ app.get('/:slug/expenses', viewRouter);
 app.get('/:slug/todo/add', viewRouter);
 app.get('/:slug/todo', viewRouter);
 
-const port = process.env.PORT || 3000;
+const port: Number = 3000;
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
