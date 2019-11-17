@@ -1,9 +1,10 @@
 import { readFileSync } from 'fs';
 
 // read icons from public folder
-export function icon(name: string) {
-  readFileSync(`./public/images/icons/${name}.svg`);
+export function icon(name:string) {
+  return readFileSync(`./public/images/icons/${name}.svg`);
 }
+
 
 export const navTop = [
   { slug: '/trips', title: 'Trips', icon: 'trips' },

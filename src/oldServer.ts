@@ -2,7 +2,7 @@ import { Application, Request, Response, NextFunction } from 'express';
 import express = require('express');
 import path = require('path');
 import moment = require('moment');
-import * as helpers from './helpers';
+import * as helpers from '../helpers';
 
 const app: Application = express();
 
