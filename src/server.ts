@@ -1,17 +1,11 @@
-import { Application, Request, Response, NextFunction } from 'express';
-import express = require('express');
-import path = require('path');
-import moment = require('moment');
-import * as helpers from './helpers';
-
-const app: Application = express();
+import app from './app';
+import { Request, Response, NextFunction } from 'express';
+const PORT = 3000;
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send('Hello from the TypeScript App');
+  res.send('Hello From The TypeScript Server');
 });
 
-const port: Number = 3000;
-
-app.listen(port, () => {
-  console.log(`App running on port ${port}`);
+app.listen(PORT, () => {
+  console.log('Express server listening on port ' + PORT);
 });
