@@ -1,4 +1,0 @@
-{
-  "watch": "src/**/*.ts",
-  "exec": "set NODE_ENV=development ts-node src/server.ts"
-}

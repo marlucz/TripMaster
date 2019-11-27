@@ -1,19 +1,20 @@
 import { Application, Request, Response, NextFunction } from 'express';
 import express = require('express');
+import session = require ("express-session");
+import flash = require ("express-flash");
+import mongoose = require ("mongoose");
+import {MongoStore} from "connect-mongo";
 import * as bodyParser from 'body-parser';
-import {resolve, join} from 'path';
+import cookieParser = require("cookie-parser");
 import path = require('path');
-import { config } from 'dotenv';
-import * as helpers from "../helpers";
+
 import moment = require('moment');
 
-import viewRouter from '../routes/viewRoutes';
-import UserController from '../controllers/userController';
-import TripController from '../controllers/tripController';
+import * as helpers from "../helpers";
 
-
-config({ path: resolve(__dirname, "variables.env") })
-
+import viewRouter from './routes/viewRoutes';
+import UserController from './controllers/userController';
+import TripController from './controllers/tripController';
 
 class App {
   public app: express.Application;
@@ -31,12 +32,23 @@ class App {
   private config(): void {
     this.app.set('port', process.env.PORT || 3000);
     this.app.set('view engine', 'pug');
-    this.app.set('views', path.join(__dirname, '../views'));
+    this.app.set('views', path.join(__dirname, './views'));
   }
 
   private middlewares():void {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(cookieParser());
+    this.app.use(
+        session({
+          secret: process.env.SECRET || '',
+          resave: true,
+          saveUninitialized: false,
+          store: new MongoStore({
+            url: process.env.DATABASE_LOCAL,
+            autoReconnect: true })
+        })
+    );
     this.app.use((req:Request, res:Response, next:NextFunction) => {
       res.locals.moment = moment;
       res.locals.helpers = helpers;
