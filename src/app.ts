@@ -9,35 +9,37 @@ import cookieParser from 'cookie-parser';
 import path, {resolve} from 'path';
 import moment from 'moment';
 import * as helpers from "../helpers";
+import cors from 'cors';
 
 const MongoStore = mongo(session);
 
 import viewRouter from './routes/viewRoutes';
-import UserController from './controllers/userController';
-import TripController from './controllers/tripController';
+import {UserRoutes} from './routes/userRoutes';
+
 
 
 
 class App {
-  public app: express.Application;
-
-  public userController: UserController = new UserController();
-  public tripController: TripController = new TripController();
+  public app: express.Application = express();
+  public userRouter: UserRoutes = new UserRoutes()
 
   constructor() {
     this.app = express();
     this.config();
     this.middlewares();
-    this.routes();
+    this.userRouter.routes(this.app);
   }
 
   private config(): void {
     this.app.set('port', process.env.PORT || 3000);
     this.app.set('view engine', 'pug');
     this.app.set('views', path.join(__dirname, './views'));
+    this.app.use(express.static(path.join(__dirname, '../public/')));
   }
 
   private middlewares():void {
+    this.app.use(cors());
+    this.app.options('*', cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(cookieParser());
@@ -56,33 +58,32 @@ class App {
     });
   }
 
-
   private routes():void {
-    this.app.use(express.static(path.join(__dirname, '../public/')));
-
-    this.app.get('/login', viewRouter);
-    this.app.get('/signup', viewRouter);
-    this.app.get('/forgot', viewRouter);
-    this.app.get('/404', viewRouter);
-
-// middleware to test user authorized routes
-    this.app.use(this.userController.setUser);
-
-    this.app.get('/', viewRouter);
-    this.app.get('/account', viewRouter);
-    this.app.get('/add-trip', viewRouter);
-    this.app.get('/trips', viewRouter);
-
-// middleware to test trip dependent routes
-    this.app.use(this.tripController.setTrip);
-
-    this.app.get('/:slug', viewRouter);
-    this.app.get('/:slug/itinerary', viewRouter);
-    this.app.get('/:slug/itinerary/add', viewRouter);
-    this.app.get('/:slug/expenses/add', viewRouter);
-    this.app.get('/:slug/expenses', viewRouter);
-    this.app.get('/:slug/todo/add', viewRouter);
-    this.app.get('/:slug/todo', viewRouter);
+     // this.app.use(express.static(path.join(__dirname, '../public/')));
+//
+//     this.app.get('/login', viewRouter);
+//     this.app.get('/signup', viewRouter);
+//     this.app.get('/forgot', viewRouter);
+//     this.app.get('/404', viewRouter);
+//
+// // middleware to test user authorized routes
+//     this.app.use(this.userController.setUser);
+//
+//     this.app.get('/', viewRouter);
+//     this.app.get('/account', viewRouter);
+//     this.app.get('/add-trip', viewRouter);
+//     this.app.get('/trips', viewRouter);
+//
+// // middleware to test trip dependent routes
+//     this.app.use(this.tripController.setTrip);
+//
+//     this.app.get('/:slug', viewRouter);
+//     this.app.get('/:slug/itinerary', viewRouter);
+//     this.app.get('/:slug/itinerary/add', viewRouter);
+//     this.app.get('/:slug/expenses/add', viewRouter);
+//     this.app.get('/:slug/expenses', viewRouter);
+//     this.app.get('/:slug/todo/add', viewRouter);
+//     this.app.get('/:slug/todo', viewRouter);
   }
 
   public start(): void {

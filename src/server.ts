@@ -14,8 +14,9 @@ mongoose
     })
     .then(() => console.log('Successful database connection'));
 
+require('./models/User');
+
 const app = new App();
 
 app.start();
-
 
