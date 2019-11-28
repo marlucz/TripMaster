@@ -1,5 +1,5 @@
 import {RequestHandler} from 'express';
-import {User} from '../models/User';
+import {User} from '../models/userModel';
 
 export class UserController {
     /**
@@ -15,6 +15,16 @@ export class UserController {
         res.locals.user = user;
         next();
     }
+    /**
+     * GET /login
+     * Login Page
+     */
+
+    public getLogin: RequestHandler = (req,res) => {
+        res.status(200).render('login', {
+            title: 'TripMaster'
+        });
+    }
 
     /**
      * GET /signup
@@ -22,11 +32,24 @@ export class UserController {
      */
     public getSignup: RequestHandler = (req,res) => {
         res.status(200).render('signup', {
-            title: 'TripMaster'
+            title: 'SignUp'
         });
     }
 
+    /**
+     * POST /signup
+     * Create User
+     */
     public postSignup: RequestHandler = async (req,res) => {
-
+        const user = new User ({
+            email: req.body.email,
+            name:req.body.name,
+            password:req.body.password
+        })
+        await User.create(user);
+        res.status(200).json({
+            status: 'success',
+            user
+        })
     }
 }

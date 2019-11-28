@@ -9,7 +9,7 @@ block signForms
         .form__container.form__container--hero
             .gradient-container.gradient-container--signForms
                 +gradient()
-            form.form
+            form.form(action="/signup" method="POST")
                 .form__group
                     label.form__label(for="name") Name
                     input.form__input(type="text" name="name" placeholder="Your name..." required)

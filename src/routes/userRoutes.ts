@@ -9,6 +9,8 @@ export class UserRoutes {
         app.route('/signup')
             .get(this.userController.getSignup)
             .post(this.userController.postSignup)
+        app.route('/login')
+            .get(this.userController.getLogin)
     }
 }
 
