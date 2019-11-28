@@ -1,23 +1,22 @@
 import { Application, Request, Response, NextFunction } from 'express';
-import express = require('express');
-import session = require ("express-session");
-import flash = require ("express-flash");
-import mongoose = require ("mongoose");
-import mongo = require('connect-mongo');
+import express from 'express';
+import session from 'express-session';
+import flash from 'express-flash'
+import mongoose from 'mongoose';
+import mongo from 'connect-mongo';
 import * as bodyParser from 'body-parser';
-import cookieParser = require("cookie-parser");
-import path = require('path');
-
-import moment = require('moment');
-
+import cookieParser from 'cookie-parser';
+import path, {resolve} from 'path';
+import moment from 'moment';
 import * as helpers from "../helpers";
+
+const MongoStore = mongo(session);
 
 import viewRouter from './routes/viewRoutes';
 import UserController from './controllers/userController';
 import TripController from './controllers/tripController';
 
 
-const MongoStore = mongo(session);
 
 class App {
   public app: express.Application;
@@ -43,9 +42,8 @@ class App {
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(cookieParser());
     this.app.use(
-        // @ts-ignore
         session({
-          secret: process.env.SECRET,
+          secret: `${process.env.SESSION_SECRET}`,
           resave: true,
           saveUninitialized: false,
           store: new MongoStore({ mongooseConnection: mongoose.connection })
