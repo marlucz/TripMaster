@@ -1,14 +1,12 @@
 import App from './app';
 import { config } from 'dotenv';
 import {resolve} from "path";
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 
-config({ path: resolve(__dirname, "variables.env") })
-
-
+config({ path: resolve(__dirname, "../variables.env") })
 
 mongoose
-.connect('mongodb://localhost:27017/tripmaster', {
+.connect(`${process.env.MONGODB_URI_LOCAL}`, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false,
@@ -19,3 +17,5 @@ mongoose
 const app = new App();
 
 app.start();
+
+
