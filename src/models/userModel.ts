@@ -7,9 +7,20 @@ export interface IUser extends Document {
     email: string;
     name: string;
     password: string;
+    passwordConfirm: string;
+    comparePassword: comparePasswordFunction;
 }
 
-const UserSchema: Schema = new Schema({
+type comparePasswordFunction = (
+    candidatePassword: string,
+    cb: (err: mongoose.Error, isMatch:boolean) => {}
+) => void;
+
+
+
+// @ts-ignore
+// @ts-ignore
+const userSchema: Schema = new Schema({
     email: {
         type: String,
         unique: true,
@@ -26,8 +37,25 @@ const UserSchema: Schema = new Schema({
     password: {
         type: String,
         required: [true, 'Please provide a password']
+    },
+    passwordConfirm: {
+        type: String,
+        required: [true, 'Please confirm your password'],
+        validate: {
+            validator: function(this: any, passwordToConfirm: string): boolean{
+                return passwordToConfirm === this.password;
+            },
+            message: 'Password confirmation is not correct'
+        }
     }
-})
+});
 
+const comparePassword: comparePasswordFunction = function (this: any, candidatePassword, cb)  {
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+        cb(err, isMatch);
+    });
+}
 
-export const User = mongoose.model<IUser>('User', UserSchema);
+userSchema.methods.comparePassword = comparePassword;
+
+export const User = mongoose.model<IUser>('User', userSchema);
