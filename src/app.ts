@@ -1,4 +1,4 @@
-import { Application, Request, Response, NextFunction } from 'express';
+import {Request, Response, NextFunction } from 'express';
 import express from 'express';
 import session from 'express-session';
 import flash from 'express-flash'
@@ -14,20 +14,17 @@ import cors from 'cors';
 const MongoStore = mongo(session);
 
 import viewRouter from './routes/viewRoutes';
-import {UserRoutes} from './routes/userRoutes';
-
-
+import userRouter from './routes/userRoutes';
 
 
 class App {
   public app: express.Application = express();
-  public userRouter: UserRoutes = new UserRoutes()
 
   constructor() {
     this.app = express();
     this.config();
     this.middlewares();
-    this.userRouter.routes(this.app);
+    this.routes();
   }
 
   private config(): void {
@@ -59,6 +56,8 @@ class App {
   }
 
   private routes():void {
+    this.app.use('/', userRouter);
+
      // this.app.use(express.static(path.join(__dirname, '../public/')));
 //
 //     this.app.get('/login', viewRouter);

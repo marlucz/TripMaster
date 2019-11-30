@@ -1,7 +1,8 @@
-import {RequestHandler} from 'express';
+import {Request, RequestHandler, Response} from 'express';
 import {User} from '../models/userModel';
+import router from "../routes/viewRoutes";
 
-export class UserController {
+class UserController {
     /**
      * Helper middleware
      * To provide user while creating view templates
@@ -52,4 +53,15 @@ export class UserController {
             user
         })
     }
+    /**
+     * GET /forgot
+     * Forgot Page
+     */
+    public forgot: RequestHandler = async (req,res) => {
+        res.status(200).render('forgot', {
+            title: 'Reset password'
+        });
+    }
 }
+
+export const userController: UserController = new UserController();

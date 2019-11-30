@@ -1,18 +1,23 @@
-import {Router, RequestHandler } from 'express';
-import {UserController} from '../controllers/userController';
+import express, {Router, RequestHandler } from 'express';
+import {userController} from '../controllers/userController';
 
+class UserRouter {
+    router: Router;
 
-export class UserRoutes {
-    public userController: UserController = new UserController()
-    public routes(app: any): void {
+    constructor(){
+        this.router = Router();
+        this.routes();
+    }
 
-        app.route('/signup')
-            .get(this.userController.getSignup)
-            .post(this.userController.postSignup)
-        app.route('/login')
-            .get(this.userController.getLogin)
+    routes():void {
+        this.router.route('/signup')
+            .get(userController.getSignup)
+            .post(userController.postSignup)
+        this.router.route('/login')
+            .get(userController.getLogin)
+        this.router.route('/forgot')
+            .get(userController.forgot)
     }
 }
-
-
-
+const userRouter = new UserRouter();
+export default userRouter.router;

@@ -8,23 +8,6 @@ router.get('/', (req: Request, res: Response) => {
       });
 });
 
-router.get('/login', (req: Request, res: Response) => {
-  res.status(200).render('login', {
-    title: 'TripMaster'
-  });
-});
-
-router.get('/signup', (req: Request, res: Response) => {
-  res.status(200).render('signup', {
-    title: 'TripMaster'
-  });
-});
-
-router.get('/forgot', (req: Request, res: Response) => {
-  res.status(200).render('forgot', {
-    title: 'Reset password'
-  });
-});
 
 router.get('/404', (req: Request, res: Response) => {
   res.status(200).render('404', {
