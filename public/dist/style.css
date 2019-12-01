@@ -1268,5 +1268,37 @@ span {
     .todo__item[data-item='done'] .todo__item--icon svg {
       fill: #05A859; }
 
+@keyframes flashIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.flash {
+  position: absolute;
+  top: 10rem;
+  left: 50vw;
+  transform: translateX(-50%);
+  width: 50vw;
+  max-width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  color: #FFFFFF;
+  display: flex;
+  animation: flashIn forwards .5s ease;
+  z-index: 999; }
+  .flash__text {
+    flex: 1; }
+  .flash__remove {
+    color: #FFFFFF;
+    background: none;
+    border: 0; }
+    .flash__remove:hover {
+      cursor: pointer; }
+  .flash--success {
+    background-color: #05A859; }
+  .flash--error {
+    background-color: #F15E4C; }
+
 
 /*# sourceMappingURL=style.css.map*/

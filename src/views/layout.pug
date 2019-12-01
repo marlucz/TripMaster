@@ -12,7 +12,16 @@ block html
                 link(rel="icon" type="image/x-icon" href="/favicon.ico")
                 link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mr+Dafoe&display=swap")
                 link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap")
+                title= title
         body
+            block messages
+                if locals.messages
+                        - const categories = Object.keys(locals.messages)
+                        each category in categories
+                            each message in messages[category]
+                                .flash(class=`flash--${category}`)
+                                    p.flash__text!= message
+                                    button.flash__remove(onClick="this.parentElement.remove()") &times;
             if !user 
                 block signForms
             else

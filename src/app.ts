@@ -11,6 +11,7 @@ import moment from 'moment';
 import * as helpers from '../helpers';
 import cors from 'cors';
 import passport from 'passport';
+import './util/passport';
 
 const MongoStore = mongo(session);
 
@@ -42,6 +43,7 @@ class App {
     this.app.use(cookieParser());
     this.app.use(
       session({
+        cookie: { maxAge: 60000 },
         secret: `${process.env.SESSION_SECRET}`,
         resave: true,
         saveUninitialized: false,
@@ -50,6 +52,7 @@ class App {
     );
     this.app.use(passport.initialize());
     this.app.use(passport.session());
+    this.app.use(flash());
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       res.locals.moment = moment;
       res.locals.helpers = helpers;

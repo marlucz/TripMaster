@@ -1,23 +1,26 @@
-import express, {Router, RequestHandler } from 'express';
-import {userController} from '../controllers/userController';
+import express, { Router, RequestHandler } from 'express';
+import { userController } from '../controllers/userController';
+import { authController } from '../controllers/authController';
 
 class UserRouter {
-    router: Router;
+  router: Router;
 
-    constructor(){
-        this.router = Router();
-        this.routes();
-    }
+  constructor() {
+    this.router = Router();
+    this.routes();
+  }
 
-    routes():void {
-        this.router.route('/signup')
-            .get(userController.getSignup)
-            .post(userController.postSignup)
-        this.router.route('/login')
-            .get(userController.getLogin)
-        this.router.route('/forgot')
-            .get(userController.forgot)
-    }
+  routes(): void {
+    this.router
+      .route('/')
+      .get(authController.isAuthenticated, userController.mainPage);
+    this.router
+      .route('/signup')
+      .get(userController.getSignup)
+      .post(userController.postSignup, authController.login);
+    this.router.route('/login').get(userController.getLogin);
+    this.router.route('/forgot').get(userController.forgot);
+  }
 }
 const userRouter = new UserRouter();
 export default userRouter.router;
