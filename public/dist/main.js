@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 //  ****************  DOM ELEMENTS **************
 var chevrons = document.querySelectorAll('.chevron');
 // *****************  DOM MANIPULATION *************
-// content height dynamic height based on nav heights
+// content height dynamic based on nav heights
 var contentListeners = ['DOMContentLoaded', 'resize'];
 contentListeners.forEach(function (listener) {
     return window.addEventListener(listener, _modules_contentHeight__WEBPACK_IMPORTED_MODULE_2__["default"]);
@@ -166,12 +166,14 @@ __webpack_require__.r(__webpack_exports__);
 function contentHeight() {
     var navTop = document.querySelector('.nav--top');
     var navBottom = document.querySelector('.nav--bottom');
-    var navTopHeight = navTop.getBoundingClientRect().height;
-    var navBottomHeight = navBottom
-        ? navBottom.getBoundingClientRect().height
-        : 0;
-    var innerHeight = window.innerHeight;
-    document.documentElement.style.setProperty('--content', innerHeight - navTopHeight - navBottomHeight + "px");
+    if (navTop) {
+        var navTopHeight = navTop.getBoundingClientRect().height;
+        var navBottomHeight = navBottom
+            ? navBottom.getBoundingClientRect().height
+            : 0;
+        var innerHeight_1 = window.innerHeight;
+        document.documentElement.style.setProperty('--content', innerHeight_1 - navTopHeight - navBottomHeight + "px");
+    }
 }
 
 

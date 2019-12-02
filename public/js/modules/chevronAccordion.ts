@@ -1,4 +1,4 @@
-export default function chevronAccordion() {
+export default function chevronAccordion(this: any) {
   if (!this.classList.contains('chevron')) return;
 
   if (this.classList.contains('chevron--event')) {

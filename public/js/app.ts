@@ -9,7 +9,7 @@ const chevrons = document.querySelectorAll('.chevron');
 
 // *****************  DOM MANIPULATION *************
 
-// content height dynamic height based on nav heights
+// content height dynamic based on nav heights
 let contentListeners = ['DOMContentLoaded', 'resize'];
 
 contentListeners.forEach(listener =>
