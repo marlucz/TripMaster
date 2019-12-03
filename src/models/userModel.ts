@@ -7,7 +7,6 @@ export interface IUser extends Document {
   email: string;
   name: string;
   password: string;
-  // passwordConfirm: string;
   comparePassword: comparePasswordFunction;
 }
 
@@ -34,16 +33,6 @@ const userSchema: Schema = new Schema({
     type: String,
     required: [true, 'Please provide a password']
   }
-  // passwordConfirm: {
-  //   type: String,
-  //   required: [true, 'Please confirm your password'],
-  //   validate: {
-  //     validator: function(this: any, passwordToConfirm: string): boolean {
-  //       return passwordToConfirm === this.password;
-  //     },
-  //     message: 'Password confirmation is not correct'
-  //   }
-  // }
 });
 
 userSchema.pre('save', async function(next) {

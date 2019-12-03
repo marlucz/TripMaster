@@ -18,8 +18,14 @@ class UserRouter {
       .route('/signup')
       .get(userController.getSignup)
       .post(userController.postSignup, authController.login);
-    this.router.route('/login').get(userController.getLogin);
+    this.router
+      .route('/login')
+      .get(userController.getLogin)
+      .post(authController.login);
     this.router.route('/forgot').get(userController.forgot);
+    this.router
+      .route('/account')
+      .get(authController.isAuthenticated, userController.getAccount);
   }
 }
 const userRouter = new UserRouter();

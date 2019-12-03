@@ -20,6 +20,17 @@ class UserController {
   // };
 
   /**
+   * GET /
+   * User's main page
+   */
+  public mainPage: RequestHandler = (req, res) => {
+    res.status(200).render('layout', {
+      title: 'Main',
+      user: req.user
+    });
+  };
+
+  /**
    * GET /login
    * Login Page
    */
@@ -28,7 +39,6 @@ class UserController {
       title: 'TripMaster'
     });
   };
-
   /**
    * GET /signup
    * Signup Page
@@ -91,18 +101,19 @@ class UserController {
    * GET /forgot
    * Forgot Page
    */
-  public forgot: RequestHandler = async (req, res) => {
+  public forgot: RequestHandler = (req, res) => {
     res.status(200).render('forgot', {
       title: 'Reset password'
     });
   };
+
   /**
-   * GET /forgot
-   * Forgot Page
+   * POST /account
+   * Get account information
    */
-  public mainPage: RequestHandler = async (req, res) => {
-    res.status(200).render('layout', {
-      title: 'Main',
+  public getAccount: RequestHandler = (req, res) => {
+    res.status(200).render('account', {
+      title: 'Your account details',
       user: req.user
     });
   };

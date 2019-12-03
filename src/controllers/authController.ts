@@ -1,6 +1,4 @@
 import { RequestHandler } from 'express';
-import { User } from '../models/userModel';
-import router from '../routes/viewRoutes';
 import passport from 'passport';
 
 class AuthController {
