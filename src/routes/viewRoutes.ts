@@ -8,24 +8,6 @@ router.get('/404', (req: Request, res: Response) => {
   });
 });
 
-router.get('/account', (req: Request, res: Response) => {
-  res.status(200).render('account', {
-    title: 'My Account'
-  });
-});
-
-router.get('/add-trip', (req: Request, res: Response) => {
-  res.status(200).render('editTrip', {
-    title: 'Add Trip'
-  });
-});
-
-router.get('/trips', (req: Request, res: Response) => {
-  res.status(200).render('trips', {
-    title: 'Your Trips'
-  });
-});
-
 router.get('/:slug', (req: Request, res: Response) => {
   const { slug } = req.params;
 

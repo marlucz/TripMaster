@@ -26,6 +26,14 @@ class UserRouter {
     this.router
       .route('/account')
       .get(authController.isAuthenticated, userController.getAccount);
+    this.router.route('/update-account').post(userController.updateAccount);
+    this.router
+      .route('/trips')
+      .get(authController.isAuthenticated, userController.getTrips);
+    this.router
+      .route('/add-trip')
+      .get(authController.isAuthenticated, userController.getAddTrip);
+    this.router.route('/404').get(authController.show404);
   }
 }
 const userRouter = new UserRouter();

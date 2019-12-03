@@ -15,6 +15,7 @@ import './util/passport';
 
 const MongoStore = mongo(session);
 
+import { errorHandler } from './util/errorHandlers';
 import viewRouter from './routes/viewRoutes';
 import userRouter from './routes/userRoutes';
 
@@ -43,7 +44,7 @@ class App {
     this.app.use(cookieParser());
     this.app.use(
       session({
-        cookie: { maxAge: 60000 },
+        // cookie: { maxAge: 60000 },
         secret: `${process.env.SESSION_SECRET}`,
         resave: true,
         saveUninitialized: false,
@@ -88,6 +89,7 @@ class App {
     //     this.app.get('/:slug/expenses', viewRouter);
     //     this.app.get('/:slug/todo/add', viewRouter);
     //     this.app.get('/:slug/todo', viewRouter);
+    this.app.use('*', errorHandler.routeNotFound);
   }
 
   public start(): void {

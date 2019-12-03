@@ -1,32 +1,18 @@
 import { Request, RequestHandler, Response } from 'express';
-import { User } from '../models/userModel';
+import { User, IUser } from '../models/userModel';
 import router from '../routes/viewRoutes';
 import passport from 'passport';
 import { check, sanitize, validationResult } from 'express-validator';
+import { isError } from 'util';
 
 class UserController {
   /**
-   * Helper middleware
-   * To provide user while creating view templates
-   */
-  // public setUser: RequestHandler = (req, res, next) => {
-  //   const user = {
-  //     name: 'Default User',
-  //     email: 'user@example.com'
-  //   };
-  //
-  //   res.locals.user = user;
-  //   next();
-  // };
-
-  /**
    * GET /
-   * User's main page
+   * User's main page = user's trips
    */
   public mainPage: RequestHandler = (req, res) => {
-    res.status(200).render('layout', {
-      title: 'Main',
-      user: req.user
+    res.status(200).render('trips', {
+      title: 'Your Trips'
     });
   };
 
@@ -113,8 +99,77 @@ class UserController {
    */
   public getAccount: RequestHandler = (req, res) => {
     res.status(200).render('account', {
-      title: 'Your account details',
-      user: req.user
+      title: 'Your account details'
+    });
+  };
+
+  /**
+   * POST /updateAccount
+   * Update your account name or email
+   */
+
+  public updateAccount: RequestHandler = async (req, res) => {
+    await sanitize('name');
+    await check('name', 'You must supply a name')
+      .notEmpty()
+      .run(req);
+    await check('email', 'Email is not valid')
+      .isEmail()
+      .run(req);
+    await sanitize('email')
+      .normalizeEmail({
+        gmail_remove_dots: false,
+        gmail_remove_subaddress: false
+      })
+      .run(req);
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const errorMsg = errors
+        .array()
+        .map(err => err.msg)
+        .join(', ');
+      req.flash('error', `${errorMsg}`);
+      return res.status(400).redirect('/account');
+    }
+
+    const newUser = {
+      name: req.body.name,
+      email: req.body.email
+    };
+
+    const user = req.user as IUser;
+
+    if (user) {
+      await User.findByIdAndUpdate(
+        { _id: user.id },
+        { $set: newUser },
+        { new: true, runValidators: true }
+      );
+    }
+    req.flash('success', 'Your profile has been updated');
+    res.redirect('back');
+  };
+
+  /**
+   * GET /trips
+   * User's trips
+   */
+  public getTrips: RequestHandler = (req, res) => {
+    res.status(200).render('trips', {
+      title: 'Your Trips'
+    });
+  };
+
+  /**
+   * GET /add-trip
+   * Open add trip form
+   */
+
+  public getAddTrip: RequestHandler = (req, res) => {
+    res.status(200).render('editTrip', {
+      title: 'Add trip to you collection'
     });
   };
 }

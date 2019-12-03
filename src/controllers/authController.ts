@@ -16,11 +16,16 @@ class AuthController {
    */
   public isAuthenticated: RequestHandler = (req, res, next) => {
     if (req.isAuthenticated()) {
+      res.locals.user = req.user;
       next();
       return;
     }
     req.flash('error', 'You must be logged in to do that');
     res.redirect('/login');
+  };
+
+  public show404: RequestHandler = (req, res) => {
+    res.status(404).render('404');
   };
 }
 
