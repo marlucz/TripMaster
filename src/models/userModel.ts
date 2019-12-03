@@ -54,14 +54,18 @@ userSchema.pre('save', async function(next) {
   });
 });
 
-const comparePassword: comparePasswordFunction = function(
+const comparePassword: comparePasswordFunction = async function(
   this: any,
   candidatePassword,
   cb
 ) {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    cb(err, isMatch);
-  });
+  return await bcrypt.compare(
+    candidatePassword,
+    this.password,
+    (err, isMatch) => {
+      cb(err, isMatch);
+    }
+  );
 };
 
 userSchema.methods.comparePassword = comparePassword;

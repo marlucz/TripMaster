@@ -27,6 +27,7 @@ class UserRouter {
       .route('/account')
       .get(authController.isAuthenticated, userController.getAccount);
     this.router.route('/update-account').post(userController.updateAccount);
+    this.router.route('/update-password').post(userController.updatePassword);
     this.router
       .route('/trips')
       .get(authController.isAuthenticated, userController.getTrips);

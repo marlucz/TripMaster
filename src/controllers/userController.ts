@@ -104,7 +104,7 @@ class UserController {
   };
 
   /**
-   * POST /updateAccount
+   * POST /update-account
    * Update your account name or email
    */
 
@@ -150,6 +150,53 @@ class UserController {
     }
     req.flash('success', 'Your profile has been updated');
     res.redirect('back');
+  };
+
+  /**
+   * POST /update-password
+   * Update your password
+   */
+
+  public updatePassword: RequestHandler = async (req, res) => {
+    await check('password', `Password can't be blank`)
+      .notEmpty()
+      .run(req);
+    await check('passwordConfirm', 'Password confirm cannot be blank')
+      .notEmpty()
+      .run(req);
+    await check('passwordConfirm', 'Passwords do not match')
+      .equals(req.body.password)
+      .run(req);
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const errorMsg = errors
+        .array()
+        .map(err => err.msg)
+        .join(', ');
+      req.flash('error', `${errorMsg}`);
+      return res.status(400).redirect('/account');
+    }
+
+    const user = req.user as IUser;
+    //@ts-ignore
+    user.comparePassword(
+      req.body.passwordCurrent,
+      async (err: Error, isMatch: boolean) => {
+        if (err) {
+          req.flash('error', 'Please provide proper password');
+          res.redirect('/account');
+        }
+        if (isMatch) {
+          user.password = req.body.password;
+
+          await user.save();
+          req.flash('success', 'Password has been changed');
+          res.redirect('back');
+        }
+      }
+    );
   };
 
   /**

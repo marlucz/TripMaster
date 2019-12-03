@@ -23,16 +23,16 @@ block content
                     span.color--secondary change
                     |  password
             .form__container.form__container--divided
-                form.form
+                form.form(action="/update-password" method="POST")
                     .form__group
-                        label.form__label(for="password-current") Current Password
-                        input.form__input(type="password" name="password-current" placeholder="*********" required)
+                        label.form__label(for="passwordCurrent") New Password
+                        input.form__input(type="password" name="passwordCurrent" placeholder="Your current password" required)
                     .form__group
-                        label.form__label(for="password-new") New Password
-                        input.form__input(type="password" name="password-new" placeholder="*********" required)
+                        label.form__label(for="password") New Password
+                        input.form__input(type="password" name="password" placeholder="Your new password" required)
                     .form__group
-                        label.form__label(for="password-confirm") Confirm Password
-                        input.form__input(type="password" name="password-confirm" placeholder="*********" required)
+                        label.form__label(for="passwordConfirm") Confirm Password
+                        input.form__input(type="password" name="passwordConfirm" placeholder="Confirm your password" required)
                     .form__group
                         button.btn(type="submit" value="Change Password") Change Password
 
