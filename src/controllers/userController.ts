@@ -1,9 +1,7 @@
 import { Request, RequestHandler, Response } from 'express';
 import { User, IUser } from '../models/userModel';
-import router from '../routes/viewRoutes';
-import passport from 'passport';
-import { check, sanitize, validationResult } from 'express-validator';
-import { isError } from 'util';
+import { check, sanitize } from 'express-validator';
+import { validate } from '../util/errorHandlers';
 
 class UserController {
   /**
@@ -41,36 +39,33 @@ class UserController {
    */
   public postSignup: RequestHandler = async (req, res, next) => {
     await sanitize('name');
-    await check('name', 'You must supply a name')
-      .notEmpty()
-      .run(req);
-    await check('email', 'Email is not valid')
-      .isEmail()
-      .run(req);
     await sanitize('email')
       .normalizeEmail({
         gmail_remove_dots: false,
         gmail_remove_subaddress: false
       })
       .run(req);
-    await check('password', `Password can't be blank`)
-      .notEmpty()
-      .run(req);
-    await check('passwordConfirm', 'Password confirm cannot be blank')
-      .notEmpty()
-      .run(req);
-    await check('passwordConfirm', 'Passwords do not match')
-      .equals(req.body.password)
-      .run(req);
 
-    const errors = validationResult(req);
+    const error: string = await validate(req, [
+      check('name')
+        .notEmpty()
+        .withMessage('You must supply a name'),
+      check('email')
+        .isEmail()
+        .withMessage('Email is not valid'),
+      check('password')
+        .notEmpty()
+        .withMessage(`Password can't be blank`),
+      check('passwordConfirm')
+        .notEmpty()
+        .withMessage('Password confirm cannot be blank'),
+      check('passwordConfirm')
+        .equals(req.body.password)
+        .withMessage('Passwords do not match')
+    ]);
 
-    if (!errors.isEmpty()) {
-      const errorMsg = errors
-        .array()
-        .map(err => err.msg)
-        .join(', ');
-      req.flash('error', `${errorMsg}`);
+    if (error !== undefined) {
+      req.flash('error', error);
       return res.status(400).redirect('/signup');
     }
 
@@ -94,7 +89,14 @@ class UserController {
   };
 
   /**
-   * POST /account
+   * POST /forgot
+   * Create reset token and send it to user's email
+   */
+
+  public postForgot: RequestHandler = (req, res) => {};
+
+  /**
+   * GET /account
    * Get account information
    */
   public getAccount: RequestHandler = (req, res) => {
@@ -110,12 +112,6 @@ class UserController {
 
   public updateAccount: RequestHandler = async (req, res) => {
     await sanitize('name');
-    await check('name', 'You must supply a name')
-      .notEmpty()
-      .run(req);
-    await check('email', 'Email is not valid')
-      .isEmail()
-      .run(req);
     await sanitize('email')
       .normalizeEmail({
         gmail_remove_dots: false,
@@ -123,14 +119,17 @@ class UserController {
       })
       .run(req);
 
-    const errors = validationResult(req);
+    const error: string = await validate(req, [
+      check('name')
+        .notEmpty()
+        .withMessage('You must supply a name'),
+      check('email')
+        .isEmail()
+        .withMessage('Email is not valid')
+    ]);
 
-    if (!errors.isEmpty()) {
-      const errorMsg = errors
-        .array()
-        .map(err => err.msg)
-        .join(', ');
-      req.flash('error', `${errorMsg}`);
+    if (error !== undefined) {
+      req.flash('error', error);
       return res.status(400).redirect('/account');
     }
 
@@ -158,29 +157,24 @@ class UserController {
    */
 
   public updatePassword: RequestHandler = async (req, res) => {
-    await check('password', `Password can't be blank`)
-      .notEmpty()
-      .run(req);
-    await check('passwordConfirm', 'Password confirm cannot be blank')
-      .notEmpty()
-      .run(req);
-    await check('passwordConfirm', 'Passwords do not match')
-      .equals(req.body.password)
-      .run(req);
+    const error: string = await validate(req, [
+      check('password')
+        .notEmpty()
+        .withMessage(`Password can't be blank`),
+      check('passwordConfirm')
+        .notEmpty()
+        .withMessage('Password confirm cannot be blank'),
+      check('passwordConfirm')
+        .equals(req.body.password)
+        .withMessage('Passwords do not match')
+    ]);
 
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      const errorMsg = errors
-        .array()
-        .map(err => err.msg)
-        .join(', ');
-      req.flash('error', `${errorMsg}`);
-      return res.status(400).redirect('/account');
+    if (error !== undefined) {
+      req.flash('error', error);
+      return res.status(400).redirect('signup');
     }
 
     const user = req.user as IUser;
-    //@ts-ignore
     user.comparePassword(
       req.body.passwordCurrent,
       async (err: Error, isMatch: boolean) => {

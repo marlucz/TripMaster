@@ -24,6 +24,9 @@ class AuthController {
     res.redirect('/login');
   };
 
+  /**
+   * Show 404 error page
+   */
   public show404: RequestHandler = (req, res) => {
     res.status(404).render('404');
   };

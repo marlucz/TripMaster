@@ -9,7 +9,7 @@ block signForms
         .form__container.form__container--hero
             .gradient-container.gradient-container--signForms
                 +gradient()
-            form.form
+            form.form(action="/forgot" method="POST")
                 .form__group
                     label.form__label(for="email") Email
                     input.form__input(type="email" name="email" placeholder="Email address..." required)

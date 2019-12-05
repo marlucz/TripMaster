@@ -7,6 +7,8 @@ export interface IUser extends Document {
   email: string;
   name: string;
   password: string;
+  passwordResetToken: string;
+  passwordResetExpires: Date;
   comparePassword: comparePasswordFunction;
 }
 
@@ -32,7 +34,9 @@ const userSchema: Schema = new Schema({
   password: {
     type: String,
     required: [true, 'Please provide a password']
-  }
+  },
+  passwordResetToken: String,
+  passwordResetExpires: Date
 });
 
 userSchema.pre('save', async function(next) {
