@@ -4,7 +4,6 @@ import session from 'express-session';
 import flash from 'express-flash';
 import mongoose from 'mongoose';
 import mongo from 'connect-mongo';
-import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import path, { resolve } from 'path';
 import moment from 'moment';
@@ -39,8 +38,8 @@ class App {
   private middlewares(): void {
     this.app.use(cors());
     this.app.options('*', cors());
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cookieParser());
     this.app.use(
       session({
@@ -89,7 +88,7 @@ class App {
     //     this.app.get('/:slug/expenses', viewRouter);
     //     this.app.get('/:slug/todo/add', viewRouter);
     //     this.app.get('/:slug/todo', viewRouter);
-    this.app.use('*', errorHandler.routeNotFound);
+    this.app.use(errorHandler.routeNotFound);
   }
 
   public start(): void {
