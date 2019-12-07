@@ -63,13 +63,9 @@ const comparePassword: comparePasswordFunction = async function(
   candidatePassword,
   cb
 ) {
-  return await bcrypt.compare(
-    candidatePassword,
-    this.password,
-    (err, isMatch) => {
-      cb(err, isMatch);
-    }
-  );
+  return bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    cb(err, isMatch);
+  });
 };
 
 userSchema.methods.comparePassword = comparePassword;

@@ -171,7 +171,7 @@ class UserController {
 
     if (error !== undefined) {
       req.flash('error', error);
-      return res.status(400).redirect('signup');
+      return res.status(400).redirect('/account');
     }
 
     const user = req.user as IUser;

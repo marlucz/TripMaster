@@ -29,10 +29,10 @@ block content
                         input.form__input(type="password" name="passwordCurrent" placeholder="Your current password" required)
                     .form__group
                         label.form__label(for="password") New Password
-                        input.form__input(type="password" name="password" placeholder="Your new password" required)
+                        input.form__input(type="password" name="password" placeholder="Your new password" minlength="6" required)
                     .form__group
                         label.form__label(for="passwordConfirm") Confirm Password
-                        input.form__input(type="password" name="passwordConfirm" placeholder="Confirm your password" required)
+                        input.form__input(type="password" name="passwordConfirm" placeholder="Confirm your password" minlength="6" required)
                     .form__group
                         button.btn(type="submit" value="Change Password") Change Password
 
