@@ -76,11 +76,7 @@ const getPasswordResetToken: getPasswordResetTokenFunction = function(
 ) {
   const resetToken: string = crypto.randomBytes(32).toString('hex');
 
-  this.passwordResetToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
-
+  this.passwordResetToken = resetToken;
   this.passwordResetExpires = Date.now() + 3600000; // 1 hour  from now
 
   return resetToken;

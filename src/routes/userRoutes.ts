@@ -2,6 +2,7 @@ import express, { Router, RequestHandler } from 'express';
 import { userController } from '../controllers/userController';
 import { authController } from '../controllers/authController';
 import { catchErrors, validate } from '../util/errorHandlers';
+import { timingSafeEqual } from 'crypto';
 
 class UserRouter {
   router: Router;
@@ -30,6 +31,10 @@ class UserRouter {
     this.router
       .route('/account')
       .get(authController.isAuthenticated, userController.getAccount);
+    this.router
+      .route('/account/reset/:token')
+      .get(catchErrors(userController.getReset))
+      .post(catchErrors(userController.resetPassword));
     this.router
       .route('/update-account')
       .post(catchErrors(userController.updateAccount));

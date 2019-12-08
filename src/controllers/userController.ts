@@ -2,6 +2,7 @@ import { Request, RequestHandler, Response } from 'express';
 import { User, IUser } from '../models/userModel';
 import { check, sanitize } from 'express-validator';
 import { validate } from '../util/errorHandlers';
+import crypto from 'crypto';
 import { Email } from '../util/email';
 
 class UserController {
@@ -106,8 +107,6 @@ class UserController {
     await user.save({ validateBeforeSave: false });
 
     try {
-      console.log(process.env.EMAIL_PORT);
-
       const resetURL = `http://${req.headers.host}/account/reset/${resetToken}`;
       await new Email(user, resetURL).sendResetPassword();
 
@@ -128,6 +127,65 @@ class UserController {
       );
       res.status(500).redirect('/login');
     }
+  };
+
+  /**
+   * GET /account/reset/:token
+   * Get password reset site
+   */
+
+  public getReset: RequestHandler = async (req, res) => {
+    res.status(200).render('reset', {
+      title: 'Reset your password'
+    });
+  };
+
+  /**
+   * POST /account/reset/:token
+   * Finally reset password
+   */
+  public resetPassword: RequestHandler = async (req, res) => {
+    const error: string = await validate(req, [
+      check('password')
+        .notEmpty()
+        .withMessage(`Password can't be blank`),
+      check('passwordConfirm')
+        .notEmpty()
+        .withMessage('Password confirm cannot be blank'),
+      check('passwordConfirm')
+        .equals(req.body.password)
+        .withMessage('Passwords do not match')
+    ]);
+
+    if (error !== undefined) {
+      req.flash('error', error);
+      return res.status(400).redirect('back');
+    }
+
+    const user = await User.findOne({
+      passwordResetToken: req.params.token,
+      passwordResetExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      req.flash('error', 'Password reset is invalid or has expired');
+      return res.status(500).redirect('/login');
+    }
+
+    user.password = req.body.password;
+
+    user.passwordResetExpires = undefined;
+    user.passwordResetToken = undefined;
+
+    const userUpdated = await user.save();
+    await req.login(userUpdated, err => {
+      if (err) {
+        req.flash('error', 'There was error with login to your account');
+        res.status(400).redirect('/login');
+      }
+    });
+    req.flash('success', 'Your password has been reset successfully');
+    return res.status(200).redirect('/');
   };
 
   /**
