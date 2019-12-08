@@ -2,6 +2,7 @@ import { Request, RequestHandler, Response } from 'express';
 import { User, IUser } from '../models/userModel';
 import { check, sanitize } from 'express-validator';
 import { validate } from '../util/errorHandlers';
+import { Email } from '../util/email';
 
 class UserController {
   /**
@@ -93,7 +94,41 @@ class UserController {
    * Create reset token and send it to user's email
    */
 
-  public postForgot: RequestHandler = (req, res) => {};
+  public postForgot: RequestHandler = async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      req.flash('error', 'User with given email addres does not exist');
+      return res.status(404).redirect('/login');
+    }
+
+    const resetToken: string = user.getPasswordResetToken();
+    await user.save({ validateBeforeSave: false });
+
+    try {
+      console.log(process.env.EMAIL_PORT);
+
+      const resetURL = `http://${req.headers.host}/account/reset/${resetToken}`;
+      await new Email(user, resetURL).sendResetPassword();
+
+      req.flash(
+        'success',
+        `An email with further instructions has been sent to ${user.email}`
+      );
+
+      res.status(200).redirect('/login');
+    } catch {
+      user.passwordResetToken = undefined;
+      user.passwordResetExpires = undefined;
+      await user.save({ validateBeforeSave: false });
+
+      req.flash(
+        'error',
+        'There was an error sending email with your password reset'
+      );
+      res.status(500).redirect('/login');
+    }
+  };
 
   /**
    * GET /account

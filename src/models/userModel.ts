@@ -7,15 +7,18 @@ export interface IUser extends Document {
   email: string;
   name: string;
   password: string;
-  passwordResetToken: string;
-  passwordResetExpires: Date;
+  passwordResetToken: string | undefined;
+  passwordResetExpires: number | undefined;
   comparePassword: comparePasswordFunction;
+  getPasswordResetToken: getPasswordResetTokenFunction;
 }
 
 type comparePasswordFunction = (
   candidatePassword: string,
   cb: (err: mongoose.Error, isMatch: boolean) => {}
 ) => void;
+
+type getPasswordResetTokenFunction = () => string;
 
 const userSchema: Schema = new Schema({
   email: {
@@ -36,7 +39,7 @@ const userSchema: Schema = new Schema({
     required: [true, 'Please provide a password']
   },
   passwordResetToken: String,
-  passwordResetExpires: Date
+  passwordResetExpires: Number
 });
 
 userSchema.pre('save', async function(next) {
@@ -59,7 +62,7 @@ userSchema.pre('save', async function(next) {
 });
 
 const comparePassword: comparePasswordFunction = async function(
-  this: any,
+  this: IUser,
   candidatePassword,
   cb
 ) {
@@ -68,6 +71,22 @@ const comparePassword: comparePasswordFunction = async function(
   });
 };
 
+const getPasswordResetToken: getPasswordResetTokenFunction = function(
+  this: IUser
+) {
+  const resetToken: string = crypto.randomBytes(32).toString('hex');
+
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  this.passwordResetExpires = Date.now() + 3600000; // 1 hour  from now
+
+  return resetToken;
+};
+
 userSchema.methods.comparePassword = comparePassword;
+userSchema.methods.getPasswordResetToken = getPasswordResetToken;
 
 export const User = mongoose.model<IUser>('User', userSchema);

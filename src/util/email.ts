@@ -17,40 +17,43 @@ export class Email {
   }
 
   private newTransport() {
-    let transporter: nodemailer.Transporter;
-
     if (process.env.NODE_ENV === 'production') {
-      return (transporter = nodemailer.createTransport({
+      return nodemailer.createTransport({
         service: 'SendGrid',
         auth: {
           user: process.env.SENDGRID_USERNAME,
           pass: process.env.SENDGRID_PASSWORD
         }
-      }));
+      });
     }
-    return (transporter = nodemailer.createTransport({
+    return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: Number(process.env.EMAIL_PORT),
       auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD
       }
-    }));
+    });
   }
 
-  sendMail(to: string, subject: string, content: string) {
-    let options = {
-      from: 'from_test@gmail.com',
-      to: to,
-      subject: subject,
-      text: content
+  private async send(template: string, subject: string): Promise<void> {
+    const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
+      url: this.url,
+      subject
+    });
+
+    const mailOptions = {
+      from: this.from,
+      to: this.to,
+      subject,
+      html,
+      text: htmlToText.fromString(html)
     };
 
-    this._transporter.sendMail(options, (error, info) => {
-      if (error) {
-        return console.log(`error: ${error}`);
-      }
-      console.log(`Message Sent ${info.response}`);
-    });
+    await this.newTransport().sendMail(mailOptions);
+  }
+
+  public async sendResetPassword() {
+    await this.send('passwordReset', 'Password Reset');
   }
 }

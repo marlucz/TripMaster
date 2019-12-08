@@ -42,10 +42,6 @@ class UserRouter {
     this.router
       .route('/add-trip')
       .get(authController.isAuthenticated, userController.getAddTrip);
-    // TODO route to be deleted after mail sending is done
-    this.router.route('/mail').get((req, res) => {
-      res.status(200).render('email/mailLayout');
-    });
     this.router.route('/404').get(authController.show404);
   }
 }

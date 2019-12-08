@@ -7,6 +7,7 @@ import mongo from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import path, { resolve } from 'path';
 import moment from 'moment';
+import morgan from 'morgan';
 import * as helpers from '../helpers';
 import cors from 'cors';
 import passport from 'passport';
@@ -36,6 +37,7 @@ class App {
   }
 
   private middlewares(): void {
+    this.app.use(morgan('dev'));
     this.app.use(cors());
     this.app.options('*', cors());
     this.app.use(express.json());
