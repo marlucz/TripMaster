@@ -18,6 +18,7 @@ const MongoStore = mongo(session);
 import { routeNotFound } from './util/errorHandlers';
 import viewRouter from './routes/viewRoutes';
 import userRouter from './routes/userRoutes';
+import tripRouter from './routes/tripRoutes';
 
 class App {
   public app: express.Application = express();
@@ -56,6 +57,7 @@ class App {
     this.app.use(passport.session());
     this.app.use(flash());
     this.app.use((req: Request, res: Response, next: NextFunction) => {
+      res.locals.user = req.user || null;
       res.locals.moment = moment;
       res.locals.helpers = helpers;
       next();
@@ -64,6 +66,7 @@ class App {
 
   private routes(): void {
     this.app.use('/', userRouter);
+    this.app.use('/trips', tripRouter);
 
     // this.app.use(express.static(path.join(__dirname, '../public/')));
     //

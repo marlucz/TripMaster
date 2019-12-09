@@ -16,7 +16,7 @@ class AuthController {
    */
   public isAuthenticated: RequestHandler = (req, res, next) => {
     if (req.isAuthenticated()) {
-      res.locals.user = req.user;
+      // res.locals.user = req.user;
       next();
       return;
     }

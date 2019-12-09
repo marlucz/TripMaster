@@ -8,7 +8,7 @@ export function icon(name: string) {
 export const navTop = [
   { slug: '/trips', title: 'Trips', icon: 'trips' },
   { slug: '/upcoming', title: 'Upcoming', icon: 'upcoming' },
-  { slug: '/add-trip', title: 'Add Trip', icon: 'add' }
+  { slug: '/trips/add', title: 'Add Trip', icon: 'add' }
 ];
 
 export const navTrip = [

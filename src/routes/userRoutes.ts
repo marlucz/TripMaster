@@ -1,8 +1,7 @@
 import express, { Router, RequestHandler } from 'express';
 import { userController } from '../controllers/userController';
 import { authController } from '../controllers/authController';
-import { catchErrors, validate } from '../util/errorHandlers';
-import { timingSafeEqual } from 'crypto';
+import { catchErrors } from '../util/errorHandlers';
 
 class UserRouter {
   router: Router;
@@ -12,7 +11,7 @@ class UserRouter {
     this.routes();
   }
 
-  routes(): void {
+  public routes(): void {
     this.router
       .route('/')
       .get(authController.isAuthenticated, userController.mainPage);
@@ -41,12 +40,6 @@ class UserRouter {
     this.router
       .route('/update-password')
       .post(catchErrors(userController.updatePassword));
-    this.router
-      .route('/trips')
-      .get(authController.isAuthenticated, userController.getTrips);
-    this.router
-      .route('/add-trip')
-      .get(authController.isAuthenticated, userController.getAddTrip);
     this.router.route('/404').get(authController.show404);
   }
 }

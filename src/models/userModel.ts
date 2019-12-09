@@ -7,8 +7,8 @@ export interface IUser extends Document {
   email: string;
   name: string;
   password: string;
-  passwordResetToken: string | undefined;
-  passwordResetExpires: number | undefined;
+  passwordResetToken?: string;
+  passwordResetExpires?: number;
   comparePassword: comparePasswordFunction;
   getPasswordResetToken: getPasswordResetTokenFunction;
 }
