@@ -9,13 +9,18 @@ block content
             .trips
                 header.header
                     h2.heading-secondary
-                        span.color--secondary your upcoming
+                        span.color--secondary your
                         |  Trips
-                    //- TODO each trip in 
-                .trips__list
-                    +tripCard()
-                    +tripCard()
-                    +tripCard()
-                    +tripCard()
-                    +tripCard()
-                +pagination()
+                    //- TODO each trip in
+                - const trips = [{name: 'Budapest Trip', startDate: '14 Dec 2019', endDate: '20 Dec 2019', duration: 1, startsIn: 1},{name: 'Barcelona Trip', startDate: '14 Dec 2019', endDate: '20 Dec 2019', duration: 5, startsIn: 20},{name: 'Rome Trip', startDate: '14 Dec 2019', endDate: '20 Dec 2019', duration: 3, startsIn: 10}]
+                if !trips
+                    h3.heading-tertiary.color--black It seems that you don't have any planned trip yet. Would you like to add it now?
+                    .form__container
+                        form.form(action="/trips/add" method="GET")
+                            .form__group
+                                button.btn(action="submit" value="Add trip") Add Trip
+                else
+                    .trips__list
+                        each trip in trips
+                            +tripCard(trip)
+                    +pagination()
