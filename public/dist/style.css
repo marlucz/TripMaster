@@ -803,6 +803,8 @@ span {
   .trips__list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    grid-template-rows: -webkit-min-content;
+    grid-template-rows: min-content;
     grid-gap: 5px;
     margin-bottom: 1rem; }
     @media (min-width: 768px) {
@@ -828,7 +830,7 @@ span {
       margin-bottom: 2rem; } }
   .trip__photo {
     width: 25%;
-    height: 90%; }
+    height: 100%; }
     @media (min-width: 768px) {
       .trip__photo {
         width: 100%;

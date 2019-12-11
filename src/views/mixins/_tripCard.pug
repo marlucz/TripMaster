@@ -1,15 +1,15 @@
 mixin tripCard(trip = {})
     .trip
-            .trip__photo
-                - const stockImage = `https://source.unsplash.com/featured/?city,${trip.name}`
-                img.trip__photo-img(src=`${trip.photo || stockImage}` alt=`${trip.name}`)
-            .trip__details
-                .trip__data
-                    a(href=`/:slug/itinerary`)
-                        h3.heading-tertiary #{trip.name}
-                .trip__data
-                    != helpers.icon('upcoming')
-                    span #{trip.startDate} - #{trip.endDate}
-                .trip__data
-                    != helpers.icon('clock')
-                    span.gray-dark= `${trip.duration} ${trip.duration > 1? 'days' : 'day'} trip, starts in ${trip.startsIn} ${trip.startsIn > 1? 'days' : 'day'}`
+        .trip__photo
+            - const stockImage = `https://source.unsplash.com/600x600/?city,${trip.name}`
+            img.trip__photo-img(src=`${trip.photo || stockImage}` alt=`${trip.name}`)
+        .trip__details
+            .trip__data
+                a(href=`/:slug/itinerary`)
+                    h3.heading-tertiary #{trip.name}
+            .trip__data
+                != helpers.icon('upcoming')
+                span #{trip.startDate} - #{trip.endDate}
+            .trip__data
+                != helpers.icon('clock')
+                span.gray-dark= `${trip.duration} ${trip.duration > 1? 'days' : 'day'} trip, starts in ${trip.startsIn} ${trip.startsIn > 1? 'days' : 'day'}`
