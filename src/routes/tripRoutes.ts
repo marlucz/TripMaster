@@ -17,7 +17,9 @@ class TripRouter {
       .get(authController.isAuthenticated, tripController.getTrips);
     this.router
       .route('/add')
-      .get(authController.isAuthenticated, tripController.getAddTrip);
+      .get(authController.isAuthenticated, tripController.getAddTrip)
+      .post(authController.isAuthenticated),
+      catchErrors(tripController.addTrip);
   }
 }
 

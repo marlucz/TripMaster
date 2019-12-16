@@ -8,7 +8,7 @@ block content
                     span.color--secondary ADD
                     |  Trip
             .form__container
-                form.form
+                form.form(action="/trips/add" method="POST" enctype="multipart/form-data")
                     .form__group
                         label.form__label(for="trip-name") Trip Name
                         input.form__input(type="text" name="trip-name" placeholder="Name of your next trip..." required)
@@ -27,10 +27,10 @@ block content
                             input.form__input(id ="lat" type="text" name="lat" placeholder="Latitude...")
                     .form__group--adjacent
                         .form__group
-                            label.form__label(for="start") Start Date
+                            label.form__label--visible(for="start") Start Date
                             input.form__input(id ="start" type="date" name="trip-starts" value=(moment().format('YYYY-MM-DD')) required)
                         .form__group
-                            label.form__label(for="end") End Date
+                            label.form__label--visible(for="end") End Date
                             input.form__input(id ="end" type="date" name="trip-ends" required)
                     .form__group
                             label.form__label(for="photo") Trip Photo
