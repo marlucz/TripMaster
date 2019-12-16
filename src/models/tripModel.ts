@@ -14,7 +14,6 @@ export interface ITrip extends Document {
   mainLocation: location;
   startDate: any;
   endDate: any;
-  duration: number;
   startsIn: number;
   owner: IUser['_id'];
   description?: string;
@@ -37,7 +36,6 @@ const tripSchema: Schema = new Schema({
   },
   startDate: Date,
   endDate: Date,
-  duration: Number,
   startsIn: Number,
   owner: {
     type: Schema.Types.ObjectId,
@@ -49,6 +47,15 @@ const tripSchema: Schema = new Schema({
     trim: true
   },
   photo: String
+});
+
+tripSchema.pre('save', function(next) {
+  const trip = this as ITrip;
+  if (!trip.isModified('name')) {
+    next();
+    return;
+  }
+  trip.slug = slug(trip.name, { replacement: '-', lower: true });
 });
 
 export const Trip = mongoose.model<ITrip>('Trip', tripSchema);
