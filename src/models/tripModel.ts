@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { IUser } from './userModel';
 import slug from 'slug';
 
 type location = {
@@ -10,13 +11,14 @@ type location = {
 export interface ITrip extends Document {
   name: string;
   slug: string;
-  description?: string;
   mainLocation: location;
   startDate: any;
   endDate: any;
-  photo?: string;
   duration: number;
   startsIn: number;
+  owner: IUser['_id'];
+  description?: string;
+  photo?: string;
 }
 
 const tripSchema: Schema = new Schema({
@@ -26,10 +28,6 @@ const tripSchema: Schema = new Schema({
     required: [true, 'Please provide trip with a name']
   },
   slug: String,
-  description: {
-    type: String,
-    trim: true
-  },
   mainLocation: {
     type: {
       type: String,
@@ -41,6 +39,15 @@ const tripSchema: Schema = new Schema({
   endDate: Date,
   duration: Number,
   startsIn: Number,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'A trip must have an owner']
+  },
+  description: {
+    type: String,
+    trim: true
+  },
   photo: String
 });
 
