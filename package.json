@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marlucz/TripMaster.git"
+    "url": "git+https://github.com/marlucz/tripmaster-server.git"
   },
   "author": "Buczi",
   "license": "ISC",
@@ -20,7 +20,7 @@
     "> 1%",
     "not IE 11"
   ],
-  "homepage": "https://github.com/marlucz/TripMaster#readme",
+  "homepage": "https://github.com/marlucz/tripmaster-server#readme",
   "devDependencies": {
     "@babel/core": "^7.6.3",
     "@babel/node": "^7.6.3",
