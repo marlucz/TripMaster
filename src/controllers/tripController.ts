@@ -4,14 +4,6 @@ import Jimp from 'jimp';
 import { body } from 'express-validator';
 
 class TripController {
-  //   public setTrip: RequestHandler = (req, res, next) => {
-  //     const trip = {
-  //       name: 'Trip'
-  //     };
-  //     res.locals.trip = trip;
-  //     next();
-  //   };
-
   /**
    * Photo upload and manage functions
    *

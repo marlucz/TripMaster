@@ -50,7 +50,7 @@ class UserController {
     });
 
     await User.create(user);
-    next();
+    return res.status(200).json(user);
   };
 
   public userLogin: RequestHandler = (req, res, next) => {

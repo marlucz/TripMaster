@@ -1,4 +1,4 @@
-import express, { Router, RequestHandler } from 'express';
+import express from 'express';
 import { userController } from '../controllers/userController';
 import { catchErrors } from '../util/errorHandlers';
 
@@ -12,11 +12,7 @@ class UserRouter {
 
   private initializeRoutes = (): void => {
     this.router
-      .post(
-        `${this.path}/register`,
-        catchErrors(userController.userRegister),
-        userController.userLogin
-      )
+      .post(`${this.path}/register`, catchErrors(userController.userRegister))
       .post(`${this.path}/login`, userController.userLogin)
       .post(`${this.path}/logout`, userController.userLogout)
       .post(`${this.path}/forgot`, catchErrors(userController.postForgot))
