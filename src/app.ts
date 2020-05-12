@@ -14,7 +14,7 @@ import './util/passport';
 
 const MongoStore = mongo(session);
 
-import { routeNotFound } from './util/errorHandlers';
+import { routeNotFound, errorMiddleware } from './util/errorHandlers';
 import viewRouter from './routes/viewRoutes';
 import userRouter from './routes/userRoutes';
 import tripRouter from './routes/tripRoutes';
@@ -57,6 +57,7 @@ class App {
       res.locals.moment = moment;
       next();
     });
+    this.app.use(errorMiddleware);
   }
 
   private routes(): void {

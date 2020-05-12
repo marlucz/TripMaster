@@ -1,6 +1,5 @@
 import express, { Router, RequestHandler } from 'express';
 import { userController } from '../controllers/userController';
-import { authController } from '../controllers/authController';
 import { catchErrors } from '../util/errorHandlers';
 
 class UserRouter {
@@ -16,10 +15,10 @@ class UserRouter {
       .post(
         `${this.path}/register`,
         catchErrors(userController.userRegister),
-        authController.userLogin
+        userController.userLogin
       )
-      .post(`${this.path}/login`, authController.userLogin)
-      .post(`${this.path}/logout`, authController.userLogout)
+      .post(`${this.path}/login`, userController.userLogin)
+      .post(`${this.path}/logout`, userController.userLogout)
       .post(`${this.path}/forgot`, catchErrors(userController.postForgot))
       .post(
         `${this.path}/reset/:token`,

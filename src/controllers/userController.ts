@@ -4,10 +4,11 @@ import { check, sanitize } from 'express-validator';
 import { validate } from '../util/errorHandlers';
 import crypto from 'crypto';
 import { Email } from '../util/email';
+import passport from 'passport';
 
 class UserController {
   /**
-   * POST /signup
+   * POST /user/signup
    * Create User
    */
   public userRegister: RequestHandler = async (req, res, next) => {
@@ -38,7 +39,6 @@ class UserController {
     ]);
 
     if (error !== undefined) {
-      req.flash('error', error);
       return res.status(400).redirect('/signup');
     }
 
@@ -52,8 +52,35 @@ class UserController {
     next();
   };
 
+  public userLogin: RequestHandler = (req, res, next) => {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.sendStatus(403);
+      }
+
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        return res.send(user);
+      });
+    })(req, res, next);
+  };
+
   /**
-   * POST /forgot
+   * POST /user/logout
+   * Logout user
+   */
+  public userLogout: RequestHandler = (req, res) => {
+    req.logout();
+    res.sendStatus(200);
+  };
+
+  /**
+   * POST /user/forgot
    * Create reset token and send it to user's email
    */
 
@@ -92,7 +119,7 @@ class UserController {
   };
 
   /**
-   * POST /account/reset/:token
+   * POST /user/reset/:token
    * Finally reset password
    */
   public resetPassword: RequestHandler = async (req, res) => {
@@ -140,7 +167,7 @@ class UserController {
   };
 
   /**
-   * POST /update-account
+   * POST /user/update-account
    * Update your account name or email
    */
 
@@ -186,7 +213,7 @@ class UserController {
   };
 
   /**
-   * POST /update-password
+   * POST /user/update-password
    * Update your password
    */
 
