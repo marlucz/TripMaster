@@ -4,44 +4,37 @@ import { authController } from '../controllers/authController';
 import { catchErrors } from '../util/errorHandlers';
 
 class UserRouter {
-  router: Router;
+  public path = '/user';
+  public router = express.Router();
 
   constructor() {
-    this.router = Router();
-    this.routes();
+    this.initializeRoutes();
   }
 
-  public routes(): void {
+  private initializeRoutes = (): void => {
     this.router
-      .route('/')
-      .get(authController.isAuthenticated, userController.mainPage);
-    this.router
-      .route('/signup')
-      .get(userController.getSignup)
-      .post(catchErrors(userController.postSignup), authController.login);
-    this.router
-      .route('/login')
-      .get(userController.getLogin)
-      .post(authController.login);
-    this.router
-      .route('/forgot')
-      .get(userController.forgot)
-      .post(catchErrors(userController.postForgot));
-    this.router
-      .route('/account')
-      .get(authController.isAuthenticated, userController.getAccount);
-    this.router
-      .route('/account/reset/:token')
-      .get(catchErrors(userController.getReset))
-      .post(catchErrors(userController.resetPassword));
-    this.router
-      .route('/update-account')
-      .post(catchErrors(userController.updateAccount));
-    this.router
-      .route('/update-password')
-      .post(catchErrors(userController.updatePassword));
-    this.router.route('/404').get(authController.show404);
-  }
+      .post(
+        `${this.path}/register`,
+        catchErrors(userController.userRegister),
+        authController.userLogin
+      )
+      .post(`${this.path}/login`, authController.userLogin)
+      .post(`${this.path}/logout`, authController.userLogout)
+      .post(`${this.path}/forgot`, catchErrors(userController.postForgot))
+      .post(
+        `${this.path}/reset/:token`,
+        catchErrors(userController.resetPassword)
+      )
+      .post(
+        `${this.path}/update-account`,
+        catchErrors(userController.updateAccount)
+      )
+      .post(
+        `${this.path}/update-password'`,
+        catchErrors(userController.updatePassword)
+      )
+      .get(this.path);
+  };
 }
 const userRouter = new UserRouter();
 export default userRouter.router;

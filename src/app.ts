@@ -60,34 +60,8 @@ class App {
   }
 
   private routes(): void {
-    this.app.use('/', userRouter);
-    this.app.use('/trips', tripRouter);
-
-    // this.app.use(express.static(path.join(__dirname, '../public/')));
-    //
-    //     this.app.get('/login', viewRouter);
-    //     this.app.get('/signup', viewRouter);
-    //     this.app.get('/forgot', viewRouter);
-    //     this.app.get('/404', viewRouter);
-    //
-    // // middleware to test user authorized routes
-    //     this.app.use(this.userController.setUser);
-    //
-    //     this.app.get('/', viewRouter);
-    //     this.app.get('/account', viewRouter);
-    //     this.app.get('/add-trip', viewRouter);
-    //     this.app.get('/trips', viewRouter);
-    //
-    // // middleware to test trip dependent routes
-    //     this.app.use(this.tripController.setTrip);
-    //
-    //     this.app.get('/:slug', viewRouter);
-    //     this.app.get('/:slug/itinerary', viewRouter);
-    //     this.app.get('/:slug/itinerary/add', viewRouter);
-    //     this.app.get('/:slug/expenses/add', viewRouter);
-    //     this.app.get('/:slug/expenses', viewRouter);
-    //     this.app.get('/:slug/todo/add', viewRouter);
-    //     this.app.get('/:slug/todo', viewRouter);
+    this.app.use('/api', userRouter);
+    this.app.use('/api/trips', tripRouter);
     this.app.use(routeNotFound);
   }
 

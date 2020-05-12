@@ -7,39 +7,10 @@ import { Email } from '../util/email';
 
 class UserController {
   /**
-   * GET /
-   * User's main page = user's trips
-   */
-  public mainPage: RequestHandler = (req, res) => {
-    res.status(200).render('trips', {
-      title: 'Your Trips'
-    });
-  };
-
-  /**
-   * GET /login
-   * Login Page
-   */
-  public getLogin: RequestHandler = (req, res) => {
-    res.status(200).render('login', {
-      title: 'TripMaster'
-    });
-  };
-  /**
-   * GET /signup
-   * Signup Page
-   */
-  public getSignup: RequestHandler = (req, res) => {
-    res.status(200).render('signup', {
-      title: 'SignUp'
-    });
-  };
-
-  /**
    * POST /signup
    * Create User
    */
-  public postSignup: RequestHandler = async (req, res, next) => {
+  public userRegister: RequestHandler = async (req, res, next) => {
     await sanitize('name');
     await sanitize('email')
       .normalizeEmail({
@@ -80,15 +51,6 @@ class UserController {
     await User.create(user);
     next();
   };
-  /**
-   * GET /forgot
-   * Forgot Page
-   */
-  public forgot: RequestHandler = (req, res) => {
-    res.status(200).render('forgot', {
-      title: 'Reset password'
-    });
-  };
 
   /**
    * POST /forgot
@@ -127,17 +89,6 @@ class UserController {
       );
       res.status(500).redirect('/login');
     }
-  };
-
-  /**
-   * GET /account/reset/:token
-   * Get password reset site
-   */
-
-  public getReset: RequestHandler = async (req, res) => {
-    res.status(200).render('reset', {
-      title: 'Reset your password'
-    });
   };
 
   /**
@@ -186,16 +137,6 @@ class UserController {
     });
     req.flash('success', 'Your password has been reset successfully');
     return res.status(200).redirect('/');
-  };
-
-  /**
-   * GET /account
-   * Get account information
-   */
-  public getAccount: RequestHandler = (req, res) => {
-    res.status(200).render('account', {
-      title: 'Your account details'
-    });
   };
 
   /**

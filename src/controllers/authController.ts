@@ -5,7 +5,7 @@ class AuthController {
   /**
    * Login authentication controller
    */
-  public login = passport.authenticate('local', {
+  public userLogin = passport.authenticate('local', {
     failureRedirect: '/login',
     failureFlash: 'Failed Login',
     successRedirect: '/',
@@ -24,11 +24,9 @@ class AuthController {
     res.redirect('/login');
   };
 
-  /**
-   * Show 404 error page
-   */
-  public show404: RequestHandler = (req, res) => {
-    res.status(404).render('404');
+  public userLogout: RequestHandler = (req, res) => {
+    req.logout();
+    res.sendStatus(200);
   };
 }
 
