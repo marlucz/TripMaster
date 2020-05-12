@@ -8,7 +8,6 @@ import cookieParser from 'cookie-parser';
 import path, { resolve } from 'path';
 import moment from 'moment';
 import morgan from 'morgan';
-import * as helpers from '../helpers';
 import cors from 'cors';
 import passport from 'passport';
 import './util/passport';
@@ -32,9 +31,6 @@ class App {
 
   private config(): void {
     this.app.set('port', process.env.PORT || 3000);
-    this.app.set('view engine', 'pug');
-    this.app.set('views', path.join(__dirname, './views'));
-    this.app.use(express.static(path.join(__dirname, '../public/')));
   }
 
   private middlewares(): void {
@@ -59,7 +55,6 @@ class App {
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       res.locals.user = req.user || null;
       res.locals.moment = moment;
-      res.locals.helpers = helpers;
       next();
     });
   }
