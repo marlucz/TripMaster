@@ -4,7 +4,7 @@ import { tripController } from '../controllers/tripController';
 import { catchErrors } from '../util/errorHandlers';
 
 class TripRouter {
-  public path = '/trips';
+  public path = '/';
   public router = express.Router();
 
   constructor() {
@@ -14,8 +14,13 @@ class TripRouter {
   private initializeRoutes = (): void => {
     this.router
       .get(this.path, authController.isAuthenticated, tripController.getTrips)
-      .post(`${this.path}/add`, authController.isAuthenticated),
-      catchErrors(tripController.addTrip);
+      .post(
+        this.path,
+        // authController.isAuthenticated,
+        // catchErrors(tripController.uploadTripPhoto),
+        // catchErrors(tripController.resizeTripPhoto),
+        catchErrors(tripController.addTrip)
+      );
   };
 }
 

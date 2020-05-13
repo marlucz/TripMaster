@@ -11,11 +11,11 @@ type location = {
 export interface ITrip extends Document {
   name: string;
   slug: string;
-  mainLocation: location;
+  location: location;
   startDate: any;
   endDate: any;
   startsIn: number;
-  owner: IUser['_id'];
+  userID: IUser['_id'];
   description?: string;
   photo?: string;
 }
@@ -27,7 +27,7 @@ const tripSchema: Schema = new Schema({
     required: [true, 'Please provide trip with a name']
   },
   slug: String,
-  mainLocation: {
+  location: {
     type: {
       type: String,
       default: 'Point',
@@ -37,7 +37,7 @@ const tripSchema: Schema = new Schema({
   startDate: Date,
   endDate: Date,
   startsIn: Number,
-  owner: {
+  userID: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'A trip must have an owner']
@@ -56,6 +56,7 @@ tripSchema.pre('save', function(next) {
     return;
   }
   trip.slug = slug(trip.name, { replacement: '-', lower: true });
+  next();
 });
 
 export const Trip = mongoose.model<ITrip>('Trip', tripSchema);

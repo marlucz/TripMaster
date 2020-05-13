@@ -15,7 +15,6 @@ import './util/passport';
 const MongoStore = mongo(session);
 
 import { routeNotFound, errorMiddleware } from './util/errorHandlers';
-import viewRouter from './routes/viewRoutes';
 import userRouter from './routes/userRoutes';
 import tripRouter from './routes/tripRoutes';
 

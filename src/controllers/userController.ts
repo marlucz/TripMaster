@@ -8,7 +8,7 @@ import passport from 'passport';
 
 class UserController {
   /**
-   * POST /user/signup
+   * POST /user/register
    * Create User
    */
   public userRegister: RequestHandler = async (req, res, next) => {
@@ -45,7 +45,7 @@ class UserController {
 
     const user = new User({
       email: req.body.email,
-      name: req.body.name,
+      name: req.body.name.toLowerCase(),
       password: req.body.password
     });
 
@@ -53,6 +53,10 @@ class UserController {
     return res.status(200).json(user);
   };
 
+  /**
+   * POST /user/login
+   * Logout user
+   */
   public userLogin: RequestHandler = (req, res, next) => {
     passport.authenticate('local', function(err, user, info) {
       if (err) {
@@ -100,7 +104,7 @@ class UserController {
     await user.save({ validateBeforeSave: false });
 
     try {
-      const resetURL = `http://${req.headers.host}/account/reset/${resetToken}`;
+      const resetURL = `http://${req.headers.host}/user/reset/${resetToken}`;
       await new Email(user, resetURL).sendResetPassword();
 
       return res.sendStatus(200);
