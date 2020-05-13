@@ -2,6 +2,7 @@ import { RequestHandler, Request, Response } from 'express';
 import multer from 'multer';
 import Jimp from 'jimp';
 import { body } from 'express-validator';
+import { Trip } from '../models/tripModel';
 
 class TripController {
   /**
@@ -43,20 +44,7 @@ class TripController {
    * User's trips
    */
   public getTrips: RequestHandler = (req, res) => {
-    res.status(200).render('trips', {
-      title: 'Your Trips'
-    });
-  };
-
-  /**
-   * GET /add-trip
-   * Open add trip form
-   */
-
-  public getAddTrip: RequestHandler = (req, res) => {
-    res.status(200).render('editTrip', {
-      title: 'Add trip to you collection'
-    });
+    res.status(200);
   };
 
   /**
@@ -64,7 +52,25 @@ class TripController {
    * Add trip
    */
 
-  public addTrip: RequestHandler = async (req, res) => {};
+  public addTrip: RequestHandler = async (req, res) => {
+    const newTrip = {
+      name: req.body.name,
+      location: req.body.location,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      startsIn: req.body.startsIn,
+      description: req.body.description,
+      userID: req.body.userID
+    };
+
+    try {
+      const trip = await new Trip(newTrip).save((err, trip) => {
+        res.status(200).json(trip);
+      });
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  };
 }
 
 export const tripController = new TripController();
