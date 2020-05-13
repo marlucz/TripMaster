@@ -1,26 +1,22 @@
-import { Router } from 'express';
+import express from 'express';
 import { authController } from '../controllers/authController';
 import { tripController } from '../controllers/tripController';
 import { catchErrors } from '../util/errorHandlers';
 
 class TripRouter {
-  router: Router;
+  public path = '/trips';
+  public router = express.Router();
 
   constructor() {
-    this.router = Router();
-    this.routes();
+    this.initializeRoutes();
   }
 
-  public routes(): void {
+  private initializeRoutes = (): void => {
     this.router
-      .route('/')
-      .get(authController.isAuthenticated, tripController.getTrips);
-    this.router
-      .route('/add')
-      .get(authController.isAuthenticated, tripController.getAddTrip)
-      .post(authController.isAuthenticated),
+      .get(this.path, authController.isAuthenticated, tripController.getTrips)
+      .post(`${this.path}/add`, authController.isAuthenticated),
       catchErrors(tripController.addTrip);
-  }
+  };
 }
 
 const tripRouter = new TripRouter();

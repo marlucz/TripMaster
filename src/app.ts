@@ -8,14 +8,13 @@ import cookieParser from 'cookie-parser';
 import path, { resolve } from 'path';
 import moment from 'moment';
 import morgan from 'morgan';
-import * as helpers from '../helpers';
 import cors from 'cors';
 import passport from 'passport';
 import './util/passport';
 
 const MongoStore = mongo(session);
 
-import { routeNotFound } from './util/errorHandlers';
+import { routeNotFound, errorMiddleware } from './util/errorHandlers';
 import viewRouter from './routes/viewRoutes';
 import userRouter from './routes/userRoutes';
 import tripRouter from './routes/tripRoutes';
@@ -32,9 +31,6 @@ class App {
 
   private config(): void {
     this.app.set('port', process.env.PORT || 3000);
-    this.app.set('view engine', 'pug');
-    this.app.set('views', path.join(__dirname, './views'));
-    this.app.use(express.static(path.join(__dirname, '../public/')));
   }
 
   private middlewares(): void {
@@ -59,40 +55,14 @@ class App {
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       res.locals.user = req.user || null;
       res.locals.moment = moment;
-      res.locals.helpers = helpers;
       next();
     });
+    this.app.use(errorMiddleware);
   }
 
   private routes(): void {
-    this.app.use('/', userRouter);
-    this.app.use('/trips', tripRouter);
-
-    // this.app.use(express.static(path.join(__dirname, '../public/')));
-    //
-    //     this.app.get('/login', viewRouter);
-    //     this.app.get('/signup', viewRouter);
-    //     this.app.get('/forgot', viewRouter);
-    //     this.app.get('/404', viewRouter);
-    //
-    // // middleware to test user authorized routes
-    //     this.app.use(this.userController.setUser);
-    //
-    //     this.app.get('/', viewRouter);
-    //     this.app.get('/account', viewRouter);
-    //     this.app.get('/add-trip', viewRouter);
-    //     this.app.get('/trips', viewRouter);
-    //
-    // // middleware to test trip dependent routes
-    //     this.app.use(this.tripController.setTrip);
-    //
-    //     this.app.get('/:slug', viewRouter);
-    //     this.app.get('/:slug/itinerary', viewRouter);
-    //     this.app.get('/:slug/itinerary/add', viewRouter);
-    //     this.app.get('/:slug/expenses/add', viewRouter);
-    //     this.app.get('/:slug/expenses', viewRouter);
-    //     this.app.get('/:slug/todo/add', viewRouter);
-    //     this.app.get('/:slug/todo', viewRouter);
+    this.app.use('/api', userRouter);
+    this.app.use('/api/trips', tripRouter);
     this.app.use(routeNotFound);
   }
 

@@ -1,5 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { ValidationChain, validationResult } from 'express-validator';
+
+class HttpException extends Error {
+  constructor(public status: number, public message: string) {
+    super(message); // call parent constructor and pass message
+  }
+}
 
 export const catchErrors: Function = (fn: Function) => {
   return function(req: Request, res: Response, next: NextFunction) {
@@ -7,12 +13,14 @@ export const catchErrors: Function = (fn: Function) => {
   };
 };
 
-export const routeNotFound = (
+export const routeNotFound: RequestHandler = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  res.redirect('/404');
+  const err = new Error('Not Found');
+  res.status(404);
+  next(err);
 };
 
 // validation middleware
@@ -36,4 +44,18 @@ export const validate = async (
       .join(', ');
     return errorMsg;
   }
+};
+
+export const errorMiddleware = (
+  error: HttpException,
+  _: Request,
+  res: Response,
+  __: NextFunction
+) => {
+  const status = error.status || 500;
+  const message = error.message || 'Internal server error';
+  res.status(status).send({
+    message,
+    status
+  });
 };

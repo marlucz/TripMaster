@@ -4,42 +4,14 @@ import { check, sanitize } from 'express-validator';
 import { validate } from '../util/errorHandlers';
 import crypto from 'crypto';
 import { Email } from '../util/email';
+import passport from 'passport';
 
 class UserController {
   /**
-   * GET /
-   * User's main page = user's trips
-   */
-  public mainPage: RequestHandler = (req, res) => {
-    res.status(200).render('trips', {
-      title: 'Your Trips'
-    });
-  };
-
-  /**
-   * GET /login
-   * Login Page
-   */
-  public getLogin: RequestHandler = (req, res) => {
-    res.status(200).render('login', {
-      title: 'TripMaster'
-    });
-  };
-  /**
-   * GET /signup
-   * Signup Page
-   */
-  public getSignup: RequestHandler = (req, res) => {
-    res.status(200).render('signup', {
-      title: 'SignUp'
-    });
-  };
-
-  /**
-   * POST /signup
+   * POST /user/signup
    * Create User
    */
-  public postSignup: RequestHandler = async (req, res, next) => {
+  public userRegister: RequestHandler = async (req, res, next) => {
     await sanitize('name');
     await sanitize('email')
       .normalizeEmail({
@@ -67,8 +39,8 @@ class UserController {
     ]);
 
     if (error !== undefined) {
-      req.flash('error', error);
-      return res.status(400).redirect('/signup');
+      res.status(400);
+      return next(error);
     }
 
     const user = new User({
@@ -78,29 +50,50 @@ class UserController {
     });
 
     await User.create(user);
-    next();
+    return res.status(200).json(user);
   };
-  /**
-   * GET /forgot
-   * Forgot Page
-   */
-  public forgot: RequestHandler = (req, res) => {
-    res.status(200).render('forgot', {
-      title: 'Reset password'
-    });
+
+  public userLogin: RequestHandler = (req, res, next) => {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        const err = new Error('User not found');
+        res.status(404);
+        return next(err);
+      }
+
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        return res.send(user);
+      });
+    })(req, res, next);
   };
 
   /**
-   * POST /forgot
+   * POST /user/logout
+   * Logout user
+   */
+  public userLogout: RequestHandler = (req, res) => {
+    req.logout();
+    res.sendStatus(200);
+  };
+
+  /**
+   * POST /user/forgot
    * Create reset token and send it to user's email
    */
 
-  public postForgot: RequestHandler = async (req, res) => {
+  public postForgot: RequestHandler = async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
-      req.flash('error', 'User with given email addres does not exist');
-      return res.status(404).redirect('/login');
+      const err = new Error('User not found');
+      res.status(404);
+      return next(err);
     }
 
     const resetToken: string = user.getPasswordResetToken();
@@ -110,41 +103,25 @@ class UserController {
       const resetURL = `http://${req.headers.host}/account/reset/${resetToken}`;
       await new Email(user, resetURL).sendResetPassword();
 
-      req.flash(
-        'success',
-        `An email with further instructions has been sent to ${user.email}`
-      );
-
-      res.status(200).redirect('/login');
+      return res.sendStatus(200);
     } catch {
       user.passwordResetToken = undefined;
       user.passwordResetExpires = undefined;
       await user.save({ validateBeforeSave: false });
 
-      req.flash(
-        'error',
+      const err = new Error(
         'There was an error sending email with your password reset'
       );
-      res.status(500).redirect('/login');
+      res.status(404);
+      return next(err);
     }
   };
 
   /**
-   * GET /account/reset/:token
-   * Get password reset site
-   */
-
-  public getReset: RequestHandler = async (req, res) => {
-    res.status(200).render('reset', {
-      title: 'Reset your password'
-    });
-  };
-
-  /**
-   * POST /account/reset/:token
+   * POST /user/reset/:token
    * Finally reset password
    */
-  public resetPassword: RequestHandler = async (req, res) => {
+  public resetPassword: RequestHandler = async (req, res, next) => {
     const error: string = await validate(req, [
       check('password')
         .notEmpty()
@@ -158,8 +135,8 @@ class UserController {
     ]);
 
     if (error !== undefined) {
-      req.flash('error', error);
-      return res.status(400).redirect('back');
+      res.status(400);
+      return next(error);
     }
 
     const user = await User.findOne({
@@ -168,8 +145,9 @@ class UserController {
     });
 
     if (!user) {
-      req.flash('error', 'Password reset is invalid or has expired');
-      return res.status(500).redirect('/login');
+      const err = new Error('User not found');
+      res.status(404);
+      return next(err);
     }
 
     user.password = req.body.password;
@@ -180,30 +158,19 @@ class UserController {
     const userUpdated = await user.save();
     await req.login(userUpdated, err => {
       if (err) {
-        req.flash('error', 'There was error with login to your account');
-        res.status(400).redirect('/login');
+        res.status(400);
+        return next(err);
       }
     });
-    req.flash('success', 'Your password has been reset successfully');
-    return res.status(200).redirect('/');
+    return res.status(200);
   };
 
   /**
-   * GET /account
-   * Get account information
-   */
-  public getAccount: RequestHandler = (req, res) => {
-    res.status(200).render('account', {
-      title: 'Your account details'
-    });
-  };
-
-  /**
-   * POST /update-account
+   * POST /user/update-account
    * Update your account name or email
    */
 
-  public updateAccount: RequestHandler = async (req, res) => {
+  public updateAccount: RequestHandler = async (req, res, next) => {
     await sanitize('name');
     await sanitize('email')
       .normalizeEmail({
@@ -222,8 +189,8 @@ class UserController {
     ]);
 
     if (error !== undefined) {
-      req.flash('error', error);
-      return res.status(400).redirect('/account');
+      res.status(400);
+      return next(error);
     }
 
     const newUser = {
@@ -240,16 +207,15 @@ class UserController {
         { new: true, runValidators: true }
       );
     }
-    req.flash('success', 'Your profile has been updated');
-    res.redirect('back');
+    return res.sendStatus(200);
   };
 
   /**
-   * POST /update-password
+   * POST /user/update-password
    * Update your password
    */
 
-  public updatePassword: RequestHandler = async (req, res) => {
+  public updatePassword: RequestHandler = async (req, res, next) => {
     const error: string = await validate(req, [
       check('password')
         .notEmpty()
@@ -272,15 +238,14 @@ class UserController {
       req.body.passwordCurrent,
       async (err: Error, isMatch: boolean) => {
         if (err) {
-          req.flash('error', 'Please provide proper password');
-          res.redirect('/account');
+          res.status(400);
+          return next(err);
         }
         if (isMatch) {
           user.password = req.body.password;
 
           await user.save();
-          req.flash('success', 'Password has been changed');
-          res.redirect('back');
+          return res.sendStatus(200);
         }
       }
     );
