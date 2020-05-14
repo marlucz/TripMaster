@@ -14,6 +14,7 @@ export interface ITrip extends Document {
   location: location;
   startDate: any;
   endDate: any;
+  duration: Number;
   startsIn: number;
   userID: IUser['_id'];
   description?: string;
@@ -36,6 +37,7 @@ const tripSchema: Schema = new Schema({
   },
   startDate: Date,
   endDate: Date,
+  duration: Number,
   startsIn: Number,
   userID: {
     type: Schema.Types.ObjectId,
@@ -56,6 +58,27 @@ tripSchema.pre('save', function(next) {
     return;
   }
   trip.slug = slug(trip.name, { replacement: '-', lower: true });
+  next();
+});
+
+const treatAsUTC = (date: Date): number => {
+  const newDate = new Date(date);
+  const value = newDate.setMinutes(
+    newDate.getMinutes() - newDate.getTimezoneOffset()
+  );
+  return value;
+};
+
+tripSchema.pre('save', function(next): void {
+  const trip = this as ITrip;
+  const { startDate, endDate } = trip;
+  console.log(startDate, endDate);
+
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+  trip.duration =
+    (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+
   next();
 });
 
