@@ -12,15 +12,13 @@ class TripRouter {
   }
 
   private initializeRoutes = (): void => {
-    this.router
-      .get(this.path, authController.isAuthenticated, tripController.getTrips)
-      .post(
-        this.path,
-        // authController.isAuthenticated,
-        // catchErrors(tripController.uploadTripPhoto),
-        // catchErrors(tripController.resizeTripPhoto),
-        catchErrors(tripController.addTrip)
-      );
+    this.router.get(this.path, tripController.getTrips).post(
+      this.path,
+      // authController.isAuthenticated,
+      // catchErrors(tripController.uploadTripPhoto),
+      // catchErrors(tripController.resizeTripPhoto),
+      catchErrors(tripController.addTrip)
+    );
   };
 }
 

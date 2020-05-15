@@ -43,8 +43,10 @@ class TripController {
    * GET /trips
    * User's trips
    */
-  public getTrips: RequestHandler = (req, res) => {
-    res.status(200);
+  public getTrips: RequestHandler = async (req, res) => {
+    Trip.find({ userID: req.query.userID })
+      .then(results => res.send(results))
+      .catch(err => console.log(err));
   };
 
   /**
@@ -62,10 +64,17 @@ class TripController {
       description: req.body.description,
       userID: req.body.userID
     };
+    console.log(newTrip);
 
     try {
       const trip = await new Trip(newTrip).save((err, trip) => {
-        res.status(200).json(trip);
+        console.log(trip);
+        return res.status(200).json({
+          status: 'success',
+          data: {
+            trip
+          }
+        });
       });
     } catch (err) {
       res.sendStatus(500);

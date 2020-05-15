@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt-nodejs';
 import crypto from 'crypto';
 import mongoose, { Schema, Document } from 'mongoose';
 import validator from 'validator';
+const passportLocalMongoose = require('passport-local-mongoose');
 
 export interface IUser extends Document {
   email: string;
@@ -82,6 +83,7 @@ const getPasswordResetToken: getPasswordResetTokenFunction = function(
   return resetToken;
 };
 
+userSchema.plugin(passportLocalMongoose);
 userSchema.methods.comparePassword = comparePassword;
 userSchema.methods.getPasswordResetToken = getPasswordResetToken;
 
