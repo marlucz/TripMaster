@@ -1,6 +1,6 @@
 import { RequestHandler, Request, Response } from 'express';
 import multer from 'multer';
-import Jimp from 'jimp';
+import sharp from 'sharp';
 import { body } from 'express-validator';
 import { Trip } from '../models/tripModel';
 
@@ -28,13 +28,11 @@ class TripController {
     const extension = req.file.mimetype.split('/')[1];
     req.body.photo = `trip-${req.params.id}.${extension}`;
 
-    await Jimp.read(req.file.buffer, (err, image) => {
-      if (err) throw err;
-      image
-        .resize(600, Jimp.AUTO)
-        .quality(90)
-        .write(`..public/uploads/${req.body.photo}`);
-    });
+    await sharp(req.file.buffer)
+      .resize(2000, 1333)
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toFile(`public/img/tours/${req.body.imageCover}`);
 
     next();
   };
