@@ -2,9 +2,10 @@ import { Request, RequestHandler, Response } from 'express';
 import { User, IUser } from '../models/userModel';
 import { check, sanitize } from 'express-validator';
 import { validate } from '../util/errorHandlers';
-import crypto from 'crypto';
 import { Email } from '../util/email';
 import passport from 'passport';
+
+import { authController } from './authController';
 
 class UserController {
   /**
@@ -48,9 +49,15 @@ class UserController {
       name: req.body.name.toLowerCase(),
       password: req.body.password
     });
+    console.log(user, 'pierwszy');
 
     await User.create(user);
-    return res.status(200).json(user);
+    console.log(user);
+
+    const userTokenData = { id: user._id, email: user.email };
+    const token = authController.createToken(userTokenData);
+
+    return res.status(200).json({ token, user });
   };
 
   /**
@@ -70,9 +77,14 @@ class UserController {
 
       req.logIn(user, function(err) {
         if (err) {
+          res.status(400);
           return next(err);
         }
-        return res.send(user);
+
+        const userTokenData = { id: user._id, email: user.email };
+        const token = authController.createToken(userTokenData);
+
+        res.status(200).json({ token, user });
       });
     })(req, res, next);
   };

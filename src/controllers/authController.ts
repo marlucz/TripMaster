@@ -1,4 +1,11 @@
 import { RequestHandler } from 'express';
+import { User, IUser } from '../models/userModel';
+import jwt from 'jsonwebtoken';
+
+interface DataStoredInToken {
+  id: string;
+  email: string;
+}
 
 class AuthController {
   /**
@@ -10,6 +17,18 @@ class AuthController {
       return;
     }
     res.sendStatus(401);
+  };
+
+  public createToken = ({ id, email }: DataStoredInToken): string => {
+    const expiresIn = 60 * 60; // an hour
+    const secret = process.env.JWT_SECRET;
+    const dataStoredInToken: DataStoredInToken = { id, email };
+
+    if (!secret) {
+      throw new Error('Something went wrong');
+    }
+
+    return jwt.sign(dataStoredInToken, secret, { expiresIn });
   };
 }
 
