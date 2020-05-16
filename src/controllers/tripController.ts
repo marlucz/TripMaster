@@ -57,18 +57,20 @@ class TripController {
   public addTrip: RequestHandler = async (req, res) => {
     const newTrip = {
       name: req.body.name,
-      location: req.body.location,
+      location: {
+        type: 'Point',
+        coordinates: [req.body.lng, req.body.lat],
+        address: req.body.location
+      },
       startDate: req.body.startDate,
       endDate: req.body.endDate,
       startsIn: req.body.startsIn,
       description: req.body.description,
       userID: req.body.userID
     };
-    console.log(newTrip);
 
     try {
       const trip = await new Trip(newTrip).save((err, trip) => {
-        console.log(trip);
         return res.status(200).json({
           status: 'success',
           data: {

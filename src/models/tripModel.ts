@@ -4,8 +4,8 @@ import slug from 'slug';
 
 type location = {
   type: string;
+  title: String;
   coordinates: number[];
-  address: string;
 };
 
 export interface ITrip extends Document {
@@ -33,7 +33,9 @@ const tripSchema: Schema = new Schema({
       type: String,
       default: 'Point',
       enum: ['Point']
-    }
+    },
+    address: String,
+    coordinates: [Number]
   },
   startDate: Date,
   endDate: Date,
@@ -69,10 +71,9 @@ const treatAsUTC = (date: Date): number => {
   return value;
 };
 
-tripSchema.pre('save', function(next): void {
+tripSchema.pre('save', function(next) {
   const trip = this as ITrip;
   const { startDate, endDate } = trip;
-  console.log(startDate, endDate);
 
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
 
