@@ -37,13 +37,36 @@ class TripController {
     next();
   };
 
+  treatAsUTC = (date: Date): number => {
+    const newDate = new Date(date);
+    const value = newDate.setMinutes(
+      newDate.getMinutes() - newDate.getTimezoneOffset()
+    );
+    return value;
+  };
+
+  getStartsIn = (trip: any) => {
+    const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    const { startDate } = trip;
+
+    const time = Math.ceil(
+      (this.treatAsUTC(startDate) - Date.now()) / millisecondsPerDay
+    );
+    trip.startsIn = time;
+  };
+
   /**
    * GET /trips
    * User's trips
    */
   public getTrips: RequestHandler = async (req, res) => {
     Trip.find({ userID: req.query.userID })
-      .then(results => res.send(results))
+      .then(results => {
+        results.forEach(trip => {
+          trip.update({ startsIn: this.getStartsIn(trip) });
+        });
+        res.send(results);
+      })
       .catch(err => console.log(err));
   };
 
@@ -62,19 +85,13 @@ class TripController {
       },
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      startsIn: req.body.startsIn,
       description: req.body.description,
       userID: req.body.userID
     };
 
     try {
       const trip = await new Trip(newTrip).save((err, trip) => {
-        return res.status(200).json({
-          status: 'success',
-          data: {
-            trip
-          }
-        });
+        return res.status(200).send(trip);
       });
     } catch (err) {
       res.sendStatus(500);

@@ -15,7 +15,7 @@ export interface ITrip extends Document {
   startDate: any;
   endDate: any;
   duration: Number;
-  startsIn: number;
+  startsIn: Number;
   userID: IUser['_id'];
   description?: string;
   photo?: string;
@@ -71,11 +71,11 @@ const treatAsUTC = (date: Date): number => {
   return value;
 };
 
+const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
 tripSchema.pre('save', function(next) {
   const trip = this as ITrip;
   const { startDate, endDate } = trip;
-
-  const millisecondsPerDay = 24 * 60 * 60 * 1000;
 
   trip.duration =
     (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
