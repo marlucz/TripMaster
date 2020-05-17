@@ -1,6 +1,9 @@
 import express from 'express';
 import { authController } from '../controllers/authController';
 import { tripController } from '../controllers/tripController';
+import itineraryRouter from '../routes/itineraryRoutes';
+import todoRouter from '../routes/todoRoutes';
+import expensesRouter from '../routes/expensesRoutes';
 import { catchErrors } from '../util/errorHandlers';
 
 class TripRouter {
@@ -12,6 +15,9 @@ class TripRouter {
   }
 
   private initializeRoutes = (): void => {
+    this.router.use('/:tripSlug/itinerary', itineraryRouter);
+    this.router.use('/:tripSlug/todo', todoRouter);
+    this.router.use('/:tripSlug/expenses', expensesRouter);
     this.router.get(this.path, tripController.getTrips).post(
       this.path,
       // authController.isAuthenticated,
