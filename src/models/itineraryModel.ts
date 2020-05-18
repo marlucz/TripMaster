@@ -15,7 +15,7 @@ export interface IItinerary extends Document {
   location: location;
   description?: string;
   userID: IUser['_id'];
-  tripID: ITrip['slug'];
+  tripID: ITrip['_id'];
   status: string;
 }
 
