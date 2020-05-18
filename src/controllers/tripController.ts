@@ -4,6 +4,8 @@ import sharp from 'sharp';
 import { body } from 'express-validator';
 import { Trip } from '../models/tripModel';
 
+import { getStartsIn } from '../util/trips';
+
 class TripController {
   /**
    * Photo upload and manage functions
@@ -37,33 +39,15 @@ class TripController {
     next();
   };
 
-  treatAsUTC = (date: Date): number => {
-    const newDate = new Date(date);
-    const value = newDate.setMinutes(
-      newDate.getMinutes() - newDate.getTimezoneOffset()
-    );
-    return value;
-  };
-
-  getStartsIn = (trip: any) => {
-    const millisecondsPerDay = 24 * 60 * 60 * 1000;
-    const { startDate } = trip;
-
-    const time = Math.ceil(
-      (this.treatAsUTC(startDate) - Date.now()) / millisecondsPerDay
-    );
-    trip.startsIn = time;
-  };
-
   /**
-   * GET /trips
-   * User's trips
+   * GET /api/trips
+   *
    */
   public getTrips: RequestHandler = async (req, res) => {
     Trip.find({ userID: req.query.userID })
       .then(results => {
         results.forEach(trip => {
-          trip.update({ startsIn: this.getStartsIn(trip) });
+          trip.update({ startsIn: getStartsIn(trip.startDate) });
         });
         res.send(results);
       })
@@ -71,8 +55,8 @@ class TripController {
   };
 
   /**
-   * POST /add-trip
-   * Add trip
+   * POST /api/trips
+   *
    */
 
   public addTrip: RequestHandler = async (req, res) => {
@@ -96,6 +80,22 @@ class TripController {
     } catch (err) {
       res.sendStatus(500);
     }
+  };
+
+  /**
+   * DELETE /api/trips/:tripSlug
+   *
+   */
+  public deleteTrip: RequestHandler = (req, res) => {
+    Trip.findByIdAndDelete(req.params.id)
+      .then(result => {
+        if (!result) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(200);
+        }
+      })
+      .catch(err => res.sendStatus(500));
   };
 }
 

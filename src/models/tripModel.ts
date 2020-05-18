@@ -2,6 +2,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 import { IUser } from './userModel';
 import slug from 'slug';
 
+import { getStartsIn } from '../util/trips';
+
 type location = {
   type: string;
   title: String;
@@ -60,6 +62,7 @@ tripSchema.pre('save', function(next) {
     return;
   }
   trip.slug = slug(trip.name, { replacement: '-', lower: true });
+  trip.startsIn = getStartsIn(trip.startDate);
   next();
 });
 
