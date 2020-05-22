@@ -10,7 +10,7 @@ class ItineraryController {
    */
   public addItinerary: RequestHandler = async (req, res) => {
     const tripBySlug = await Trip.findOne({
-      slug: req.query.slug,
+      slug: req.params.slug,
       userID: req.query.userID
     });
     if (tripBySlug) {
@@ -46,10 +46,19 @@ class ItineraryController {
    *
    */
   public getItinerary: RequestHandler = async (req, res) => {
-    res.status(200).send({
-      status: 200,
-      message: 'request success'
+    const tripBySlug = await Trip.findOne({
+      slug: req.params.slug,
+      userID: req.query.userID
     });
+    if (tripBySlug) {
+      Itinerary.find({ userID: req.query.userID, tripID: tripBySlug._id })
+        .then(results => {
+          res.status(200).send(results);
+        })
+        .catch(err => res.sendStatus(500));
+    } else {
+      return res.status(404);
+    }
   };
 }
 
