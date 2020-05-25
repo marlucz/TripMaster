@@ -45,11 +45,11 @@ class TripController {
    */
   public getTrips: RequestHandler = async (req, res) => {
     Trip.find({ userID: req.query.userID })
-      .then(results => {
-        results.forEach(trip => {
-          trip.update({ startsIn: getStartsIn(trip.startDate) });
+      .then(trips => {
+        trips.forEach(trip => {
+          trip.startsIn = getStartsIn(trip.startDate);
         });
-        res.send(results);
+        res.send(trips);
       })
       .catch(err => console.log(err));
   };
