@@ -10,13 +10,11 @@ type location = {
 
 export interface IItinerary extends Document {
   name: string;
-  date: any;
-  hour: any;
+  startDate: Date;
+  endDate: Date;
   location: location;
-  description?: string;
   userID: IUser['_id'];
   tripID: ITrip['_id'];
-  status: string;
 }
 
 const itinerarySchema: Schema = new Schema(
@@ -26,8 +24,7 @@ const itinerarySchema: Schema = new Schema(
       trim: true,
       required: [true, 'Please provide itinerary event with a name']
     },
-    date: Date,
-    hour: Date,
+
     location: {
       type: {
         type: String,
@@ -37,10 +34,8 @@ const itinerarySchema: Schema = new Schema(
       address: String,
       coordinates: [Number]
     },
-    description: {
-      type: String,
-      trim: true
-    },
+    startDate: Date,
+    endDate: Date,
     userID: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -51,7 +46,6 @@ const itinerarySchema: Schema = new Schema(
       ref: 'Trip',
       required: [true, `Itinerary event is connected to a trip`]
     },
-    photo: String,
     status: {
       type: String,
       default: 'next'

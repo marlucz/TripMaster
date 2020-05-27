@@ -14,8 +14,8 @@ export interface ITrip extends Document {
   name: string;
   slug: string;
   location: location;
-  startDate: any;
-  endDate: any;
+  startDate: Date;
+  endDate: Date;
   duration: Number;
   startsIn: Number;
   userID: IUser['_id'];

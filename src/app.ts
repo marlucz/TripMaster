@@ -17,6 +17,7 @@ const MongoStore = mongo(session);
 import { routeNotFound, errorMiddleware } from './util/errorHandlers';
 import userRouter from './routes/userRoutes';
 import tripRouter from './routes/tripRoutes';
+import itineraryRouter from './routes/itineraryRoutes';
 
 class App {
   public app: express.Application = express();

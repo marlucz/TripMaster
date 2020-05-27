@@ -74,7 +74,7 @@ class TripController {
     };
 
     try {
-      const trip = await new Trip(newTrip).save((err, trip) => {
+      await new Trip(newTrip).save((err, trip) => {
         return res.status(200).send(trip);
       });
     } catch (err) {

@@ -5,7 +5,7 @@ import { Trip } from '../models/tripModel';
 
 class ItineraryController {
   /**
-   * POST api/trips/:tripSlug/itinerary
+   * POST api/trips/:slug/itinerary
    *
    */
   public addItinerary: RequestHandler = async (req, res) => {
@@ -19,30 +19,27 @@ class ItineraryController {
 
     const newItinerary = {
       name: req.body.name,
-      date: req.body.startDate,
-      hour: req.body.endDate,
       location: {
         type: 'Point',
         coordinates: [req.body.lng, req.body.lat],
         address: req.body.location
       },
-      description: req.body.description,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
       userID: req.query.userID,
       tripID: req.body.tripID
     };
 
     try {
-      const itinerary = await new Itinerary(newItinerary).save(
-        (err, itinerary) => {
-          return res.status(200).send(itinerary);
-        }
-      );
+      await new Itinerary(newItinerary).save((err, itinerary) => {
+        res.status(200).send(itinerary);
+      });
     } catch (err) {
       res.sendStatus(500);
     }
   };
   /**
-   * GET api/trips/:tripSlug/itinerary
+   * GET api/trips/:slug/itinerary
    *
    */
   public getItinerary: RequestHandler = async (req, res) => {

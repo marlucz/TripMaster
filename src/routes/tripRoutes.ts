@@ -15,9 +15,9 @@ class TripRouter {
   }
 
   private initializeRoutes = (): void => {
-    this.router.use('/:tripSlug/itinerary', itineraryRouter);
-    this.router.use('/:tripSlug/todos', todoRouter);
-    this.router.use('/:tripSlug/expenses', expensesRouter);
+    this.router.use(`${this.path}:slug/itinerary`, itineraryRouter);
+    this.router.use(`${this.path}:slug/todo`, todoRouter);
+    this.router.use(`${this.path}:slug/expenses`, expensesRouter);
     this.router.get(this.path, tripController.getTrips).post(
       this.path,
       // authController.isAuthenticated,
