@@ -12,6 +12,7 @@ class ItineraryRouter {
   private initializeRoutes = (): void => {
     this.router.get(this.path, itineraryController.getItinerary);
     this.router.post(this.path, itineraryController.addItinerary);
+    this.router.delete(`${this.path}:id`, itineraryController.deleteItinerary);
   };
 }
 

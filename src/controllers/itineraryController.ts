@@ -9,7 +9,6 @@ class ItineraryController {
    *
    */
   public addItinerary: RequestHandler = async (req, res) => {
-    console.log(req.params.slug, req.body.userID);
     const tripBySlug = await Trip.findOne({
       slug: req.params.slug,
       userID: req.body.userID
@@ -18,13 +17,13 @@ class ItineraryController {
     if (tripBySlug) {
       const newItinerary = {
         name: req.body.name,
+        description: req.body.description,
         location: {
           type: 'Point',
           coordinates: [req.body.lng, req.body.lat],
           address: req.body.location
         },
         startDate: req.body.startDate,
-        endDate: req.body.endDate,
         userID: req.body.userID,
         tripID: tripBySlug._id
       };
@@ -57,6 +56,23 @@ class ItineraryController {
     } else {
       return res.status(404);
     }
+  };
+
+  /**
+   * DELETE api/trips/:slug/itinerary/:id
+   *
+   */
+
+  public deleteItinerary: RequestHandler = async (req, res) => {
+    Itinerary.findByIdAndDelete(req.params.id)
+      .then(result => {
+        if (!result) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(200);
+        }
+      })
+      .catch(err => res.sendStatus(500));
   };
 }
 

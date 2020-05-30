@@ -25,7 +25,7 @@ class TripRouter {
       // catchErrors(tripController.resizeTripPhoto),
       catchErrors(tripController.addTrip)
     );
-    this.router.delete('/:id', tripController.deleteTrip);
+    this.router.delete(`${this.path}:id`, tripController.deleteTrip);
   };
 }
 

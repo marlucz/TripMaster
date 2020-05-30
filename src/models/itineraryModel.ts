@@ -10,8 +10,8 @@ type location = {
 
 export interface IItinerary extends Document {
   name: string;
+  description: string;
   startDate: Date;
-  endDate: Date;
   location: location;
   userID: IUser['_id'];
   tripID: ITrip['_id'];
@@ -24,7 +24,9 @@ const itinerarySchema: Schema = new Schema(
       trim: true,
       required: [true, 'Please provide itinerary event with a name']
     },
-
+    description: {
+      type: String
+    },
     location: {
       type: {
         type: String,
