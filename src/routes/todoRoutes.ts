@@ -11,6 +11,8 @@ class TodoRouter {
 
   private initializeRoutes = (): void => {
     this.router.get(this.path, todoController.getTodo);
+    this.router.post(this.path, todoController.addTodo);
+    this.router.delete(`${this.path}:id`, todoController.deleteTodo);
   };
 }
 

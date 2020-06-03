@@ -11,6 +11,8 @@ class ExpensesRouter {
 
   private initializeRoutes = (): void => {
     this.router.get(this.path, expensesController.getExpenses);
+    this.router.post(this.path, expensesController.addExpense);
+    this.router.delete(`${this.path}:id`, expensesController.deleteExpense);
   };
 }
 

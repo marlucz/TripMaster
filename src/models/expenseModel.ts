@@ -47,4 +47,4 @@ const expenseSchema: Schema = new Schema(
   }
 );
 
-export const Expense = mongoose.model<IExpense>('Todo', expenseSchema);
+export const Expense = mongoose.model<IExpense>('Expense', expenseSchema);
