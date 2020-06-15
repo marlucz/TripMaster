@@ -7,7 +7,8 @@ export interface IExpense extends Document {
   value: number;
   currency: string;
   tags: string[];
-  startDate: Date;
+  date: string;
+  hour: string;
   userID: IUser['_id'];
   tripID: ITrip['_id'];
 }
@@ -30,6 +31,8 @@ const expenseSchema: Schema = new Schema(
     tags: {
       type: [String]
     },
+    date: String,
+    hour: String,
     userID: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -46,5 +49,12 @@ const expenseSchema: Schema = new Schema(
     toObject: { virtuals: true }
   }
 );
+expenseSchema.pre('save', function(next) {
+  const expense = this as IExpense;
+
+  expense.date = new Date(Date.now()).toLocaleDateString();
+  expense.hour = new Date(Date.now()).toLocaleTimeString();
+  next();
+});
 
 export const Expense = mongoose.model<IExpense>('Expense', expenseSchema);
