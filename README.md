@@ -1,15 +1,17 @@
-# TripMaster
+# TripMaster - Server
 
-> Fullstack project with Node.js with Express on the backend side and JavaScript with Pug Template Engine on the frontend side. The idea for applications came from the need to plan a vacation trip. Unfortunately, I did not find any application that would meet my needs, so this application is to give me all the necessary tools that I want.
+> Fullstack project with Node.js with Express on the backend side and React on the frontend side. The idea for applications came from the need to plan a vacation trip. Unfortunately, I did not find any application that would meet my needs, so this application is to give me all the necessary tools that I want.
 
 > Only logged user has access to the application tabs, so each person has access to its trips only. Within trip user can create whole itinerary experience with individual stops showed on map, expenses and todo tab to list all the stuff that has to be done before or during the trip.
 
-## Technologies (so far)
+[Client side code for the project](https://github.com/marlucz/tripmaster-client)
 
+## Backend Technologies
+
+- Node.js
 - Express
-- Mongoose
-- Vanilla JS
-- SSR with Pug
+- MongoDB
+- TypeScript
 
 ## Installation
 
@@ -27,28 +29,12 @@ Run app
 $ npm run start:dev
 ```
 
-Open login page at
-
-```$xslt
-localhost:3000/login
-```
-
-or logged user interface at
-
-```$xslt
-localhost:3000/
-```
-
 ## Done
 
 - Server setup with router
-- Pages: login/register, 404, account, trips, itinerary, expenses, todo list
-
-## Working on
-
-- Migrate Node Server to TypeScript
-- Pages: single trip view to be done with external api
+- Schemas for all models
+- GET, POST, DELETE routes and operations for all models
 
 ## To be done
 
-- Whole server functionality (schemas, routing, working on the data)
+- Item update finctionality for all models
