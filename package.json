@@ -90,7 +90,7 @@
     "nodemailer": "^6.4.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "sharp": "^0.25.3",
     "slug": "^1.1.0",
     "validator": "^12.1.0"
